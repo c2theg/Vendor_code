@@ -10,7 +10,7 @@
  sudo apt-get -y install php7.0 php7.0-common php7.0-cli php7.0-curl php7.0-mcrypt php7.0-ssh2
  
  then just issue on the CLI:
- sudo php geoip_updater.php <downloads.f5.com https geoip file url>  <optional, md5 file url>
+ php geoip_updater.php <downloads.f5.com https geoip file url - on location page> <optional, md5 file url>
  
  */
 
