@@ -24,14 +24,14 @@
 	$Debug = 0;
 	//-----------------------------------------------------------------------------------------------------------------
 	$BigIPs_ip_array = array(
-	   "", ""
+	   "10.1.1.1", "10.1.1.2"
 	);
 	$BigIPs_fqdn_array = array(
-	   "", ""
+	   "ltm1.example.com", "ltm2.example.com"
 	);
 	
 	$BigIPs_username = "root";
-	$BigIPs_password = "";
+	$BigIPs_password = "ChangeMe";
 	$BigIPs_port = "22";
 
 	
