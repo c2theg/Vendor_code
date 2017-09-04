@@ -4,9 +4,13 @@
 # 1/1/17  - 9/4/17
 #
 # 1) SSH into BigIP
-# 2) from TMSH, paste the following. Please modify for your needs
+# 2) from TMSH, paste the following. 
 #
-#  THIS USES:  TCP : 1520 currently
+#   THIS USES:  TCP : 1520 currently
+#
+#	Simply find and replace "logcollector.example.com" for your FQDN to your central logging solution
+#   Please modify for your needs
+#
 #------------------------------------------------------------------
 
 create ltm node logcollector.example.com fqdn { autopopulate enabled name logcollector.example.com down-interval 2 interval 15 } monitor /Common/icmp
