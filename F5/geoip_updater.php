@@ -2,8 +2,10 @@
 /*
  ------ STEPS -----
  By: Christopher Gray - christophermjgray@gmail.com - 9/16/17 - Version 0.0.7
+ 	https://devcentral.f5.com/codeshare/auto-updates-geoip-database-on-big-ip-1061
+ 	https://github.com/c2theg/Vendor_code/edit/master/F5/geoip_updater.php
  
- you need PHP to get this to work.
+  you need PHP to get this to work.
  - For Ubuntu:
  
  sudo LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
