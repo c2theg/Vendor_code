@@ -7,7 +7,7 @@
  - For Ubuntu:
  
  sudo LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
- sudo apt-get -y install php7.0 php7.0-common php7.0-cli php7.0-curl php7.0-mcrypt php7.0-ssh2
+ sudo apt-get -y install php7.0 php7.0-common php7.0-cli php7.0-curl php7.0-mcrypt php-ssh2 php-zip
  
  then just issue on the CLI:
  php geoip_updater.php <downloads.f5.com https geoip file url - on location page> <optional, md5 file url>
