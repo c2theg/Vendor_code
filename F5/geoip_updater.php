@@ -1,7 +1,7 @@
 <?php
 /*
  ------ STEPS -----
- By: Christopher Gray - 9/16/17 - Version 0.0.7
+ By: Christopher Gray - christophermjgray@gmail.com - 9/16/17 - Version 0.0.7
  
  you need PHP to get this to work.
  - For Ubuntu:
