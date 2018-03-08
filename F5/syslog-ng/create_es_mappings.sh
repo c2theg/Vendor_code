@@ -7,6 +7,11 @@
 #
 #
 
+echo "\r\n \r\n "
+
+echo "Creating BigIP Logs ES Mapping....  \r\n \r\n "
+
+
 curl -XPUT localhost:9200/_template/bigip.logs -d '
 {
 "template" : "bigip.logs*", "settings" : {
@@ -55,6 +60,8 @@ curl -XPUT localhost:9200/_template/bigip.logs -d '
 #
 #
 #
+echo "\r\n \r\n Creating HTTP Logs ES Mapping....  \r\n \r\n "
+
 curl -XPUT localhost:9200/_template/http.logs -d ' {
 "template" : "http.logs*", "settings" : {
 "number_of_shards" : 4 },
@@ -121,6 +128,7 @@ curl -XPUT localhost:9200/_template/http.logs -d ' {
 #
 #
 #
+echo "\r\n \r\n Creating DDoS Logs ES Mapping....  \r\n \r\n "
 
 curl -XPUT localhost:9200/_template/ddos.logs -d ' {
 "template" : "ddos.logs*", "settings" : {
@@ -205,3 +213,5 @@ curl -XPUT localhost:9200/_template/ddos.logs -d ' {
 } }
 } }
 }'
+
+echo "\r\n \r\n DONE!  \r\n \r\n "
