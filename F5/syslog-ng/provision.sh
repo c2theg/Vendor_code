@@ -29,7 +29,7 @@ if [ -s "create_es6_mappings.sh" ]
 then
 	echo "Deleting old configs...  "
 	rm create_es6_mappings.sh
-	rm kibana_indexs.sh
+	rm load_sample_data.sh
 	rm f5_logstash_config.conf
 	rm /etc/logstash/conf.d/f5_config.conf
 	rm syslogng_bigip.conf
