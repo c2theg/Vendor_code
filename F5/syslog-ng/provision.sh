@@ -65,3 +65,5 @@ sudo cp "syslogng_bigip.conf" "/etc/syslog-ng/conf.d/bigip.conf"
 wait
 
 
+echo "Visit -  http://127.0.0.1:5601    and  http://127.0.0.1:9200   \r\n \r\n"
+echo "DONE! \r\n "
