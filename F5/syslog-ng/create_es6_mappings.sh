@@ -110,7 +110,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.l
 #
 #
 #
-echo "\r\n \r\n Creating HTTP Logs ES Mapping....  \r\n \r\n "
+echo "\r\n \r\n Creating HTTP Logs ES 6 Mapping....  \r\n \r\n "
 
 curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/http.logs -d '
 {  
@@ -216,3 +216,165 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/http.lo
 }'
 
 
+#
+#
+#
+#----  Create the template for indexing the DDoS logs
+#
+#
+#
+#
+echo "\r\n \r\n Creating DDoS Logs ES 6 Mapping....  \r\n \r\n "
+
+curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/ddos.logs -d '
+{  
+   "template":"ddos.logs*",
+   "settings":{  
+      "number_of_shards":4
+   },
+   "mappings":{  
+      "logs":{  
+         "properties":{  
+            "@timestamp":{  
+               "type":"date",
+               "format":"strict_date_optional_time||epoch_millis"
+            },
+            "@version":{  
+               "type":"text"
+            },
+            "action":{  
+               "type":"text",
+               "analyzer":"english",
+               "fields":{  
+                  "raw":{  
+                     "type":"text",
+                     "index":"false"
+                  }
+               }
+            },
+            "attack_time":{  
+               "type":"text"
+            },
+            "dest_ip":{  
+               "type":"ip"
+            },
+            "dest_port":{  
+               "type":"text"
+            },
+            "dos_attack_event":{  
+               "type":"text",
+               "analyzer":"english",
+               "fields":{  
+                  "raw":{  
+                     "type":"text",
+                     "index":"false"
+                  }
+               }
+            },
+            "dos_attack_id":{  
+               "type":"text",
+               "analyzer":"english",
+               "fields":{  
+                  "raw":{  
+                     "type":"text",
+                     "index":"false"
+                  }
+               }
+            },
+            "dos_attack_name":{  
+               "type":"text",
+               "analyzer":"english",
+               "fields":{  
+                  "raw":{  
+                     "type":"text",
+                     "index":"false"
+                  }
+               }
+            },
+            "f5_hostname":{  
+               "type":"text",
+               "analyzer":"english",
+               "fields":{  
+                  "raw":{  
+                     "type":"text",
+                     "index":"false"
+                  }
+               }
+            },
+            "host":{  
+               "type":"text"
+            },
+            "message":{  
+               "type":"text"
+            },
+            "mgmt_ip":{  
+               "type":"ip"
+            },
+            "context":{  
+               "type":"text",
+               "analyzer":"english",
+               "fields":{  
+                  "raw":{  
+                     "type":"text",
+                     "index":"false"
+                  }
+               }
+            },
+            "packets_dropped":{  
+               "type":"integer"
+            },
+            "packets_received":{  
+               "type":"integer"
+            },
+            "partition_name":{  
+               "type":"text",
+               "analyzer":"english",
+               "fields":{  
+                  "raw":{  
+                     "type":"text",
+                     "index":"false"
+                  }
+               }
+            },
+            "path":{  
+               "type":"text"
+            },
+            "route_domain":{  
+               "type":"integer"
+            },
+            "severity":{  
+               "type":"integer"
+            },
+            "source_ip":{  
+               "type":"ip"
+            },
+            "source_port":{  
+               "type":"text"
+            },
+            "syslog_hostname":{  
+               "type":"text",
+               "analyzer":"english",
+               "fields":{  
+                  "raw":{  
+                     "type":"text",
+                     "index":"false"
+                  }
+               }
+            },
+            "syslog_timestamp":{  
+               "type":"text"
+            },
+            "vlan":{  
+               "type":"text",
+               "analyzer":"english",
+               "fields":{  
+                  "raw":{  
+                     "type":"text",
+                     "index":"false"
+                  }
+               }
+            }
+         }
+      }
+   }
+}'
