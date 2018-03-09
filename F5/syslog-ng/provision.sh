@@ -44,7 +44,7 @@ wait
 
 
 
-echo "Downloading Kibana Config"
+echo "\r\n \r\n Downloading Kibana Config"
 wget -O "kibana_indexs.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/kibana_indexs.sh"
 sudo chmod u+x kibana_indexs.sh
 sudo ./kibana_indexs.sh
@@ -52,18 +52,24 @@ wait
 
 
 
-echo "Downloading Logstash Config"
+echo "\r\n \r\n Downloading Logstash Config"
 wget -O "f5_logstash_config.conf" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/logstash.conf"
 sudo cp "f5_logstash_config.conf" "/etc/logstash/conf.d/f5_config.conf"
 wait
 
 
 
-echo "Downloading BTSync Config"
+echo "\r\n \r\n Downloading Syslog_ng Config"
 wget -O "syslogng_bigip.conf" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/syslogng_bigip.conf"
 sudo cp "syslogng_bigip.conf" "/etc/syslog-ng/conf.d/bigip.conf"
 wait
 
 
-echo "Visit -  http://127.0.0.1:5601    and  http://127.0.0.1:9200   \r\n \r\n"
+
+echo "\r\n \r\n Downloading Test ES shell script.. "
+wget -O "test_es.sh" "https://raw.githubusercontent.com/c2theg/srvBuilds/master/test_es.sh"
+sudo chmod u+x test_es.sh
+wait
+
+echo "\r\n \r\n Visit -  http://127.0.0.1:5601    and  http://127.0.0.1:9200   \r\n \r\n"
 echo "DONE! \r\n "
