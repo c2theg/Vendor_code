@@ -31,7 +31,9 @@ then
 	rm create_es6_mappings.sh
 	rm kibana_indexs.sh
 	rm f5_logstash_config.conf
+	rm /etc/logstash/conf.d/f5_config.conf
 	rm syslogng_bigip.conf
+	rm /etc/syslog-ng/conf.d/bigip.conf
 fi
 
 echo "Downloading ES 6 Mappings Config"
