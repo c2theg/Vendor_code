@@ -20,6 +20,8 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.l
    "settings":{
       "number_of_shards":4,
       "number_of_replicas" : 1,
+      "index.routing.allocation.include.size": "small",
+      "index.routing.allocation.include.rack": "r1",
        "analysis": {
          "analyzer": {
            "my_analyzer": {
@@ -125,7 +127,9 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/http.lo
    "order" : 0,
    "settings":{  
       "number_of_shards":4,
-      "number_of_replicas" : 1
+      "number_of_replicas" : 1,
+      "index.routing.allocation.include.size": "small",
+      "index.routing.allocation.include.rack": "r1"
    },
    "mappings":{  
       "logs":{  
@@ -242,7 +246,9 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/ddos.lo
    "order" : 0,
    "settings":{  
       "number_of_shards":4,
-      "number_of_replicas" : 1
+      "number_of_replicas" : 1,
+      "index.routing.allocation.include.size": "small",
+      "index.routing.allocation.include.rack": "r1"
    },
    "mappings":{  
       "logs":{  
