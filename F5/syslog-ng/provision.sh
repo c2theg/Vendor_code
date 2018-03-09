@@ -18,7 +18,7 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.4                             \r\n
+Version:  0.5.1                             \r\n
 Last Updated:  3/9/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04.  \r\n \r\n"
@@ -44,14 +44,6 @@ wait
 
 
 
-echo "\r\n \r\n Downloading Kibana Config"
-wget -O "kibana_indexs.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/kibana_indexs.sh"
-sudo chmod u+x kibana_indexs.sh
-sudo ./kibana_indexs.sh
-wait
-
-
-
 echo "\r\n \r\n Downloading Logstash Config"
 wget -O "f5_logstash_config.conf" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/logstash.conf"
 sudo cp "f5_logstash_config.conf" "/etc/logstash/conf.d/f5_config.conf"
@@ -70,6 +62,15 @@ echo "\r\n \r\n Downloading Test ES shell script.. "
 wget -O "test_es.sh" "https://raw.githubusercontent.com/c2theg/srvBuilds/master/test_es.sh"
 sudo chmod u+x test_es.sh
 wait
+
+
+
+echo "\r\n \r\n Downloading Sample Data.. "
+wget -O "load_sample_data.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/load_sample_data.sh"
+sudo chmod u+x load_sample_data.sh
+sudo ./load_sample_data.sh
+wait
+
 
 echo "\r\n \r\n Visit -  http://127.0.0.1:5601    and  http://127.0.0.1:9200   \r\n \r\n"
 echo "DONE! \r\n "
