@@ -46,17 +46,20 @@ wait
 
 echo "\r\n \r\n Downloading Logstash Config"
 wget -O "f5_logstash_config.conf" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/logstash.conf"
-sudo cp "f5_logstash_config.conf" "/etc/logstash/conf.d/f5_config.conf"
 wait
-
+mkdir logstash
+sudo mv "f5_logstash_config.conf" "logstash/f5_logging.conf"
+if [ -s "logstash/f5_logging.conf" ] 
+then
+	echo "\r\n \r\n  Starting Logstash... \r\n \r\n"
+	sudo -u logstash /usr/share/logstash/bin/logstash --path.settings=/etc/logstash -f logstash/f5_logging.conf
+	wait
+fi
 
 
 echo "\r\n \r\n Downloading Syslog_ng Config"
 wget -O "syslogng_bigip.conf" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/syslogng_bigip.conf"
-#sudo cp "syslogng_bigip.conf" "/etc/syslog-ng/conf.d/bigip.conf"
-
-mkdir logstash
-sudo cp "syslogng_bigip.conf" "logstash/f5_logging.conf"
+sudo cp "syslogng_bigip.conf" "/etc/syslog-ng/conf.d/bigip.conf"
 wait
 
 
