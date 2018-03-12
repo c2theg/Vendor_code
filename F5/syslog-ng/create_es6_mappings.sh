@@ -1,6 +1,6 @@
 # Christopher Gray
-# Version 2.1
-# . 3-9-18
+# Version 2.1.2
+# . 3-12-18
 #
 # ---- Create the template for indexing the device logs
 #
@@ -18,7 +18,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.l
    "template":"bigip.logs*",
    "order" : 0,
    "settings":{
-      "number_of_shards":4,
+      "number_of_shards":3,
       "number_of_replicas" : 1,
       "index.routing.allocation.include.size": "small",
       "index.routing.allocation.include.rack": "r1",
@@ -126,7 +126,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/http.lo
    "index_patterns": ["http.logs*"],
    "order" : 0,
    "settings":{  
-      "number_of_shards":4,
+      "number_of_shards":3,
       "number_of_replicas" : 1,
       "index.routing.allocation.include.size": "small",
       "index.routing.allocation.include.rack": "r1"
@@ -245,7 +245,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/ddos.lo
    "index_patterns": ["ddos.logs*"],
    "order" : 0,
    "settings":{  
-      "number_of_shards":4,
+      "number_of_shards":3,
       "number_of_replicas" : 1,
       "index.routing.allocation.include.size": "small",
       "index.routing.allocation.include.rack": "r1"
