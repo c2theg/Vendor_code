@@ -1,5 +1,6 @@
+#!/bin/sh
 # Christopher Gray
-# Version 2.1.2
+# Version 2.1.3
 # . 3-12-18
 #
 # ---- Create the template for indexing the device logs
@@ -396,3 +397,5 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/ddos.lo
       }
    }
 }'
+
+echo " DONE! \r\n \r\n "
