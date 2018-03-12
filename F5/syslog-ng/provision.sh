@@ -18,7 +18,7 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.5.3                             \r\n
+Version:  0.5.4                             \r\n
 Last Updated:  3/12/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04  \r\n \r\n"
@@ -51,8 +51,15 @@ mkdir logstash
 sudo mv "f5_logstash_config.conf" "logstash/f5_logging.conf"
 if [ -s "logstash/f5_logging.conf" ] 
 then
-	echo "\r\n \r\n  Starting Logstash... \r\n \r\n"
-	sudo -u logstash /usr/share/logstash/bin/logstash --path.settings=/etc/logstash -f logstash/f5_logging.conf
+	#echo "\r\n \r\n  Starting Logstash (this may take 1 minute)... \r\n \r\n"
+	#sudo -u logstash /usr/share/logstash/bin/logstash --path.settings=/etc/logstash -f logstash/f5_logging.conf
+	#sudo /usr/share/logstash/bin/logstash --path.settings=/etc/logstash -f /home/ubuntu/logstash/f5_logging.conf
+	
+	
+	echo "To start logstash use the following: \r\n \r\n
+	   sudo  /usr/share/logstash/bin/logstash --path.settings=/etc/logstash -f /home/ubuntu/logstash/f5_logging.conf 
+	   
+	\r\n \r\n"
 	wait
 fi
 
