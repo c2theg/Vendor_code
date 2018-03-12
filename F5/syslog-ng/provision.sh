@@ -18,10 +18,10 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.5.2                             \r\n
+Version:  0.5.3                             \r\n
 Last Updated:  3/12/2018
 \r\n \r\n
-This is meant for Ubuntu 16.04.  \r\n \r\n"
+This is meant for Ubuntu 16.04  \r\n \r\n"
 
 #---------------------------------------------------------------------------------------------------------
 
@@ -60,6 +60,7 @@ fi
 echo "\r\n \r\n Downloading Syslog_ng Config"
 wget -O "syslogng_bigip.conf" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/syslogng_bigip.conf"
 sudo cp "syslogng_bigip.conf" "/etc/syslog-ng/conf.d/bigip.conf"
+sudo -u /etc/init.d/syslog-ng restart
 wait
 
 
