@@ -18,8 +18,8 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.5.1                             \r\n
-Last Updated:  3/9/2018
+Version:  0.5.2                             \r\n
+Last Updated:  3/12/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04.  \r\n \r\n"
 
@@ -53,7 +53,10 @@ wait
 
 echo "\r\n \r\n Downloading Syslog_ng Config"
 wget -O "syslogng_bigip.conf" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/syslogng_bigip.conf"
-sudo cp "syslogng_bigip.conf" "/etc/syslog-ng/conf.d/bigip.conf"
+#sudo cp "syslogng_bigip.conf" "/etc/syslog-ng/conf.d/bigip.conf"
+
+mkdir logstash
+sudo cp "syslogng_bigip.conf" "logstash/f5_logging.conf"
 wait
 
 
@@ -68,7 +71,7 @@ wait
 echo "\r\n \r\n Downloading Sample Data.. "
 wget -O "load_sample_data.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/load_sample_data.sh"
 sudo chmod u+x load_sample_data.sh
-sudo ./load_sample_data.sh
+#sudo ./load_sample_data.sh
 wait
 
 
