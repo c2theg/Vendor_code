@@ -11,17 +11,17 @@
 echo "\r\n \r\n "
 echo "Deleting existing ES indexs if present....  \r\n \r\n "
 echo "\r\n bigip.logs ... \r\n "
-curl -XDELETE 'localhost:9200/bigip.logs*?pretty'
+curl -XDELETE 'localhost:9200/bigip*?pretty'
 echo "\r\n http.logs ... \r\n "
-curl -XDELETE 'localhost:9200/http.logs*?pretty'
+curl -XDELETE 'localhost:9200/http*?pretty'
 echo "\r\n ddos.logs ... \r\n "
-curl -XDELETE 'localhost:9200/ddos.logs*?pretty'
+curl -XDELETE 'localhost:9200/ddos*?pretty'
 wait
 
 echo "\r\n \r\n "
 echo "Creating BigIP Logs ES 6 Mapping....  \r\n \r\n "
 
-curl -H 'Content-Type: application/json' -X PUT localhost:9200/bigip.logs -d '{  
+curl -H 'Content-Type: application/json' -X PUT localhost:9200/bigip -d '{  
    "settings":{
       "number_of_shards": 3,
       "number_of_replicas": 1
@@ -108,12 +108,10 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/bigip.logs -d '{
 #
 echo "\r\n \r\n Creating HTTP Logs ES 6 Mapping....  \r\n \r\n "
 
-curl -H 'Content-Type: application/json' -X PUT localhost:9200/http.logs -d '{
+curl -H 'Content-Type: application/json' -X PUT localhost:9200/http -d '{
    "settings":{  
       "number_of_shards":3,
-      "number_of_replicas" : 1,
-      "index.routing.allocation.include.size": "small",
-      "index.routing.allocation.include.rack": "r1"
+      "number_of_replicas" : 1
    },
    "mappings":{  
       "logs":{  
@@ -223,12 +221,10 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/http.logs -d '{
 #
 echo "\r\n \r\n Creating DDoS Logs ES 6 Mapping....  \r\n \r\n "
 
-curl -H 'Content-Type: application/json' -X PUT localhost:9200/ddos.logs -d '{
+curl -H 'Content-Type: application/json' -X PUT localhost:9200/ddos -d '{
    "settings":{  
       "number_of_shards": 3,
-      "number_of_replicas" : 1,
-      "index.routing.allocation.include.size": "small",
-      "index.routing.allocation.include.rack": "r1"
+      "number_of_replicas" : 1
    },
    "mappings":{  
       "logs":{  
