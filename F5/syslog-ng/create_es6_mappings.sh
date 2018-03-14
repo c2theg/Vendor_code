@@ -105,12 +105,11 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/bigip -d '{
 echo "\r\n \r\n Creating HTTP Logs ES 6 Mapping....  \r\n \r\n "
 
 curl -H 'Content-Type: application/json' -X PUT localhost:9200/http -d '{
-   "settings":{  
-      "number_of_shards":3,
-      "number_of_replicas" : 1
-   },
    "mappings":{  
-      "logs":{  
+      "logs":{
+         "_all": { 
+            "enabled": false
+         },
          "properties":{  
             "@timestamp":{  
                "type":"date",
@@ -218,12 +217,11 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/http -d '{
 echo "\r\n \r\n Creating DDoS Logs ES 6 Mapping....  \r\n \r\n "
 
 curl -H 'Content-Type: application/json' -X PUT localhost:9200/ddos -d '{
-   "settings":{  
-      "number_of_shards": 3,
-      "number_of_replicas" : 1
-   },
    "mappings":{  
-      "logs":{  
+      "logs":{
+         "_all": { 
+            "enabled": false
+         },
          "properties":{  
             "@timestamp":{  
                "type":"date",
