@@ -18,8 +18,8 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.5.5                             \r\n
-Last Updated:  3/12/2018
+Version:  0.5.6                             \r\n
+Last Updated:  3/13/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04  \r\n \r\n"
 
@@ -48,6 +48,9 @@ echo "\r\n \r\n Downloading Logstash Config"
 wget -O "f5_logstash_config.conf" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/logstash.conf"
 wait
 mkdir logstash
+sudo chmod -R 755 /var/lib/logstash
+sudo chown -R logstash:logstash /var/lib/logstash
+
 sudo mv "f5_logstash_config.conf" "logstash/f5_logging.conf"
 if [ -s "logstash/f5_logging.conf" ] 
 then
