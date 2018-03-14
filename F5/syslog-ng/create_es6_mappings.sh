@@ -21,14 +21,10 @@ wait
 echo "\r\n \r\n "
 echo "Creating BigIP Logs ES 6 Mapping....  \r\n \r\n "
 
-curl -H 'Content-Type: application/json' -X PUT localhost:9200/bigip -d '{  
-   "settings":{
-      "number_of_shards": 3,
-      "number_of_replicas": 1
-   },
+curl -H 'Content-Type: application/json' -X PUT localhost:9200/bigip -d '{
    "mappings":{
       "logs":{
-         "_source": {
+         "_all": { 
             "enabled": false
          },
          "properties":{  
