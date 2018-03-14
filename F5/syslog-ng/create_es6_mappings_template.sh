@@ -24,9 +24,7 @@ echo "Creating BigIP Logs ES 6 Mapping....  \r\n \r\n "
 
 curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.logs -d '
 {  
-   "index_patterns": ["bigip.logs*"],
    "template":"bigip.logs*",
-   "order" : 0,   
    "settings":{
       "number_of_shards":3,
       "number_of_replicas" : 1,
@@ -133,8 +131,6 @@ echo "\r\n \r\n Creating HTTP Logs ES 6 Mapping....  \r\n \r\n "
 curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/http.logs -d '
 {  
    "template":"http.logs*",
-   "index_patterns": ["http.logs*"],
-   "order" : 0,
    "settings":{  
       "number_of_shards":3,
       "number_of_replicas" : 1,
@@ -252,8 +248,6 @@ echo "\r\n \r\n Creating DDoS Logs ES 6 Mapping....  \r\n \r\n "
 curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/ddos.logs -d '
 {
    "template":"ddos.logs*",
-   "index_patterns": ["ddos.logs*"],
-   "order" : 0,
    "settings":{  
       "number_of_shards":3,
       "number_of_replicas" : 1,
