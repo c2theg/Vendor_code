@@ -15,8 +15,8 @@ echo "Creating BigIP Logs ES 6 Mapping....  \r\n \r\n "
 curl -H 'Content-Type: application/json' -X PUT localhost:9200/bigip.logs -d '
 {  
    "settings":{
-      "number_of_shards":3,
-      "number_of_replicas" : 1,
+#      "number_of_shards": 5,
+#      "number_of_replicas" : 1,
       "index.routing.allocation.include.size": "small",
       "index.routing.allocation.include.rack": "r1",
        "analysis": {
@@ -120,8 +120,8 @@ echo "\r\n \r\n Creating HTTP Logs ES 6 Mapping....  \r\n \r\n "
 curl -H 'Content-Type: application/json' -X PUT localhost:9200/http.logs -d '
 {
    "settings":{  
-      "number_of_shards":3,
-      "number_of_replicas" : 1,
+#      "number_of_shards":3,
+#      "number_of_replicas" : 1,
       "index.routing.allocation.include.size": "small",
       "index.routing.allocation.include.rack": "r1"
    },
@@ -236,8 +236,8 @@ echo "\r\n \r\n Creating DDoS Logs ES 6 Mapping....  \r\n \r\n "
 curl -H 'Content-Type: application/json' -X PUT localhost:9200/ddos.logs -d '
 {
    "settings":{  
-      "number_of_shards":3,
-      "number_of_replicas" : 1,
+#      "number_of_shards":3,
+#      "number_of_replicas" : 1,
       "index.routing.allocation.include.size": "small",
       "index.routing.allocation.include.rack": "r1"
    },
