@@ -407,4 +407,10 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/ddos.lo
    }
 }'
 
-echo " DONE! \r\n \r\n "
+echo "DONE! \r\n \r\n"
+
+curl -XGET 'localhost:9200/_cat/indices?v&pretty'
+curl -XGET 'localhost:9200/_cat/health?v&pretty'
+curl -XGET 'localhost:9200/_cat/nodes?v&pretty'
+
+echo "\r\n \r\n \r\n"
