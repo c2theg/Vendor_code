@@ -18,10 +18,10 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.5.7                             \r\n
-Last Updated:  3/13/2018
+Version:  0.5.8                             \r\n
+Last Updated:  3/14/2018
 \r\n \r\n
-This is meant for Ubuntu 16.04  \r\n \r\n"
+This is meant for Ubuntu 16.04+  \r\n \r\n"
 
 #---------------------------------------------------------------------------------------------------------
 
@@ -30,10 +30,11 @@ then
 	echo "Deleting old configs...  "
 	rm create_es6_mappings.sh
 	rm load_sample_data.sh
-	rm f5_logstash_config.conf
-	rm /etc/logstash/conf.d/f5_config.conf
-	rm syslogng_bigip.conf
-	rm /etc/syslog-ng/conf.d/bigip.conf
+	rm test_es.sh
+	rm logstash/f5_logging.conf
+	rm /etc/logstash/conf.d/f5_logging.conf
+	#rm syslogng_bigip.conf
+	#rm /etc/syslog-ng/conf.d/bigip.conf
 fi
 
 echo "Downloading ES 6 Mappings Config"
@@ -43,21 +44,23 @@ sudo ./create_es6_mappings.sh
 wait
 
 
-
 echo "\r\n \r\n Downloading Logstash Config"
-wget -O "f5_logstash_config.conf" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/logstash2.conf"
+wget -O "f5_logging.conf" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/logstash2.conf"
 wait
-mkdir logstash
+if [ ! -d "logstash" ]; then
+then
+	mkdir logstash
+fi
+
 sudo chmod -R 755 /var/lib/logstash
 sudo chown -R logstash:logstash /var/lib/logstash
-
-sudo mv "f5_logstash_config.conf" "logstash/f5_logging.conf"
+	
+sudo mv "f5_logging.conf" "logstash/f5_logging.conf"
 if [ -s "logstash/f5_logging.conf" ] 
 then
 	#echo "\r\n \r\n  Starting Logstash (this may take 1 minute)... \r\n \r\n"
 	#sudo -u logstash /usr/share/logstash/bin/logstash --path.settings=/etc/logstash -f logstash/f5_logging.conf
 	#sudo /usr/share/logstash/bin/logstash --path.settings=/etc/logstash -f /home/ubuntu/logstash/f5_logging.conf
-	
 	
 	echo "To start logstash use the following: \r\n \r\n
 	   sudo  /usr/share/logstash/bin/logstash --path.settings=/etc/logstash -f /home/ubuntu/logstash/f5_logging.conf 
