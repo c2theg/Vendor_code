@@ -8,6 +8,15 @@
 #
 #
 #
+echo "\r\n \r\n "
+echo "Deleting existing ES indexs if present....  \r\n \r\n "
+echo "\r\n bigip ... \r\n "
+curl -XDELETE 'localhost:9200/bigip*?pretty'
+echo "\r\n http ... \r\n "
+curl -XDELETE 'localhost:9200/http*?pretty'
+echo "\r\n ddos ... \r\n "
+curl -XDELETE 'localhost:9200/ddos*?pretty'
+wait
 
 echo "\r\n \r\n "
 
@@ -17,7 +26,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.l
 {  
    "index_patterns": ["bigip.logs*"],
    "template":"bigip.logs*",
-   "order" : 0,
+   "order" : 0,   
    "settings":{
       "number_of_shards":3,
       "number_of_replicas" : 1,
