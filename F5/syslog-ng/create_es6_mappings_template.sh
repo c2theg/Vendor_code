@@ -413,4 +413,7 @@ curl -XGET 'localhost:9200/_cat/indices?v&pretty'
 curl -XGET 'localhost:9200/_cat/health?v&pretty'
 curl -XGET 'localhost:9200/_cat/nodes?v&pretty'
 
+echo "\r\n \r\n  Cluster Templates' \r\n \r\n"
+curl -XGET 'localhost:9200/_template/*?pretty'
+
 echo "\r\n \r\n \r\n"
