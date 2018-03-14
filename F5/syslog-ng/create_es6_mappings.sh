@@ -10,11 +10,11 @@
 #
 echo "\r\n \r\n "
 echo "Deleting existing ES indexs if present....  \r\n \r\n "
-echo "\r\n bigip.logs ... \r\n "
+echo "\r\n bigip ... \r\n "
 curl -XDELETE 'localhost:9200/bigip*?pretty'
-echo "\r\n http.logs ... \r\n "
+echo "\r\n http ... \r\n "
 curl -XDELETE 'localhost:9200/http*?pretty'
-echo "\r\n ddos.logs ... \r\n "
+echo "\r\n ddos ... \r\n "
 curl -XDELETE 'localhost:9200/ddos*?pretty'
 wait
 
