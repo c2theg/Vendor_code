@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # Christopher Gray
-# Version 2.1.7
+# Version 2.1.8
 # . 3-14-18
 #
 # ---- Create the mapping for indexing the device logs
