@@ -1,15 +1,21 @@
+#!/bin/sh
+#
 # Christopher Gray
-# Version 2.1.4
+# Version 2.1.5
 # . 3-14-18
 #
 # ---- Create the mapping for indexing the device logs
 #
 #
 #
-#
+echo "\r\n \r\n "
+echo "Deleting existing ES indexs if present....  \r\n \r\n "
+curl -XDELETE 'localhost:9200/bigip.logs*?pretty'
+curl -XDELETE 'localhost:9200/http.logs*?pretty'
+curl -XDELETE 'localhost:9200/ddos.logs*?pretty'
+wait
 
 echo "\r\n \r\n "
-
 echo "Creating BigIP Logs ES 6 Mapping....  \r\n \r\n "
 
 curl -H 'Content-Type: application/json' -X PUT localhost:9200/bigip.logs -d '{  
@@ -368,3 +374,10 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/ddos.logs -d '{
    }
 }'
 
+echo "DONE! \r\n \r\n"
+
+curl -XGET 'localhost:9200/_cat/indices?v&pretty'
+curl -XGET 'localhost:9200/_cat/health?v&pretty'
+curl -XGET 'localhost:9200/_cat/nodes?v&pretty'
+
+echo "\r\n \r\n \r\n"
