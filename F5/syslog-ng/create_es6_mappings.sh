@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # Christopher Gray
-# Version 2.1.5
+# Version 2.1.6
 # . 3-14-18
 #
 # ---- Create the mapping for indexing the device logs
@@ -10,8 +10,11 @@
 #
 echo "\r\n \r\n "
 echo "Deleting existing ES indexs if present....  \r\n \r\n "
+echo "\r\n bigip.logs ... \r\n "
 curl -XDELETE 'localhost:9200/bigip.logs*?pretty'
+echo "\r\n http.logs ... \r\n "
 curl -XDELETE 'localhost:9200/http.logs*?pretty'
+echo "\r\n ddos.logs ... \r\n "
 curl -XDELETE 'localhost:9200/ddos.logs*?pretty'
 wait
 
