@@ -52,6 +52,13 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.l
          "_source": {
             "enabled": false
          },
+         "_meta": {
+           "version": "1.0"
+         },
+         "_all": {
+           "enabled": false
+         },
+         "dynamic": false,         
          "properties":{  
             "@timestamp":{  
                "type":"date",
