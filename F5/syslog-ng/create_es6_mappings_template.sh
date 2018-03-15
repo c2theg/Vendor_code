@@ -28,6 +28,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.l
    "settings":{
       "number_of_shards":3,
       "number_of_replicas" : 1,
+      "refresh_interval": "10s",
       "index.routing.allocation.include.size": "small",
       "index.routing.allocation.include.rack": "r1",
        "analysis": {
