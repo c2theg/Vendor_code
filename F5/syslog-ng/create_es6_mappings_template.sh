@@ -1,7 +1,7 @@
 #!/bin/sh
 # Christopher Gray
-# Version 2.1.3
-# . 3-12-18
+# Version 2.1.5
+# . 3-19-18
 #
 # ---- Create the template for indexing the device logs
 #
@@ -10,12 +10,15 @@
 #
 echo "\r\n \r\n "
 echo "Deleting existing ES indexs if present....  \r\n \r\n "
-echo "\r\n bigip ... \r\n "
+echo "\r\n BigIP ... \r\n "
 curl -XDELETE 'localhost:9200/bigip*?pretty'
-echo "\r\n http ... \r\n "
+echo "\r\n HTTP ... \r\n "
 curl -XDELETE 'localhost:9200/http*?pretty'
-echo "\r\n ddos ... \r\n "
+echo "\r\n DDoS ... \r\n "
 curl -XDELETE 'localhost:9200/ddos*?pretty'
+wait
+echo "\r\n DNS ... \r\n "
+curl -XDELETE 'localhost:9200/dns*?pretty'
 wait
 
 echo "\r\n \r\n "
@@ -142,6 +145,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/http.lo
    "settings":{  
       "number_of_shards":3,
       "number_of_replicas" : 0,
+      "refresh_interval": "10s",      
       "index.routing.allocation.include.size": "small",
       "index.routing.allocation.include.rack": "r1"
    },
@@ -408,6 +412,101 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/ddos.lo
       }
    }
 }'
+
+
+#
+#
+#
+#----  Create the template for indexing the DNS logs
+#
+#
+#
+#
+echo "\r\n \r\n Creating DDoS Logs ES 6 Mapping....  \r\n \r\n "
+
+curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/dns.logs -d '
+{
+    "template" : "dns.logs*",
+    "settings" : {
+      "number_of_shards":4,
+      "number_of_replicas" : 0,
+      "refresh_interval": "10s",      
+      "index.routing.allocation.include.size": "small",
+      "index.routing.allocation.include.rack": "r1"
+    },
+"mappings": {
+         "logs": {
+            "properties": {
+               "@timestamp": {
+                  "type": "date",
+                  "format": "strict_date_optional_time||epoch_millis"
+               },
+               "@version": {
+                  "type": "string"
+               },
+               "host": {
+                  "type": "string"
+               },
+               "message": {
+                  "type": "string"
+               },
+               "path": {
+                  "type": "string"
+               },
+               "syslog_hostname": {
+                  "type": "string",
+                    "analyzer": "english",
+                    "fields": {
+                        "raw": {
+                            "type":  "string",
+                            "index": "not_analyzed"
+                        }
+                    }
+               },
+               "Subscriber": {
+                  "type": "ip"
+               },
+              "port": {
+                  "type": "integer"
+               },
+               "Query": {
+                  "type": "string",
+                    "analyzer": "english",
+                    "fields": {
+                        "raw": {
+                            "type":  "string",
+                            "index": "not_analyzed"
+                        }
+                    }
+               },
+              "QueryType": {
+                  "type": "string",
+                    "analyzer": "english",
+                    "fields": {
+                        "raw": {
+                            "type":  "string",
+                            "index": "not_analyzed"
+                        }
+                    }
+               },
+               "DNS_response": {
+                  "type": "string",
+                    "analyzer": "english",
+                    "fields": {
+                        "raw": {
+                            "type":  "string",
+                            "index": "not_analyzed"
+                        }
+                    }
+               },
+               "timestamp": {
+                  "type": "string"
+               }
+            }
+         }
+      }
+}'
+
 
 echo "DONE! \r\n \r\n"
 
