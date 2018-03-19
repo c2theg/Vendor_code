@@ -1,6 +1,6 @@
 #!/bin/sh
 # Christopher Gray
-# Version 2.1.5
+# Version 2.1.6
 # . 3-19-18
 #
 # ---- Create the template for indexing the device logs
@@ -51,7 +51,6 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.l
       }
    },
    "mappings":{
-      "logs":{
          "_source": {
             "enabled": false
          },
@@ -125,7 +124,6 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.l
             }
          }
       }
-   }
 }'
 
 
@@ -149,8 +147,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/http.lo
       "index.routing.allocation.include.size": "small",
       "index.routing.allocation.include.rack": "r1"
    },
-   "mappings":{  
-      "logs":{  
+   "mappings":{ 
          "properties":{  
             "@timestamp":{  
                "type":"date",
@@ -243,7 +240,6 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/http.lo
             }
          }
       }
-   }
 }'
 
 
@@ -266,8 +262,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/ddos.lo
       "index.routing.allocation.include.size": "small",
       "index.routing.allocation.include.rack": "r1"
    },
-   "mappings":{  
-      "logs":{  
+   "mappings":{
          "properties":{  
             "@timestamp":{  
                "type":"date",
@@ -409,7 +404,6 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/ddos.lo
                }
             }
          }
-      }
    }
 }'
 
@@ -434,8 +428,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/dns.log
       "index.routing.allocation.include.size": "small",
       "index.routing.allocation.include.rack": "r1"
     },
-"mappings": {
-         "logs": {
+   "mappings": {
             "properties": {
                "@timestamp": {
                   "type": "date",
@@ -504,7 +497,6 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/dns.log
                }
             }
          }
-      }
 }'
 
 
