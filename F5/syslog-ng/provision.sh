@@ -18,8 +18,8 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.5.9                             \r\n
-Last Updated:  3/14/2018
+Version:  0.6.0                             \r\n
+Last Updated:  3/19/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
 
@@ -38,7 +38,8 @@ then
 fi
 
 echo "Downloading ES 6 Mappings Config"
-wget -O "create_es6_mappings.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/create_es6_mappings.sh"
+#wget -O "create_es6_mappings.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/create_es6_mappings.sh"
+wget -O "create_es6_mappings.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/create_es6_mappings_template.sh"
 sudo chmod u+x create_es6_mappings.sh
 sudo ./create_es6_mappings.sh
 wait
