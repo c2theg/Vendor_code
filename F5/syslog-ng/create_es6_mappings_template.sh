@@ -1,6 +1,6 @@
 #!/bin/sh
 # Christopher Gray
-# Version 2.1.6
+# Version 2.1.7
 # . 3-19-18
 #
 # ---- Create the template for indexing the device logs
@@ -20,6 +20,23 @@ wait
 echo "\r\n DNS ... \r\n "
 curl -XDELETE 'localhost:9200/dns*?pretty'
 wait
+
+echo "\r\n TEMPLATES ... \r\n "
+
+echo "\r\n BigIP ... \r\n "
+curl -XDELETE 'localhost:9200/_template/bigip*?pretty'
+echo "\r\n HTTP ... \r\n "
+wait
+curl -XDELETE 'localhost:9200/_template/http*?pretty'
+echo "\r\n DDoS ... \r\n "
+wait
+curl -XDELETE 'localhost:9200/_template/ddos*?pretty'
+wait
+echo "\r\n DNS ... \r\n "
+curl -XDELETE 'localhost:9200/_template/dns*?pretty'
+wait
+
+
 
 echo "\r\n \r\n "
 
