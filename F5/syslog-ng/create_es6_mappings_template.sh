@@ -437,9 +437,9 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/ddos.lo
                }
             }
          }
-     }
+       }
+    }
 }'
-
 
 #
 #
@@ -476,23 +476,23 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/dns.log
                   "format": "strict_date_optional_time||epoch_millis"
                },
                "@version": {
-                  "type": "string"
+                  "type": "text"
                },
                "host": {
-                  "type": "string"
+                  "type": "text"
                },
                "message": {
-                  "type": "string"
+                  "type": "text"
                },
                "path": {
-                  "type": "string"
+                  "type": "text"
                },
                "syslog_hostname": {
-                  "type": "string",
+                  "type": "text",
                     "analyzer": "english",
                     "fields": {
                         "raw": {
-                            "type":  "string",
+                            "type":  "text",
                             "index": "not_analyzed"
                         }
                     }
@@ -504,37 +504,37 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/dns.log
                   "type": "integer"
                },
                "Query": {
-                  "type": "string",
+                  "type": "text",
                     "analyzer": "english",
                     "fields": {
                         "raw": {
-                            "type":  "string",
+                            "type":  "text",
                             "index": "not_analyzed"
                         }
                     }
                },
               "QueryType": {
-                  "type": "string",
+                  "type": "text",
                     "analyzer": "english",
                     "fields": {
                         "raw": {
-                            "type":  "string",
+                            "type":  "text",
                             "index": "not_analyzed"
                         }
                     }
                },
                "DNS_response": {
-                  "type": "string",
+                  "type": "text",
                     "analyzer": "english",
                     "fields": {
                         "raw": {
-                            "type":  "string",
+                            "type":  "text",
                             "index": "not_analyzed"
                         }
                     }
                },
                "timestamp": {
-                  "type": "string"
+                  "type": "text"
                }
             }
          }
