@@ -1,7 +1,7 @@
 #!/bin/sh
 # Christopher Gray
-# Version 2.1.7
-# . 3-19-18
+# Version 2.1.8
+# . 3-20-18
 #
 # ---- Create the template for indexing the device logs
 #
@@ -44,7 +44,7 @@ echo "Creating BigIP Logs ES 6 Mapping....  \r\n \r\n "
 
 curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.logs -d '
 {  
-   "template":"bigip.logs*",
+   "index_patterns":"bigip.logs*",
    "settings":{
       "number_of_shards":3,
       "number_of_replicas" : 0,
@@ -73,9 +73,6 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.l
          },
          "_meta": {
            "version": "1.0"
-         },
-         "_all": {
-           "enabled": false
          },
          "dynamic": false,         
          "properties":{  
@@ -156,7 +153,7 @@ echo "\r\n \r\n Creating HTTP Logs ES 6 Mapping....  \r\n \r\n "
 
 curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/http.logs -d '
 {  
-   "template":"http.logs*",
+   "index_patterns":"http.logs*",
    "settings":{  
       "number_of_shards":3,
       "number_of_replicas" : 0,
@@ -164,7 +161,14 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/http.lo
       "index.routing.allocation.include.size": "small",
       "index.routing.allocation.include.rack": "r1"
    },
-   "mappings":{ 
+   "mappings":{
+         "_source": {
+            "enabled": false
+         },
+         "_meta": {
+           "version": "1.0"
+         },
+         "dynamic": false,
          "properties":{  
             "@timestamp":{  
                "type":"date",
@@ -272,7 +276,7 @@ echo "\r\n \r\n Creating DDoS Logs ES 6 Mapping....  \r\n \r\n "
 
 curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/ddos.logs -d '
 {
-   "template":"ddos.logs*",
+   "index_patterns":"ddos.logs*",
    "settings":{  
       "number_of_shards":3,
       "number_of_replicas" : 0,
@@ -280,6 +284,13 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/ddos.lo
       "index.routing.allocation.include.rack": "r1"
    },
    "mappings":{
+         "_source": {
+            "enabled": false
+         },
+         "_meta": {
+           "version": "1.0"
+         },
+         "dynamic": false,
          "properties":{  
             "@timestamp":{  
                "type":"date",
@@ -437,7 +448,7 @@ echo "\r\n \r\n Creating DDoS Logs ES 6 Mapping....  \r\n \r\n "
 
 curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/dns.logs -d '
 {
-    "template" : "dns.logs*",
+    "index_patterns" : "dns.logs*",
     "settings" : {
       "number_of_shards":4,
       "number_of_replicas" : 0,
@@ -446,7 +457,14 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/dns.log
       "index.routing.allocation.include.rack": "r1"
     },
    "mappings": {
-            "properties": {
+         "_source": {
+            "enabled": false
+         },
+         "_meta": {
+           "version": "1.0"
+         },
+         "dynamic": false,
+         "properties": {
                "@timestamp": {
                   "type": "date",
                   "format": "strict_date_optional_time||epoch_millis"
