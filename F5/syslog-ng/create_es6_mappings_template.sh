@@ -1,6 +1,6 @@
 #!/bin/sh
 # Christopher Gray
-# Version 2.1.8
+# Version 2.1.9
 # . 3-20-18
 #
 # ---- Create the template for indexing the device logs
