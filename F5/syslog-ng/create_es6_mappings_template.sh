@@ -449,7 +449,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/ddos.lo
 #
 #
 #
-echo "\r\n \r\n Creating DDoS Logs ES 6 Mapping....  \r\n \r\n "
+echo "\r\n \r\n Creating DNS Logs ES 6 Mapping....  \r\n \r\n "
 
 curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/dns.logs -d '
 {
