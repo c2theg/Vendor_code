@@ -542,13 +542,16 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/dns.log
 }'
 
 
-echo "DONE! \r\n \r\n"
+echo "\r\n \r\n DONE! \r\n \r\n -------------------------------------------------------------------------------- \r\n \r\n"
 
 curl -XGET 'localhost:9200/_cat/indices?v&pretty'
+echo "\r\n \r\n "
+
 curl -XGET 'localhost:9200/_cat/health?v&pretty'
-curl -XGET 'localhost:9200/_cat/nodes?v&pretty'
+echo "\r\n \r\n "
+
+#curl -XGET 'localhost:9200/_cat/nodes?v&pretty'
 
 echo "\r\n \r\n  Cluster Templates' \r\n \r\n"
 curl -XGET 'localhost:9200/_template/*?pretty'
-
 echo "\r\n \r\n \r\n"
