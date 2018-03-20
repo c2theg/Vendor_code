@@ -68,6 +68,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.l
       }
    },
    "mappings":{
+      "logs": {
          "_source": {
             "enabled": false
          },
@@ -138,6 +139,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.l
             }
          }
       }
+    }
 }'
 
 
@@ -162,6 +164,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/http.lo
       "index.routing.allocation.include.rack": "r1"
    },
    "mappings":{
+      "logs": {   
          "_source": {
             "enabled": false
          },
@@ -261,6 +264,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/http.lo
             }
          }
       }
+    }
 }'
 
 
@@ -284,6 +288,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/ddos.lo
       "index.routing.allocation.include.rack": "r1"
    },
    "mappings":{
+     "logs": {   
          "_source": {
             "enabled": false
          },
@@ -432,6 +437,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/ddos.lo
                }
             }
          }
+      }
    }
 }'
 
@@ -457,6 +463,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/dns.log
       "index.routing.allocation.include.rack": "r1"
     },
    "mappings": {
+      "logs": {   
          "_source": {
             "enabled": false
          },
@@ -532,6 +539,7 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/dns.log
                }
             }
          }
+     }
 }'
 
 
