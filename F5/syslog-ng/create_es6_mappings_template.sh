@@ -543,6 +543,8 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/dns.log
 
 
 echo "\r\n \r\n DONE! \r\n \r\n -------------------------------------------------------------------------------- \r\n \r\n"
+wait
+wait
 
 echo "\r\n \r\n  Indices \r\n \r\n"
 curl -XGET 'localhost:9200/_cat/indices?v&pretty'
@@ -555,6 +557,6 @@ echo "\r\n \r\n "
 #echo "\r\n \r\n  Nodes \r\n \r\n"
 #curl -XGET 'localhost:9200/_cat/nodes?v&pretty'
 
-echo "\r\n \r\n Templates \r\n \r\n"
-curl -XGET 'localhost:9200/_template/*?pretty'
+#echo "\r\n \r\n Templates \r\n \r\n"
+#curl -XGET 'localhost:9200/_template/*?pretty'
 echo "\r\n \r\n \r\n"
