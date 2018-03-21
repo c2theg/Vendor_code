@@ -109,8 +109,10 @@ sudo chmod u+x load_sample_data.sh
 #sudo ./load_sample_data.sh
 wait
 
-echo "\r\n \r\n To update your logstash plugins: /usr/share/logstash/bin/logstash-plugin update \r\n \r\n "
+echo "\r\n \r\n To update your logstash plugins: \r\n \r\n
+	gem install atomic -v '1.1.100'    \r\n 
+	/usr/share/logstash/bin/logstash-plugin update \r\n \r\n"
 
 
-echo "\r\n \r\n Visit -  http://127.0.0.1:5601    and  http://127.0.0.1:9200   \r\n \r\n"
+
 echo "DONE! \r\n "
