@@ -18,7 +18,7 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.1.2                             \r\n
+Version:  0.1.3                             \r\n
 Last Updated:  3/21/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
@@ -76,7 +76,7 @@ wait
 
 echo "All files are in: /etc/elasticsearch/ingest-geoip/  \r\n \r\n"
 echo "Add to crontab (will update every Wednesday at 4:05am) \r\n \r\n
-  20 4 * * 7 /home/ubuntu/update_geoipdb.sh >> /var/log/update_geoipdb.log 2>&1
+  5 4 * * 3 /home/ubuntu/update_geoipdb.sh >> /var/log/update_geoipdb.log 2>&1
 
 
 echo "Done! \r\n \r\n"
