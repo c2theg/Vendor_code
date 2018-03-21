@@ -18,8 +18,8 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.6.0                             \r\n
-Last Updated:  3/19/2018
+Version:  0.6.1                             \r\n
+Last Updated:  3/21/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
 
@@ -35,6 +35,7 @@ then
 	rm /etc/logstash/conf.d/f5_logging.conf
 	#rm syslogng_bigip.conf
 	#rm /etc/syslog-ng/conf.d/bigip.conf
+	rm /etc/logstash/pattern/f5_grok_pattern.yml
 fi
 
 echo "Downloading ES 6 Mappings Config"
@@ -83,12 +84,18 @@ fi
 #wait
 #-------------------------------------------------------
 
+
+
+echo "\r\n \r\n Downloading custom Grok patterns... \r\n "
+wget -O "f5_grok_pattern.yml" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/f5_grok_pattern.yml"
+sudo mv "f5_grok_pattern.yml" "/etc/logstash/pattern/f5_grok_pattern.yml"
+echo "Done! \r\n "
+wait
+
 echo "\r\n \r\n Downloading Test ES shell script.. "
 wget -O "test_es.sh" "https://raw.githubusercontent.com/c2theg/srvBuilds/master/test_es.sh"
 sudo chmod u+x test_es.sh
 wait
-
-
 
 echo "\r\n \r\n Downloading Sample Data.. "
 wget -O "load_sample_data.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/load_sample_data.sh"
