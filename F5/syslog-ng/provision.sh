@@ -18,7 +18,7 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.6.1                             \r\n
+Version:  0.6.2                             \r\n
 Last Updated:  3/21/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
@@ -88,6 +88,10 @@ fi
 
 echo "\r\n \r\n Downloading custom Grok patterns... \r\n "
 wget -O "f5_grok_pattern.yml" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/f5_grok_pattern.yml"
+if [ ! -d "/etc/logstash/patterns/" ]
+then
+	mkdir "/etc/logstash/patterns/"
+fi
 sudo mv "f5_grok_pattern.yml" "/etc/logstash/patterns/f5_grok_pattern.yml"
 echo "Done! \r\n "
 wait
