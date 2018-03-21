@@ -30,5 +30,13 @@ This is meant for Ubuntu 16.04+  \r\n \r\n"
 #untar files 
 # move files to: /etc/elasticsearch/ingest-geoip/
 
+echo "Downloading latest file from Maxmind.com....  \r\n \r\n"
+wget -O "GeoLite2-City.tar.gz" "http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz"
 
-wget http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz
+echo "DONE! Untarring.. \r\n "
+tar xvzf GeoLite2-City.tar.gz GeoLite2-City_20180306/GeoLite2-City.mmdb
+
+echo "\r\n Moving files \r\n "
+cp GeoLite2-City.mmdb /etc/elasticsearch/ingest-geoip/
+
+echo "Done! \r\n \r\n"
