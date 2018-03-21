@@ -35,7 +35,7 @@ then
 	rm /etc/logstash/conf.d/f5_logging.conf
 	#rm syslogng_bigip.conf
 	#rm /etc/syslog-ng/conf.d/bigip.conf
-	rm /etc/logstash/pattern/f5_grok_pattern.yml
+	rm /etc/logstash/patterns/f5_grok_pattern.yml
 fi
 
 echo "Downloading ES 6 Mappings Config"
@@ -88,7 +88,7 @@ fi
 
 echo "\r\n \r\n Downloading custom Grok patterns... \r\n "
 wget -O "f5_grok_pattern.yml" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/f5_grok_pattern.yml"
-sudo mv "f5_grok_pattern.yml" "/etc/logstash/pattern/f5_grok_pattern.yml"
+sudo mv "f5_grok_pattern.yml" "/etc/logstash/patterns/f5_grok_pattern.yml"
 echo "Done! \r\n "
 wait
 
