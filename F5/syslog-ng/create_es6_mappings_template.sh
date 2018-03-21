@@ -1,7 +1,7 @@
 #!/bin/sh
 # Christopher Gray
-# Version 2.1.13
-# . 3-20-18
+# Version 2.1.14
+# . 3-21-18
 #
 # ---- Create the template for indexing the device logs
 #
@@ -13,7 +13,7 @@ echo "Deleting existing ES indexs if present....  \r\n \r\n "
 echo "\r\n BigIP ... \r\n "
 curl -XDELETE 'localhost:9200/bigip*?pretty'
 echo "\r\n HTTP ... \r\n "
-curl -XDELETE 'localhost:9200/http*?pretty'
+curl -XDELETE 'localhost:9200/asm*?pretty'
 echo "\r\n DDoS ... \r\n "
 curl -XDELETE 'localhost:9200/ddos*?pretty'
 wait
@@ -27,7 +27,7 @@ echo "\r\n BigIP ... \r\n "
 curl -XDELETE 'localhost:9200/_template/bigip*?pretty'
 echo "\r\n HTTP ... \r\n "
 wait
-curl -XDELETE 'localhost:9200/_template/http*?pretty'
+curl -XDELETE 'localhost:9200/_template/asm*?pretty'
 echo "\r\n DDoS ... \r\n "
 wait
 curl -XDELETE 'localhost:9200/_template/ddos*?pretty'
@@ -151,11 +151,11 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.l
 #
 #
 #
-echo "\r\n \r\n Creating HTTP Logs ES 6 Mapping....  \r\n \r\n "
+echo "\r\n \r\n Creating ASM - HTTP Logs ES 6 Mapping....  \r\n \r\n "
 
-curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/http.logs -d '
+curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/asm.logs -d '
 {  
-   "index_patterns":"http.logs*",
+   "index_patterns":"asm.logs*",
    "settings":{  
       "number_of_shards":3,
       "number_of_replicas" : 0,
