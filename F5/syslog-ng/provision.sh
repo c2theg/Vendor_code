@@ -36,6 +36,7 @@ then
 	#rm syslogng_bigip.conf
 	#rm /etc/syslog-ng/conf.d/bigip.conf
 	rm /etc/logstash/patterns/f5_grok_pattern.yml
+	rm update_geoipdb.sh
 fi
 
 echo "Downloading ES 6 Mappings Config"
