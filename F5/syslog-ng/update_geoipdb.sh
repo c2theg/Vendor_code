@@ -18,7 +18,7 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.0.1                             \r\n
+Version:  0.0.5                             \r\n
 Last Updated:  3/21/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
@@ -32,11 +32,19 @@ This is meant for Ubuntu 16.04+  \r\n \r\n"
 
 echo "Downloading latest file from Maxmind.com....  \r\n \r\n"
 wget -O "GeoLite2-City.tar.gz" "http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz"
+wait
 
-echo "DONE! Untarring.. \r\n "
-tar xvzf GeoLite2-City.tar.gz GeoLite2-City_20180306/GeoLite2-City.mmdb
+echo "\r\n Removing files \r\n "
+rm /etc/elasticsearch/ingest-geoip/README.txt
+rm /etc/elasticsearch/ingest-geoip/LICENSE.txt
+rm /etc/elasticsearch/ingest-geoip/COPYRIGHT.txt
 
-echo "\r\n Moving files \r\n "
-#cp GeoLite2-City.mmdb /etc/elasticsearch/ingest-geoip/
+echo "DONE! Uncompressing.. \r\n "
+tar xvzf GeoLite2-City.tar.gz --strip-components=1 -C /etc/elasticsearch/ingest-geoip/
+wait
 
+
+
+
+   
 echo "Done! \r\n \r\n"
