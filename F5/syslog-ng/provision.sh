@@ -58,6 +58,8 @@ sudo chmod -R 755 /var/lib/logstash
 sudo chown -R logstash:logstash /var/lib/logstash
 	
 sudo mv "f5_logging.conf" "logstash/f5_logging.conf"
+bin/logstash-plugin list --verbose
+
 if [ -s "logstash/f5_logging.conf" ] 
 then
 	#echo "\r\n \r\n  Starting Logstash (this may take 1 minute)... \r\n \r\n"
@@ -106,6 +108,8 @@ wget -O "load_sample_data.sh" "https://raw.githubusercontent.com/c2theg/Vendor_c
 sudo chmod u+x load_sample_data.sh
 #sudo ./load_sample_data.sh
 wait
+
+echo "\r\n \r\n To update your logstash plugins: /usr/share/logstash/bin/logstash-plugin update \r\n \r\n "
 
 
 echo "\r\n \r\n Visit -  http://127.0.0.1:5601    and  http://127.0.0.1:9200   \r\n \r\n"
