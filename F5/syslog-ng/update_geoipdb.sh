@@ -18,11 +18,16 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.1.0                             \r\n
+Version:  0.1.1                             \r\n
 Last Updated:  3/21/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
 #--------------------------------------------------------------------------------------
+echo "Removing old databases ... "
+rm /etc/elasticsearch/ingest-geoip/GeoLite2-ASN.mmdb.gz
+rm /etc/elasticsearch/ingest-geoip/GeoLite2-Country.mmdb.gz
+rm /etc/elasticsearch/ingest-geoip/GeoLite2-City.mmdb.gz
+echo "DONE! \r\n "
 
 #--------------------- City ---------------------
 echo "Downloading latest City database file from Maxmind.com....  \r\n \r\n"
@@ -69,5 +74,6 @@ tar xvzf GeoLite2-ASN.tar.gz --strip-components=1 -C /etc/elasticsearch/ingest-g
 echo "Done! \r\n \r\n"
 wait
 
+echo "All files are in: /etc/elasticsearch/ingest-geoip/  \r\n \r\n"
 
 echo "Done! \r\n \r\n"
