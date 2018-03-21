@@ -37,6 +37,6 @@ echo "DONE! Untarring.. \r\n "
 tar xvzf GeoLite2-City.tar.gz GeoLite2-City_20180306/GeoLite2-City.mmdb
 
 echo "\r\n Moving files \r\n "
-cp GeoLite2-City.mmdb /etc/elasticsearch/ingest-geoip/
+#cp GeoLite2-City.mmdb /etc/elasticsearch/ingest-geoip/
 
 echo "Done! \r\n \r\n"
