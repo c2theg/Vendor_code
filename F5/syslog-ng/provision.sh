@@ -18,8 +18,8 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.6.3                             \r\n
-Last Updated:  3/21/2018
+Version:  0.6.4                             \r\n
+Last Updated:  3/23/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
 
@@ -37,6 +37,7 @@ then
 	#rm /etc/syslog-ng/conf.d/bigip.conf
 	rm /etc/logstash/patterns/f5_grok_pattern.yml
 	rm update_geoipdb.sh
+	rm elasticsearch-f5.yml
 fi
 
 echo "Downloading ES 6 Mappings Config"
@@ -87,6 +88,16 @@ fi
 #wait
 #-------------------------------------------------------
 
+#----------- Update ES config --------------------------------------------
+mv /etc/elasticsearch/elasticsearch.yml  /etc/elasticsearch/elasticsearch6_backup.yml
+wait
+wget  -O "elasticsearch-f5.yml" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/elasticsearch.yml"
+wait
+cp elasticsearch-f5.yml /etc/elasticsearch/elasticsearch.yml
+wait
+echo " Restarting ElasticSearch... \r\n \r\n "
+sudo /etc/init.d/elasticsearch restart
+#-------------------------------------------------------
 
 
 echo "\r\n \r\n Downloading custom Grok patterns... \r\n "
