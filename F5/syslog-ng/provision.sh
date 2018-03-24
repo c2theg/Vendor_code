@@ -48,12 +48,25 @@ sudo chmod u+x create_es6_mappings.sh
 sudo ./create_es6_mappings.sh
 wait
 
-
+#---------------------------------------------------------------------
 echo "\r\n \r\n Downloading Logstash Config"
 wget -O "f5_logging.conf" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/logstash2.conf"
 wget -O "f5_syslogpri.yml" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/f5_syslogpri.yml"
+wget -O "f5_grok_pattern.yml" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/f5_grok_pattern.yml"
 
-wait
+#------ Move configs -----------
+if [ ! -d "/etc/logstash/patterns/" ]
+then
+	mkdir "/etc/logstash/patterns/"
+fi
+sudo mv "f5_grok_pattern.yml" "/etc/logstash/patterns/f5_grok_pattern.yml"
+
+if [ ! -d "/etc/logstash/dictionaries/" ]
+then
+	mkdir "/etc/logstash/dictionaries/"
+fi
+sudo mv "f5_syslogpri.yml" "/etc/logstash/dictionaries/f5_syslogpri.yml"
+
 if [ ! -d "logstash" ]
 then
 	mkdir logstash
@@ -61,10 +74,10 @@ fi
 
 sudo chmod -R 755 /var/lib/logstash
 sudo chown -R logstash:logstash /var/lib/logstash
-	
-sudo mv "f5_logging.conf"  "logstash/f5_logging.conf"
-sudo mv "f5_syslogpri.yml" "logstash/f5_syslogpri.yml"
 
+sudo mv "f5_logging.conf"  "logstash/f5_logging.conf"
+echo "Done! \r\n "
+#---------------------------------------------------------------------
 
 bin/logstash-plugin list --verbose
 
@@ -106,15 +119,7 @@ sudo /etc/init.d/elasticsearch restart
 #-------------------------------------------------------
 
 
-echo "\r\n \r\n Downloading custom Grok patterns... \r\n "
-wget -O "f5_grok_pattern.yml" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/f5_grok_pattern.yml"
-if [ ! -d "/etc/logstash/patterns/" ]
-then
-	mkdir "/etc/logstash/patterns/"
-fi
-sudo mv "f5_grok_pattern.yml" "/etc/logstash/patterns/f5_grok_pattern.yml"
-echo "Done! \r\n "
-wait
+
 
 echo "\r\n \r\n Downloading Test ES shell script.. "
 wget -O "test_es.sh" "https://raw.githubusercontent.com/c2theg/srvBuilds/master/test_es.sh"
