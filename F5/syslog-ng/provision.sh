@@ -18,8 +18,8 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.6.4                             \r\n
-Last Updated:  3/23/2018
+Version:  0.6.5                             \r\n
+Last Updated:  3/24/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
 
@@ -38,6 +38,7 @@ then
 	rm /etc/logstash/patterns/f5_grok_pattern.yml
 	rm update_geoipdb.sh
 	rm elasticsearch-f5.yml
+	rm f5_syslogpri.yml
 fi
 
 echo "Downloading ES 6 Mappings Config"
@@ -50,6 +51,8 @@ wait
 
 echo "\r\n \r\n Downloading Logstash Config"
 wget -O "f5_logging.conf" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/logstash2.conf"
+wget -O "f5_syslogpri.yml" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/f5_syslogpri.yml"
+
 wait
 if [ ! -d "logstash" ]
 then
@@ -59,7 +62,10 @@ fi
 sudo chmod -R 755 /var/lib/logstash
 sudo chown -R logstash:logstash /var/lib/logstash
 	
-sudo mv "f5_logging.conf" "logstash/f5_logging.conf"
+sudo mv "f5_logging.conf"  "logstash/f5_logging.conf"
+sudo mv "f5_syslogpri.yml" "logstash/f5_syslogpri.yml"
+
+
 bin/logstash-plugin list --verbose
 
 if [ -s "logstash/f5_logging.conf" ] 
