@@ -35,10 +35,10 @@ then
 	rm /etc/logstash/conf.d/f5_logging.conf
 	#rm syslogng_bigip.conf
 	#rm /etc/syslog-ng/conf.d/bigip.conf
-	rm /etc/logstash/patterns/f5_grok_pattern.yml
 	rm update_geoipdb.sh
 	rm elasticsearch-f5.yml
-	rm f5_syslogpri.yml
+	rm /etc/logstash/patterns/f5_grok_pattern.yml
+	rm /etc/logstash/dictionaries/f5_syslogpri.yml
 fi
 
 echo "Downloading ES 6 Mappings Config"
