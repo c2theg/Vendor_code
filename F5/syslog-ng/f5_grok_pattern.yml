@@ -1,5 +1,22 @@
+# F5 Logstash Grok patterns - v0.0.2
+
 HOSTNAMEUND \b(?:[_0-9A-Za-z][_0-9A-Za-z-]{0,62})(?:\.(?:[_0-9A-Za-z][_0-9A-Za-z-]{0,62}))*(\.?|\b)
 IPNA (?:%{IPV6}|%{IPV4}|N\/A)
 SCHEME (HTTPS?)
 F5SEQ ([0-9]*:[0-9])
 F5ID ([a-z0-9]*)
+
+# F5 Fields
+VHOST %{IPORHOST:url}:\s?%{POSINT:port}
+VIRTSERVER ((?:\/?[\w\.\-]+){2,4}(?:\s?\d*)?)
+F5DATE %{YEAR}/%{MONTHNUM}/%{MONTHDAY} %{TIME}
+SSL_CIPHER (?:[\w\-]*)
+SSL_VERSION (?:[\w\-\.]*)
+SSL_BITS (?:\d{2,4})
+SSL_DN (?:[\w]{1,2}=[\w\s]*,?)
+SSL_SERIAL (?:[\w]{1,2})
+
+# F5 Patterns
+F5_BASE %{VHOST:vhost} %{IP:clientip} %{WORD:httpmethod} '%{URIPATHPARAM:request}' HTTP/%{NUMBER:httpversion} %{QS:useragent} %{QS:referrer} %{F5DATE:requesttimestamp} %{NUMBER:requestsize} %{NUMBER:reqeustelapsedtime} %{IPORHOST:nodeip}:%{POSINT:nodeport} %{NUMBER:responsecode} %{F5DATE:responsetimestamp} %{NUMBER:responsesize} %{VIRTSERVER:virtualserver}
+F5_SSL %{SSL_CIPHER:sslcipher} %{SSL_VERSION:sslversion} %{SSL_BITS:sslbits}
+F5_SSL_CLIENT %{QS:ssldn} %{SSL_SERIAL:sslserial}
