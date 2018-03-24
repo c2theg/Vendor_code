@@ -18,7 +18,7 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.6.5                             \r\n
+Version:  0.6.6                             \r\n
 Last Updated:  3/24/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
@@ -54,9 +54,12 @@ wget -O "f5_logging.conf" "https://raw.githubusercontent.com/c2theg/Vendor_code/
 wget -O "f5_syslogpri.yml" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/f5_syslogpri.yml"
 wget -O "f5_grok_pattern.yml" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/f5_grok_pattern.yml"
 
+echo "\r\n \r\n"
+echo "moving configs....  "
 #------ Move configs -----------
 if [ ! -d "/etc/logstash/patterns/" ]
 then
+	echo "Creating directories... "
 	mkdir "/etc/logstash/patterns/"
 fi
 sudo mv "f5_grok_pattern.yml" "/etc/logstash/patterns/f5_grok_pattern.yml"
@@ -71,11 +74,11 @@ if [ ! -d "logstash" ]
 then
 	mkdir logstash
 fi
+sudo mv "f5_logging.conf"  "logstash/f5_logging.conf"
+
 
 sudo chmod -R 755 /var/lib/logstash
 sudo chown -R logstash:logstash /var/lib/logstash
-
-sudo mv "f5_logging.conf"  "logstash/f5_logging.conf"
 echo "Done! \r\n "
 #---------------------------------------------------------------------
 
