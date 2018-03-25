@@ -1,3 +1,4 @@
+''' - Version 0.0.2  - 3/24/18 '''
 import logging
 import logging.handlers
 my_logger = logging.getLogger('MyLogger')
