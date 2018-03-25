@@ -18,7 +18,7 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.6.6                             \r\n
+Version:  0.6.7                             \r\n
 Last Updated:  3/24/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
@@ -130,9 +130,9 @@ sudo chmod u+x test_es.sh
 wait
 
 
-echo "\r\n \r\n Downloading Update_GeoIP shell script.. "
-wget -O "update_geoipdb.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/update_geoipdb.sh"
-sudo chmod u+x update_geoipdb.sh
+echo "\r\n \r\n Downloading Update ELK plugins shell script.. "
+wget -O "update_elk_plugins.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/update_elk_plugins.sh"
+sudo chmod u+x update_elk_plugins.sh
 wait
 
 
