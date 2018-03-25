@@ -1,4 +1,4 @@
-''' - Version 0.0.4  - 3/24/18 '''
+''' - Version 0.0.5  - 3/24/18 '''
 import logging
 import logging.handlers
 my_logger = logging.getLogger('MyLogger')
@@ -19,8 +19,8 @@ List1 = [
   'test3'
 ]
 
-for x in List1:
-  print "Sending [", List1[x], "]... \r\n"
-  my_logger.info(List1[x])
+for (var i = 0; i < List1.length; i++) {
+  print "Sending [", List1[i], "]... \r\n"
+  my_logger.info(List1[i])
 
 print "\r\n Done! \r\n "
