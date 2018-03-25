@@ -80,7 +80,7 @@ wait
 
 echo "All files are in: /etc/elasticsearch/ingest-geoip/  \r\n \r\n"
 echo "Add to crontab (will update every Wednesday at 4:05am) \r\n \r\n
-  5 4 * * 3 /home/ubuntu/update_geoipdb.sh >> /var/log/update_geoipdb.log 2>&1
+  5 4 * * 3 /home/ubuntu/update_elk_plugins.sh >> /var/log/update_elk_plugins.log 2>&1
 \r\n \r\n"
 
 #---------------------------------------------
