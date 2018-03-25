@@ -18,8 +18,8 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.1.4                             \r\n
-Last Updated:  3/21/2018
+Version:  0.1.5                             \r\n
+Last Updated:  3/24/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
 
