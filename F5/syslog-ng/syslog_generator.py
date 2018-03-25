@@ -19,8 +19,11 @@ List1 = [
   'test3'
 ]
 
-for (var i = 0; i < List1.length; i++) {
+i = 0
+while i < len(List1):
   print "Sending [", List1[i], "]... \r\n"
   my_logger.info(List1[i])
-
+  i += 1
+  
+  
 print "\r\n Done! \r\n "
