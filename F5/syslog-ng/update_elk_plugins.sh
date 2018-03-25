@@ -24,7 +24,7 @@ Last Updated:  3/21/2018
 This is meant for Ubuntu 16.04+  \r\n \r\n"
 
 
-
+sudo /usr/share/logstash/bin/logstash-plugin update
 
 #--------------------------------------------------------------------------------------
 echo "Removing old GeoIP databases ... "
