@@ -22,8 +22,12 @@ Version:  0.1.4                             \r\n
 Last Updated:  3/21/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
+
+
+
+
 #--------------------------------------------------------------------------------------
-echo "Removing old databases ... "
+echo "Removing old GeoIP databases ... "
 rm /etc/elasticsearch/ingest-geoip/GeoLite2-ASN.mmdb.gz
 rm /etc/elasticsearch/ingest-geoip/GeoLite2-Country.mmdb.gz
 rm /etc/elasticsearch/ingest-geoip/GeoLite2-City.mmdb.gz
