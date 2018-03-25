@@ -83,4 +83,8 @@ echo "Add to crontab (will update every Wednesday at 4:05am) \r\n \r\n
   5 4 * * 3 /home/ubuntu/update_geoipdb.sh >> /var/log/update_geoipdb.log 2>&1
 \r\n \r\n"
 
+#---------------------------------------------
+echo "Update elasticsearch plugins... \r\n "
+sudo /usr/share/elasticsearch/bin/elasticsearch-plugin list
+
 echo "Done! \r\n \r\n"
