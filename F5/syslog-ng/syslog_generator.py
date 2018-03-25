@@ -1,4 +1,4 @@
-# --- Version 0.0.6 - 3/24/18
+# --- Version 0.0.7 - 3/24/18
 import logging
 import logging.handlers
 my_logger = logging.getLogger('MyLogger')
@@ -30,8 +30,9 @@ while i < len(List1):
 
 with open(fs_syslog_lines_to_send) as f:
     fs_lines = f.readlines()
-    print "Sending: [", fs_lines, "]... \r\n"
-    my_logger.info(fs_lines)
+    if str(fs_lines) != '':
+      print "Sending: [", fs_lines, "]... \r\n"
+      my_logger.info(fs_lines)
 
 
 print "\r\n Done! \r\n "
