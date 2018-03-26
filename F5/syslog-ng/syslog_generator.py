@@ -4,7 +4,7 @@ import logging.handlers
 my_logger = logging.getLogger('MyLogger')
 my_logger.setLevel(logging.INFO)
 
-if len(sys.argv) <= 4:
+if len(sys.argv) < 4:
     print "Usage: python syslog_generator.py 192.168.1.2 514 syslog_lines.txt \r\n \r\n"
 else:
     #syslog_server = '192.168.1.210'
