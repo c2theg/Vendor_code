@@ -54,4 +54,4 @@ bootstrap.memory_lock: false
 #http.cors.allow-headers: X-Requested-With,X-Auth-Token,Content-Type, Content-Length, Authorization
 # ================== END CUSTOM CONFIG =========================
 # Allow to create index templates automatically 
-action.auto_create_index: logstash*, netflow-*, bigip.logs*, asm.logs*, dns.logs*, ddos.logs*, bigiq.logs*, avr.logs*, bgp.logs*, fs.logs*, bh.logs*, ipintel.logs*, srcips.logs*
+action.auto_create_index: logstash*, netflow-*, bigip.logs*, http.logs*, dns.logs*, ddos.logs*, bigiq.logs*, avr.logs*, bgp.logs*, fs.logs*, bh.logs*, ipintel.logs*, srcips.logs*
