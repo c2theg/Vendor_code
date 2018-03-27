@@ -9,7 +9,7 @@ if [ "$#" -eq  "0" ]
       server_ip=127.0.0.1
 else
       server_ip=$1
-      echo "ES Server is $$ \r\n"
+      echo "ES Server is $server_ip \r\n"
 fi
 
 
@@ -60,16 +60,16 @@ wait
 echo "\r\n \r\n "
 #curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.logs -d ''
 echo "Creating BigIP Logs ES 6 Mapping....  \r\n \r\n "
-curl -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_bigip.json
+curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_bigip.json
 
 echo "\r\n \r\n Creating HTTP Logs ES 6 Mapping....  \r\n \r\n "
-curl -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_http.json
+curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_http.json
 
 echo "\r\n \r\n Creating DDoS Logs ES 6 Mapping....  \r\n \r\n "
-curl -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_ddos.json
+curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_ddos.json
 
 echo "\r\n \r\n Creating DDoS Logs ES 6 Mapping....  \r\n \r\n "
-curl -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_dns.json
+curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_dns.json
 echo "DONE! \r\n \r\n"
 
 
