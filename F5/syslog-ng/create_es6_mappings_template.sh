@@ -5,10 +5,12 @@
 
 if [ "$#" -eq  "0" ]
    then
-     server_ip=127.0.0.1
+      server_ip=127.0.0.1
 else
-     echo "Server is $1"
+      server_ip=$1
 fi
+
+echo "ES Server is $1"
 
 if [ -s "es_mapping_bigip.json" ]
 then
