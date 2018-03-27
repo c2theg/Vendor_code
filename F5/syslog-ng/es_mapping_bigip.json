@@ -7,7 +7,7 @@
       "refresh_interval": "1s",
       "index.routing.allocation.include.size": "small",
       "index.routing.allocation.include.rack": "r1",
-
+      
        "analysis": {
          "analyzer": {
            "my_analyzer": {
@@ -31,16 +31,15 @@
          "_meta": {
            "version": "1.0"
          },
-         "dynamic": false,         
-         "properties":{  
-            "@timestamp":{  
+         "properties":{
+            "@timestamp":{
                "type":"date",
                "format":"strict_date_optional_time||epoch_millis"
             },
-            "@version":{  
+            "@version":{
                "type":"text"
             },
-            "host":{  
+            "host":{
                "type":"text"
             },
             "message":{
@@ -50,55 +49,49 @@
             "path":{
                "type":"text"
             },
-            "syslog_hostname":{  
+            "syslog_hostname":{
                "type":"text",
                "analyzer":"english",
-               "fields":{  
-                  "raw":{  
+               "fields":{
+                  "raw":{
                      "type":"text",
                      "index":"false"
                   }
                }
             },
-            "syslog_message":{  
+            "syslog_message":{
                "type":"text",
                "analyzer":"english",
-               "fields":{  
-                  "raw":{  
+               "fields":{
+                  "raw":{
                      "type":"text",
                      "index":"false"
                   }
                }
             },
-            "syslog_program":{  
+            "syslog_program":{
                "type":"text",
                "analyzer":"english",
-               "fields":{  
-                  "raw":{  
+               "fields":{
+                  "raw":{
                      "type":"text",
                      "index":"false"
                   }
                }
             },
-            "syslog_severity":{  
+            "syslog_severity":{
                "type":"text",
                "analyzer":"english",
-               "fields":{  
-                  "raw":{  
+               "fields":{
+                  "raw":{
                      "type":"text",
                      "index":"false"
                   }
                }
             },
-            "syslog_timestamp":{  
+            "syslog_timestamp":{
                "type":"text"
             }
          }
-
-
-
-
-
-
-    }
+      }
 }
