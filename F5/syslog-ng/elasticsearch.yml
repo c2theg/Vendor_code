@@ -1,4 +1,4 @@
-# ======== Christopher Gray - ES v6.x - Custom Config v0.6.7 - 3/23/18 ========
+# ======== Christopher Gray - ES v6.x - Custom Config v0.6.8 - 3/27/18 ========
 # https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html
 #
 #   Set Permissions:
@@ -54,4 +54,4 @@ bootstrap.memory_lock: false
 #http.cors.allow-headers: X-Requested-With,X-Auth-Token,Content-Type, Content-Length, Authorization
 # ================== END CUSTOM CONFIG =========================
 # Allow to create index templates automatically 
-action.auto_create_index: logstash*, netflow-*, bigip.logs*, http.logs*, dns.logs*, ddos.logs*, bigiq.logs*, avr.logs*, bgp.logs*, fs.logs*, bh.logs*, ipintel.logs*, srcips.logs*
+action.auto_create_index: logstash*, netflow-*, bigip.logs*, http.logs*, dns.logs*, ddos.logs*, bigiq.logs*, asm.logs*, bgp.logs*, fs.logs*, bh.logs*, ip_intel.logs*, src_ips.logs*, avr.logs*
