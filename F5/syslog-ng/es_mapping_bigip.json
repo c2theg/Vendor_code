@@ -28,9 +28,6 @@
          "_source": {
             "enabled": false
          },
-         "_meta": {
-           "version": "1.0"
-         },
          "properties":{
             "@timestamp":{
                "type":"date",
