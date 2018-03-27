@@ -1,0 +1,81 @@
+# ElasticSearch Mapping for: F5 DNS - version 0.1.1 - 3/26/18
+# https://support.f5.com/kb/en-us/products/big-ip_ltm/manuals/product/bigip-external-monitoring-implementations-13-0-0/15.html#guid-87e43db0-6700-48d1-8e1b-d52e8bb6c899
+{
+    "index_patterns" : "dns.logs*",
+    "settings" : {
+      "number_of_shards":4,
+      "number_of_replicas" : 0,
+      "refresh_interval": "10s",      
+      "index.routing.allocation.include.size": "small",
+      "index.routing.allocation.include.rack": "r1"
+    },
+   "mappings": {
+      "properties": {
+         "@timestamp": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+         },
+         "@version": {
+            "type": "string"
+         },
+         "host": {
+            "type": "string"
+         },
+         "message": {
+            "type": "string"
+         },
+         "path": {
+            "type": "string"
+         },
+         "syslog_hostname": {
+            "type": "string",
+              "analyzer": "english",
+              "fields": {
+                  "raw": {
+                      "type":  "string",
+                      "index": "not_analyzed"
+                  }
+              }
+         },
+         "Subscriber": {
+            "type": "ip"
+         },
+        "port": {
+            "type": "integer"
+         },
+         "Query": {
+            "type": "string",
+              "analyzer": "english",
+              "fields": {
+                  "raw": {
+                      "type":  "string",
+                      "index": "not_analyzed"
+                  }
+              }
+         },
+        "QueryType": {
+            "type": "string",
+              "analyzer": "english",
+              "fields": {
+                  "raw": {
+                      "type":  "string",
+                      "index": "not_analyzed"
+                  }
+              }
+         },
+         "DNS_response": {
+            "type": "string",
+              "analyzer": "english",
+              "fields": {
+                  "raw": {
+                      "type":  "string",
+                      "index": "not_analyzed"
+                  }
+              }
+         },
+         "timestamp": {
+            "type": "string"
+         }
+      }
+   }
+}
