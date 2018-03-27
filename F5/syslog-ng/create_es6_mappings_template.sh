@@ -1,15 +1,15 @@
-#!/bin/bash
+#!/bin/sh
 # Christopher Gray
-# Version 2.2.2
+# Version 2.2.3
 #  3-27-18
 
 if [ "$#" -eq  "0" ]
    then
-      echo "EMPTY: using localhost \r\n"
+      echo "No server ip specified. Defaulting to localhost \r\n"
       server_ip=127.0.0.1
 else
       server_ip=$1
-      echo "ES Server is $server_ip \r\n"
+      echo "ES Server is set to $server_ip \r\n"
 fi
 
 
@@ -58,9 +58,19 @@ curl -XDELETE $server_ip:9200/_template/dns*?pretty
 wait
 
 echo "\r\n \r\n "
-#curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.logs -d ''
+
 echo "Creating BigIP Logs ES 6 Mapping....  \r\n \r\n "
-curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_bigip.json
+#curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.logs -d ''
+#curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_bigip.json
+#curl -XPUT 'http://localhost:9200/<indexname>/positions/_mapping' -d @es_mapping_bigip.json
+#curl -H 'Content-Type: application/json' -XPUT 'http://localhost:9200/bigip.logs*/positions/_mapping' -d @es_mapping_bigip.json
+#curl -H 'Content-Type: application/json' -XPUT 'http://localhost:9200/_template/bigip.logs*' -d @es_mapping_bigip.json
+#curl -H 'Content-Type: application/json' -XPUT 'http://localhost:9200/_template/metricbeat' -d@/etc/metricbeat/metricbeat.template.json
+#curl -H 'Content-Type: application/json' -XPUT 'http://localhost:9200/_template/bigip.logs' -d@es_mapping_bigip.json
+
+JSON_Data =`cat es_mapping_bigip.json`
+echo "$JSON_Data"
+curl -H 'Content-Type: application/json' -X PUT $server_ip:9200/_template/bigip.logs -d '$JSON_Data'
 
 echo "\r\n \r\n Creating HTTP Logs ES 6 Mapping....  \r\n \r\n "
 curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_http.json
