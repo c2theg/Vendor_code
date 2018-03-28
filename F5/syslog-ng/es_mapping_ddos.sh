@@ -194,6 +194,7 @@ curl -H 'Content-Type: application/json' -X PUT $server_ip:$server_port/_templat
 
 
 
+         }
       }
    }
 }'
