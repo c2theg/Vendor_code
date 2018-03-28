@@ -1,6 +1,6 @@
 #!/bin/sh
 # Christopher Gray
-# Version 0.1.3
+# Version 0.1.4
 #  3-28-18
 
 #ElasticSearch Mapping for: F5 DDoS
@@ -184,7 +184,7 @@ curl -H 'Content-Type: application/json' -X PUT $server_ip:9200/_template/ddos.l
 
 
 
-
+         }
       }
    }
 }'
