@@ -1,7 +1,7 @@
 #!/bin/sh
 # Christopher Gray
-# Version 2.2.3
-#  3-27-18
+# Version 2.2.4
+#  3-28-18
 
 if [ "$#" -eq  "0" ]
    then
@@ -89,10 +89,10 @@ sudo ./es_mapping_dns.sh $server_ip
 wait
 echo "DONE! \r\n \r\n"
 
-echo "\r\n \r\n Get ES Stats:  \r\n \r\n "
-curl -XGET $server_ip:9200/_cat/indices?v&pretty
-curl -XGET $server_ip:9200/_cat/health?v&pretty
-curl -XGET $server_ip:9200/_cat/nodes?v&pretty
+echo "\r\n \r\n Get ES Stats: $server_ip:9200 \r\n \r\n "
+curl -XGET '$server_ip:9200/_cat/indices?v&pretty'
+curl -XGET '$server_ip:9200/_cat/health?v&pretty'
+curl -XGET '$server_ip:9200/_cat/nodes?v&pretty'
 
 echo "\r\n \r\n  Cluster Templates' \r\n \r\n"
 curl -XGET $server_ip:9200/_template/*?pretty
