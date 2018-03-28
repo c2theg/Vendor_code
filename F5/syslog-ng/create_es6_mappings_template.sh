@@ -12,7 +12,6 @@ else
       echo "ES Server is set to $server_ip \r\n"
 fi
 
-
 if [ -s "es_mapping_bigip.json" ]
 then
    echo "Deleting old mappings...  "
@@ -23,11 +22,15 @@ then
 fi
 
 echo "Downloading ES Mappings..."
-wget -O "es_mapping_bigip.json" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/es_mapping_bigip.json"
-wget -O "es_mapping_http.json" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/es_mapping_http.json"
-wget -O "es_mapping_ddos.json" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/es_mapping_ddos.json"
-wget -O "es_mapping_dns.json" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/es_mapping_dns.json"
+wget -O "es_mapping_bigip.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/es_mapping_bigip.sh"
+wget -O "es_mapping_http.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/es_mapping_http.sh"
+wget -O "es_mapping_ddos.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/es_mapping_ddos.sh"
+wget -O "es_mapping_dns.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/es_mapping_dns.sh"
 wait
+sudo chmod u+x es_mapping_bigip.sh
+sudo chmod u+x es_mapping_http.sh
+sudo chmod u+x es_mapping_ddos.sh
+sudo chmod u+x es_mapping_dns.sh
 
 # ---- Create the template for indexing the device logs
 echo "\r\n \r\n "
@@ -62,26 +65,29 @@ echo "\r\n \r\n "
 echo "Creating BigIP Logs ES 6 Mapping....  \r\n \r\n "
 #curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.logs -d ''
 #curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_bigip.json
-#curl -XPUT 'http://localhost:9200/<indexname>/positions/_mapping' -d @es_mapping_bigip.json
 #curl -H 'Content-Type: application/json' -XPUT 'http://localhost:9200/bigip.logs*/positions/_mapping' -d @es_mapping_bigip.json
 #curl -H 'Content-Type: application/json' -XPUT 'http://localhost:9200/_template/bigip.logs*' -d @es_mapping_bigip.json
-#curl -H 'Content-Type: application/json' -XPUT 'http://localhost:9200/_template/metricbeat' -d@/etc/metricbeat/metricbeat.template.json
-#curl -H 'Content-Type: application/json' -XPUT 'http://localhost:9200/_template/bigip.logs' -d@es_mapping_bigip.json
-
-JSON_Data='cat es_mapping_bigip.json'
-echo "$JSON_Data"
-curl -H 'Content-Type: application/json' -X PUT $server_ip:9200/_template/bigip.logs -d '$JSON_Data'
+#-- load text into variable, then push it via curl to es.
+#JSON_Data='cat es_mapping_bigip.json'
+#echo "$JSON_Data"
+#curl -H 'Content-Type: application/json' -X PUT $server_ip:9200/_template/bigip.logs -d '$JSON_Data'
+sudo ./es_mapping_bigip.sh $server_ip
 
 echo "\r\n \r\n Creating HTTP Logs ES 6 Mapping....  \r\n \r\n "
-curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_http.json
+#curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_http.json
+sudo ./es_mapping_http.sh $server_ip
 
 echo "\r\n \r\n Creating DDoS Logs ES 6 Mapping....  \r\n \r\n "
-curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_ddos.json
+#curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_ddos.json
+sudo ./es_mapping_ddos.sh $server_ip
 
-echo "\r\n \r\n Creating DDoS Logs ES 6 Mapping....  \r\n \r\n "
-curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_dns.json
+echo "\r\n \r\n Creating DNS Logs ES 6 Mapping....  \r\n \r\n "
+#curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_dns.json
+sudo ./es_mapping_dns.sh $server_ip
+
+#---------------------------------------------------
+wait
 echo "DONE! \r\n \r\n"
-
 
 echo "\r\n \r\n Get ES Stats:  \r\n \r\n "
 curl -XGET $server_ip:9200/_cat/indices?v&pretty
