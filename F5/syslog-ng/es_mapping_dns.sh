@@ -1,6 +1,6 @@
 #!/bin/sh
 # Christopher Gray
-# Version 0.1.4
+# Version 0.1.5
 #  3-28-18
 
 #ElasticSearch Mapping for: F5 DNS
@@ -40,23 +40,23 @@ curl -H 'Content-Type: application/json' -X PUT $server_ip:9200/_template/dns.lo
                     "format": "strict_date_optional_time||epoch_millis"
                 },
                 "@version": {
-                    "type": "string"
+                    "type": "text"
                 },
                 "host": {
-                    "type": "string"
+                    "type": "text"
                 },
                 "message": {
-                    "type": "string"
+                    "type": "text"
                 },
                 "path": {
-                    "type": "string"
+                    "type": "text"
                 },
                 "syslog_hostname": {
-                    "type": "string",
+                    "type": "text",
                     "analyzer": "english",
                     "fields": {
                         "raw": {
-                            "type":  "string",
+                            "type":  "text",
                             "index": "not_analyzed"
                         }
                     }
@@ -68,37 +68,37 @@ curl -H 'Content-Type: application/json' -X PUT $server_ip:9200/_template/dns.lo
                     "type": "integer"
                 },
                 "Query": {
-                    "type": "string",
+                    "type": "text",
                     "analyzer": "english",
                     "fields": {
                         "raw": {
-                            "type":  "string",
+                            "type":  "text",
                             "index": "not_analyzed"
                         }
                     }
                 },
                 "QueryType": {
-                    "type": "string",
+                    "type": "text",
                     "analyzer": "english",
                     "fields": {
                         "raw": {
-                            "type":  "string",
+                            "type":  "text",
                             "index": "not_analyzed"
                         }
                     }
                 },
                 "DNS_response": {
-                    "type": "string",
+                    "type": "text",
                     "analyzer": "english",
                     "fields": {
                         "raw": {
-                            "type":  "string",
+                            "type":  "text",
                             "index": "not_analyzed"
                         }
                     }
                 },
                 "timestamp": {
-                    "type": "string"
+                    "type": "text"
                 }
             }
         
