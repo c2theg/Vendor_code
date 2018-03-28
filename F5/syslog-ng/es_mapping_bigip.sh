@@ -4,7 +4,6 @@
 #  3-27-18
 curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.logs -d '
 {
-   "_comment": "ElasticSearch Mapping for: F5 BigIP - version 0.1.2 - 3/28/18",
    "index_patterns":"bigip.logs*",
    "settings":{
       "number_of_shards": 3,
