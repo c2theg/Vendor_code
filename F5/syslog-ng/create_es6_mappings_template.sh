@@ -1,6 +1,6 @@
 #!/bin/sh
 # Christopher Gray
-# Version 2.2.7
+# Version 2.2.8
 #  3-28-18
 
 if [ "$#" -eq  "0" ]
@@ -72,7 +72,7 @@ sudo ./es_mapping_ddos.sh $server_ip
 
 echo "\r\n \r\n Creating HTTP Logs ES 6 Mapping....  \r\n \r\n "
 #curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_http.json
-#sudo ./es_mapping_http.sh $server_ip
+sudo ./es_mapping_http.sh $server_ip
 
 echo "Creating BigIP Logs ES 6 Mapping....  \r\n \r\n "
 #curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.logs -d ''
