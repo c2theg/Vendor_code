@@ -1,17 +1,16 @@
 #!/bin/sh
 # Christopher Gray
-# Version 0.0.1
+# Version 0.0.2
 #  3-27-18
 curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.logs -d '
-{
+{  
    "index_patterns":"bigip.logs*",
    "settings":{
-      "number_of_shards": 3,
+      "number_of_shards":3,
       "number_of_replicas" : 0,
-      "refresh_interval": "1s",
+      "refresh_interval": "10s",
       "index.routing.allocation.include.size": "small",
       "index.routing.allocation.include.rack": "r1",
-      
        "analysis": {
          "analyzer": {
            "my_analyzer": {
@@ -29,18 +28,23 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.l
       }
    },
    "mappings":{
+      "logs": {
          "_source": {
             "enabled": false
          },
-         "properties":{
-            "@timestamp":{
+         "_meta": {
+           "version": "1.0"
+         },
+         "dynamic": false,         
+         "properties":{  
+            "@timestamp":{  
                "type":"date",
                "format":"strict_date_optional_time||epoch_millis"
             },
-            "@version":{
+            "@version":{  
                "type":"text"
             },
-            "host":{
+            "host":{  
                "type":"text"
             },
             "message":{
@@ -50,49 +54,50 @@ curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.l
             "path":{
                "type":"text"
             },
-            "syslog_hostname":{
+            "syslog_hostname":{  
                "type":"text",
                "analyzer":"english",
-               "fields":{
-                  "raw":{
+               "fields":{  
+                  "raw":{  
                      "type":"text",
                      "index":"false"
                   }
                }
             },
-            "syslog_message":{
+            "syslog_message":{  
                "type":"text",
                "analyzer":"english",
-               "fields":{
-                  "raw":{
+               "fields":{  
+                  "raw":{  
                      "type":"text",
                      "index":"false"
                   }
                }
             },
-            "syslog_program":{
+            "syslog_program":{  
                "type":"text",
                "analyzer":"english",
-               "fields":{
-                  "raw":{
+               "fields":{  
+                  "raw":{  
                      "type":"text",
                      "index":"false"
                   }
                }
             },
-            "syslog_severity":{
+            "syslog_severity":{  
                "type":"text",
                "analyzer":"english",
-               "fields":{
-                  "raw":{
+               "fields":{  
+                  "raw":{  
                      "type":"text",
                      "index":"false"
                   }
                }
             },
-            "syslog_timestamp":{
+            "syslog_timestamp":{  
                "type":"text"
             }
          }
       }
+    }
 }'
