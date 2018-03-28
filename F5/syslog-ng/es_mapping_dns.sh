@@ -57,7 +57,7 @@ curl -H 'Content-Type: application/json' -X PUT $server_ip:9200/_template/dns.lo
                     "fields": {
                         "raw": {
                             "type":  "text",
-                            "index": "not_analyzed"
+                            "index": "false"
                         }
                     }
                 },
@@ -73,7 +73,7 @@ curl -H 'Content-Type: application/json' -X PUT $server_ip:9200/_template/dns.lo
                     "fields": {
                         "raw": {
                             "type":  "text",
-                            "index": "not_analyzed"
+                            "index": "false"
                         }
                     }
                 },
@@ -83,7 +83,7 @@ curl -H 'Content-Type: application/json' -X PUT $server_ip:9200/_template/dns.lo
                     "fields": {
                         "raw": {
                             "type":  "text",
-                            "index": "not_analyzed"
+                            "index": "false"
                         }
                     }
                 },
@@ -93,7 +93,7 @@ curl -H 'Content-Type: application/json' -X PUT $server_ip:9200/_template/dns.lo
                     "fields": {
                         "raw": {
                             "type":  "text",
-                            "index": "not_analyzed"
+                            "index": "false"
                         }
                     }
                 },
