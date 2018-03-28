@@ -1,6 +1,6 @@
 #!/bin/sh
 # Christopher Gray
-# Version 0.1.3
+# Version 0.1.4
 #  3-28-18
 
 #ElasticSearch Mapping for: F5 BigIP
@@ -15,7 +15,17 @@ else
       echo "ES Server is set to $server_ip \r\n"
 fi
 
-curl -H 'Content-Type: application/json' -X PUT $server_ip:9200/_template/bigip.logs -d '
+if [ -z "$2" ]
+   then
+      echo "No port specified. Defaulting to 9200 \r\n"
+      server_port=9200
+   else
+      server_port=$2
+      #echo "port = $server_port \r\n"
+fi
+
+
+curl -H 'Content-Type: application/json' -X PUT $server_ip:$server_port/_template/bigip.logs -d '
 {  
    "index_patterns":"bigip.logs*",
    "settings":{
