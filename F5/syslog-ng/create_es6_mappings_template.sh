@@ -68,7 +68,7 @@ echo "Creating BigIP Logs ES 6 Mapping....  \r\n \r\n "
 #curl -H 'Content-Type: application/json' -XPUT 'http://localhost:9200/_template/metricbeat' -d@/etc/metricbeat/metricbeat.template.json
 #curl -H 'Content-Type: application/json' -XPUT 'http://localhost:9200/_template/bigip.logs' -d@es_mapping_bigip.json
 
-JSON_Data ='cat es_mapping_bigip.json'
+JSON_Data='cat es_mapping_bigip.json'
 echo "$JSON_Data"
 curl -H 'Content-Type: application/json' -X PUT $server_ip:9200/_template/bigip.logs -d '$JSON_Data'
 
