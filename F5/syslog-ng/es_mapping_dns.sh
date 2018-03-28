@@ -15,7 +15,16 @@ else
       echo "ES Server is set to $server_ip \r\n"
 fi
 
-curl -H 'Content-Type: application/json' -X PUT $server_ip:9200/_template/dns.logs -d '
+if [ -z "$2" ]
+   then
+      echo "No port specified. Defaulting to 9200 \r\n"
+      server_port=9200
+   else
+      server_port=$2
+      #echo "port = $server_port \r\n"
+fi
+
+curl -H 'Content-Type: application/json' -X PUT $server_ip:$server_port/_template/dns.logs -d '
 {
     "index_patterns" : "dns.logs*",
     "settings" : {
