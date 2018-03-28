@@ -1,6 +1,6 @@
 #!/bin/sh
 # Christopher Gray
-# Version 2.2.5
+# Version 2.2.6
 #  3-28-18
 
 if [ "$#" -eq  "0" ]
@@ -62,6 +62,18 @@ wait
 
 echo "\r\n \r\n "
 
+echo "\r\n \r\n Creating DNS Logs ES 6 Mapping....  \r\n \r\n "
+#curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_dns.json
+sudo ./es_mapping_dns.sh $server_ip
+
+echo "\r\n \r\n Creating DDoS Logs ES 6 Mapping....  \r\n \r\n "
+#curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_ddos.json
+sudo ./es_mapping_ddos.sh $server_ip
+
+echo "\r\n \r\n Creating HTTP Logs ES 6 Mapping....  \r\n \r\n "
+#curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_http.json
+#sudo ./es_mapping_http.sh $server_ip
+
 echo "Creating BigIP Logs ES 6 Mapping....  \r\n \r\n "
 #curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.logs -d ''
 #curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_bigip.json
@@ -71,19 +83,7 @@ echo "Creating BigIP Logs ES 6 Mapping....  \r\n \r\n "
 #JSON_Data='cat es_mapping_bigip.json'
 #echo "$JSON_Data"
 #curl -H 'Content-Type: application/json' -X PUT $server_ip:9200/_template/bigip.logs -d '$JSON_Data'
-sudo ./es_mapping_bigip.sh $server_ip
-
-echo "\r\n \r\n Creating HTTP Logs ES 6 Mapping....  \r\n \r\n "
-#curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_http.json
-sudo ./es_mapping_http.sh $server_ip
-
-echo "\r\n \r\n Creating DDoS Logs ES 6 Mapping....  \r\n \r\n "
-#curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_ddos.json
-sudo ./es_mapping_ddos.sh $server_ip
-
-echo "\r\n \r\n Creating DNS Logs ES 6 Mapping....  \r\n \r\n "
-#curl -H 'Content-Type: application/json' -s -XPOST $server_ip:9200/_bulk --data-binary @es_mapping_dns.json
-sudo ./es_mapping_dns.sh $server_ip
+#sudo ./es_mapping_bigip.sh $server_ip
 
 #---------------------------------------------------
 wait
