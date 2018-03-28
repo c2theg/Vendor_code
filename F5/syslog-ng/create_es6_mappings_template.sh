@@ -1,6 +1,6 @@
 #!/bin/sh
 # Christopher Gray
-# Version 2.2.6
+# Version 2.2.7
 #  3-28-18
 
 if [ "$#" -eq  "0" ]
@@ -83,7 +83,7 @@ echo "Creating BigIP Logs ES 6 Mapping....  \r\n \r\n "
 #JSON_Data='cat es_mapping_bigip.json'
 #echo "$JSON_Data"
 #curl -H 'Content-Type: application/json' -X PUT $server_ip:9200/_template/bigip.logs -d '$JSON_Data'
-#sudo ./es_mapping_bigip.sh $server_ip
+sudo ./es_mapping_bigip.sh $server_ip
 
 #---------------------------------------------------
 wait
