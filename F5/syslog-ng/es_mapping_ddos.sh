@@ -1,0 +1,169 @@
+#!/bin/sh
+# Christopher Gray
+# Version 0.0.2
+#  3-27-18
+curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.logs -d '
+{
+   "_comment": "ElasticSearch Mapping for: F5 DDoS - version 0.1.2 - 3/28/18",
+   "index_patterns":"ddos.logs*",
+   "settings":{  
+      "number_of_shards":3,
+      "number_of_replicas" : 0,
+      "index.routing.allocation.include.size": "small",
+      "index.routing.allocation.include.rack": "r1"
+   },
+   "mappings":{
+      "properties":{  
+         "@timestamp":{  
+            "type":"date",
+            "format":"strict_date_optional_time||epoch_millis"
+         },
+         "@version":{  
+            "type":"text"
+         },
+         "action":{  
+            "type":"text",
+            "analyzer":"english",
+            "fields":{  
+               "raw":{  
+                  "type":"text",
+                  "index":"false"
+               }
+            }
+         },
+         "hostname":{  
+            "type":"text",
+            "analyzer":"english",
+            "fields":{  
+               "raw":{  
+                  "type":"text",
+                  "index":"false"
+               }
+            }
+         },
+         "bigip_mgmt_ip":{  
+            "type":"ip"
+         },
+         "date_time":{  
+            "type":"date"
+         },
+         "dest_ip":{  
+            "type":"ip"
+         },
+         "dest_port":{  
+            "type":"integer"
+         },
+         "device_product":{  
+            "type":"text",
+            "analyzer":"english",
+            "fields":{  
+               "raw":{  
+                  "type":"text",
+                  "index":"false"
+               }
+            }
+         }, 
+         "device_vendor":{  
+            "type":"text",
+            "analyzer":"english",
+            "fields":{  
+               "raw":{  
+                  "type":"text",
+                  "index":"false"
+               }
+            }
+         }, 
+         "device_version":{  
+            "type":"text",
+            "analyzer":"english",
+            "fields":{  
+               "raw":{  
+                  "type":"text",
+                  "index":"false"
+               }
+            }
+         },          
+
+         "dos_attack_event":{  
+            "type":"text",
+            "analyzer":"english",
+            "fields":{  
+               "raw":{  
+                  "type":"text",
+                  "index":"false"
+               }
+            }
+         },
+         "dos_attack_id":{  
+            "type":"text",
+            "analyzer":"english",
+            "fields":{  
+               "raw":{  
+                  "type":"text",
+                  "index":"false"
+               }
+            }
+         },
+         "dos_attack_name":{  
+            "type":"text",
+            "analyzer":"english",
+            "fields":{  
+               "raw":{  
+                  "type":"text",
+                  "index":"false"
+               }
+            }
+         },
+         "errdefs_msgno":{  
+            "type":"integer"
+         },
+         "errdefs_msg_name":{  
+            "type":"text",
+            "analyzer":"english",
+            "fields":{  
+               "raw":{  
+                  "type":"text",
+                  "index":"false"
+               }
+            }
+         },         
+         "severity":{  
+            "type":"integer"
+         },
+         "partition_name":{  
+            "type":"text",
+            "analyzer":"english",
+            "fields":{  
+               "raw":{  
+                  "type":"text",
+                  "index":"false"
+               }
+            }
+         },
+         "route_domain":{  
+            "type":"integer"
+         },
+         "src_ip":{  
+            "type":"ip"
+         },
+         "src_port":{  
+            "type":"integer"
+         },
+         "vlan":{  
+            "type":"text",
+            "analyzer":"english",
+            "fields":{  
+               "raw":{  
+                  "type":"text",
+                  "index":"false"
+               }
+            }
+         }
+
+
+
+
+
+      }
+   }
+}'
