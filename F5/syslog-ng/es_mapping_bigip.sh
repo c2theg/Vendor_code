@@ -3,6 +3,9 @@
 # Version 0.1.3
 #  3-28-18
 
+#ElasticSearch Mapping for: F5 BigIP
+#https://support.f5.com/kb/en-us/products/big-ip_ltm/manuals/product/bigip-external-monitoring-implementations-13-0-0/15.html#guid-87e43db0-6700-48d1-8e1b-d52e8bb6c899
+
 if [ "$#" -eq  "0" ]
    then
       echo "No server ip specified. Defaulting to localhost \r\n"
