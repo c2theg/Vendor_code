@@ -2,13 +2,13 @@
 # Christopher Gray
 # Version 0.0.2
 #  3-27-18
-curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.logs -d '
+curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/ddos.logs -d '
 {
-   "_comment": "ElasticSearch Mapping for: F5 DDoS - version 0.1.2 - 3/28/18",
    "index_patterns":"ddos.logs*",
    "settings":{  
       "number_of_shards":3,
       "number_of_replicas" : 0,
+      "refresh_interval": "1s",
       "index.routing.allocation.include.size": "small",
       "index.routing.allocation.include.rack": "r1"
    },
