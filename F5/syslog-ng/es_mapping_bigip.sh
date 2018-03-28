@@ -1,8 +1,18 @@
 #!/bin/sh
 # Christopher Gray
-# Version 0.0.2
-#  3-27-18
-curl -H 'Content-Type: application/json' -X PUT localhost:9200/_template/bigip.logs -d '
+# Version 0.1.3
+#  3-28-18
+
+if [ "$#" -eq  "0" ]
+   then
+      echo "No server ip specified. Defaulting to localhost \r\n"
+      server_ip=127.0.0.1
+else
+      server_ip=$1
+      echo "ES Server is set to $server_ip \r\n"
+fi
+
+curl -H 'Content-Type: application/json' -X PUT $server_ip:9200/_template/bigip.logs -d '
 {  
    "index_patterns":"bigip.logs*",
    "settings":{
