@@ -36,28 +36,28 @@ sudo chmod u+x es_mapping_dns.sh
 echo "\r\n \r\n "
 echo "Deleting existing ES indexs if present....  \r\n \r\n "
 echo "\r\n BigIP ... \r\n "
-curl -XDELETE $server_ip:9200/bigip*?pretty
+curl -XDELETE "$server_ip:9200/bigip*?pretty"
 echo "\r\n HTTP ... \r\n "
-curl -XDELETE $server_ip:9200/http*?pretty
+curl -XDELETE "$server_ip:9200/http*?pretty"
 echo "\r\n DDoS ... \r\n "
-curl -XDELETE $server_ip:9200/ddos*?pretty
+curl -XDELETE "$server_ip:9200/ddos*?pretty"
 echo "\r\n DNS ... \r\n "
-curl -XDELETE $server_ip:9200/dns*?pretty
+curl -XDELETE "$server_ip:9200/dns*?pretty"
 wait
-
+f
 echo "\r\n TEMPLATES ... \r\n "
 
 echo "\r\n BigIP ... \r\n "
-curl -XDELETE $server_ip:9200/_template/bigip*?pretty
+curl -XDELETE "$server_ip:9200/_template/bigip*?pretty"
 echo "\r\n HTTP ... \r\n "
 wait
-curl -XDELETE $server_ip:9200/_template/http*?pretty
+curl -XDELETE "$server_ip:9200/_template/http*?pretty"
 echo "\r\n DDoS ... \r\n "
 wait
-curl -XDELETE $server_ip:9200/_template/ddos*?pretty
+curl -XDELETE "$server_ip:9200/_template/ddos*?pretty"
 wait
 echo "\r\n DNS ... \r\n "
-curl -XDELETE $server_ip:9200/_template/dns*?pretty
+curl -XDELETE "$server_ip:9200/_template/dns*?pretty"
 wait
 
 echo "\r\n \r\n "
