@@ -1,6 +1,6 @@
 #!/bin/sh
 # Christopher Gray
-# Version 2.2.4
+# Version 2.2.5
 #  3-28-18
 
 if [ "$#" -eq  "0" ]
@@ -90,11 +90,11 @@ wait
 echo "DONE! \r\n \r\n"
 
 echo "\r\n \r\n Get ES Stats: $server_ip:9200 \r\n \r\n "
-curl -XGET '$server_ip:9200/_cat/indices?v&pretty'
-curl -XGET '$server_ip:9200/_cat/health?v&pretty'
-curl -XGET '$server_ip:9200/_cat/nodes?v&pretty'
+curl -XGET "$server_ip:9200/_cat/indices?v&pretty"
+curl -XGET "$server_ip:9200/_cat/health?v&pretty"
+curl -XGET "$server_ip:9200/_cat/nodes?v&pretty"
 
 echo "\r\n \r\n  Cluster Templates' \r\n \r\n"
-curl -XGET $server_ip:9200/_template/*?pretty
+curl -XGET "$server_ip:9200/_template/*?pretty"
 
 echo "\r\n \r\n \r\n"
