@@ -18,8 +18,8 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.6.7                             \r\n
-Last Updated:  3/24/2018
+Version:  0.6.8                             \r\n
+Last Updated:  4/1/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
 
@@ -122,8 +122,6 @@ sudo /etc/init.d/elasticsearch restart
 #-------------------------------------------------------
 
 
-
-
 echo "\r\n \r\n Downloading Test ES shell script.. "
 wget -O "test_es.sh" "https://raw.githubusercontent.com/c2theg/srvBuilds/master/test_es.sh"
 sudo chmod u+x test_es.sh
@@ -142,10 +140,11 @@ sudo chmod u+x load_sample_data.sh
 #sudo ./load_sample_data.sh
 wait
 
-echo "\r\n \r\n To update your logstash plugins: \r\n \r\n
-	gem install atomic -v '1.1.100'    \r\n 
-	/usr/share/logstash/bin/logstash-plugin update \r\n \r\n"
 
+echo "\r\n \r\n To update your logstash plugins: \r\n \r\n
+	sudo ./update_elk_plugins.sh    \r\n"
+
+sudo ./update_elk_plugins.sh
 
 
 echo "DONE! \r\n "
