@@ -14,8 +14,8 @@ wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/pr
 </ul>
 
 <br /><br /><br />
-To update ElasticSearch plugins, Logstash plugins, (including GeoIP databases from Maxmind)
-  sudo ./update_elk_plugins.sh
+To update ElasticSearch plugins, Logstash plugins, (including GeoIP databases from Maxmind) <br /><br />
+ <b> sudo ./update_elk_plugins.sh  </b>
 
 
 <br /><br />
