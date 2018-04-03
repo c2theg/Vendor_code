@@ -2,13 +2,13 @@ The following scripts will download, setup, and configure the software. <br /><b
 
 Getting Started: <br />
 <ul>
-  <li><b>Install Elastic Stack (v6): </b><br /><br />
+  <li><b>Install Elastic Stack (v6): </b><br />
     wget https://raw.githubusercontent.com/c2theg/srvBuilds/master/install_elk6.sh && chmod u+x install_elk6.sh && ./install_elk6.sh
 
   </li>
   
   <li>
-    <b>Install F5 config: </b><br /><br />
+    <b>Install F5 config: </b><br />
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/provision.sh && chmod u+x provision.sh && ./provision.sh
   </li>
 </ul>
