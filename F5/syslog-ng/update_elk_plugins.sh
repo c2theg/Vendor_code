@@ -28,7 +28,7 @@ This is meant for Ubuntu 16.04+  \r\n \r\n"
 
 
 sudo /usr/share/logstash/bin/logstash-plugin update
-sudo /usr/share/logstash/bin/logstash-plugin update logstash-input-beats
+#sudo /usr/share/logstash/bin/logstash-plugin update logstash-input-beats
 
 #--------------------------------------------------------------------------------------
 echo "Removing old GeoIP databases ... "
