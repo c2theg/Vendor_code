@@ -130,6 +130,7 @@ perl slowloris.pl -dns (Victim URL or IP) -options \r\n
 
 
 #--- SlowHTTPtest
+#  https://github.com/shekyan/slowhttptest/wiki/InstallationAndUsage
 wget -O "slowhttptest-1.7.tar.gz" "https://github.com/shekyan/slowhttptest/archive/v1.7.tar.gz"
 tar -xzvf slowhttptest-1.7.tar.gz
 cd slowhttptest-1.7
