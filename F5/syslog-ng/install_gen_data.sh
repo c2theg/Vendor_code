@@ -19,8 +19,8 @@ echo "
                             |_|                                             |___|
 
 \r\n \r\n
-Version:  0.0.5                             \r\n
-Last Updated:  4/10/2018
+Version:  0.0.6                             \r\n
+Last Updated:  4/16/2018
 \r\n \r\n
 Updating system first..."
 sudo -E apt-get update
@@ -128,3 +128,11 @@ perl slowloris.pl -dns (Victim URL or IP) -options \r\n
 ./slowloris.pl -dns TARGET_URL -port 80 -num 200   \r\n
 "
 
+
+#--- SlowHTTPtest
+wget -O "slowhttptest-1.7.tar.gz" "https://github.com/shekyan/slowhttptest/archive/v1.7.tar.gz"
+tar -xzvf slowhttptest-1.7.tar.gz
+cd slowhttptest-1.7
+./configure --prefix=PREFIX
+make
+sudo make install
