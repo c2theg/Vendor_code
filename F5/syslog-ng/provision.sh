@@ -18,8 +18,8 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.6.8                             \r\n
-Last Updated:  4/1/2018
+Version:  0.6.9                             \r\n
+Last Updated:  4/16/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
 
@@ -31,6 +31,7 @@ then
 	rm create_es6_mappings.sh
 	rm load_sample_data.sh
 	rm test_es.sh
+	rm gen_data.sh
 	rm logstash/f5_logging.conf
 	rm /etc/logstash/conf.d/f5_logging.conf
 	#rm syslogng_bigip.conf
@@ -134,11 +135,17 @@ sudo chmod u+x update_elk_plugins.sh
 wait
 
 
-echo "\r\n \r\n Downloading Sample Data.. "
-wget -O "load_sample_data.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/load_sample_data.sh"
-sudo chmod u+x load_sample_data.sh
-#sudo ./load_sample_data.sh
+echo "\r\n \r\n Downloading install_gen_data script.. "
+wget -O "install_gen_data.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/install_gen_data.sh"
+sudo chmod u+x install_gen_data.sh
 wait
+
+echo "\r\n \r\n Downloading Sample Data Generator.. "
+wget -O "gen_data.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/gen_data.sh"
+sudo chmod u+x gen_data.sh
+wait
+
+
 
 
 echo "\r\n \r\n To update your logstash plugins: \r\n \r\n
