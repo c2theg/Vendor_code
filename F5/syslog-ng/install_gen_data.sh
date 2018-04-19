@@ -19,8 +19,8 @@ echo "
                             |_|                                             |___|
 
 \r\n \r\n
-Version:  0.0.6                             \r\n
-Last Updated:  4/16/2018
+Version:  0.0.7                             \r\n
+Last Updated:  4/18/2018
 \r\n \r\n
 Updating system first..."
 sudo -E apt-get update
@@ -29,6 +29,11 @@ sudo -E apt-get upgrade -y
 wait
 echo "Downloading required dependencies...\r\n\r\n"
 #--------------------------------------------------------------------------------------------
+rm gen_data.sh
+wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/gen_data.sh
+chmod u+x gen_data.sh
+
+
 #-- Install DNS-Perf --
 # https://www.nominum.com/measurement-tools/
 
