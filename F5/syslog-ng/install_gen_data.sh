@@ -19,7 +19,7 @@ echo "
                             |_|                                             |___|
 
 \r\n \r\n
-Version:  0.0.7                             \r\n
+Version:  0.0.8                             \r\n
 Last Updated:  4/18/2018
 \r\n \r\n
 Updating system first..."
@@ -51,7 +51,8 @@ sudo make install
 dnsperf -h
 
 #--- download latest Queryfile from Nominum ---
-wget ftp://ftp.nominum.com/pub/nominum/dnsperf/data/queryfile-example-current.gz
+rm queryfile-example-current.gz
+wget -O "queryfile-example-current.gz" "ftp://ftp.nominum.com/pub/nominum/dnsperf/data/queryfile-example-current.gz"
 gunzip queryfile-example-current.gz
 
 #-------------------- HPING ---------------------
