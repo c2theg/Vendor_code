@@ -18,8 +18,8 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.6.9                             \r\n
-Last Updated:  4/16/2018
+Version:  0.6.10                             \r\n
+Last Updated:  4/19/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
 
@@ -38,6 +38,7 @@ then
 	#rm /etc/syslog-ng/conf.d/bigip.conf
 	rm update_geoipdb.sh
 	rm elasticsearch-f5.yml
+	rm cleanup_installs.sh
 	rm /etc/logstash/patterns/f5_grok_pattern.yml
 	rm /etc/logstash/dictionaries/f5_syslogpri.yml
 fi
@@ -145,8 +146,10 @@ wget -O "gen_data.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/mast
 sudo chmod u+x gen_data.sh
 wait
 
-
-
+echo "\r\n \r\n Downloading Cleanup script. "
+wget -O "cleanup_installs.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/cleanup_installs.sh"
+sudo chmod u+x cleanup_installs.sh
+wait
 
 echo "\r\n \r\n To update your logstash plugins: \r\n \r\n
 	sudo ./update_elk_plugins.sh    \r\n"
