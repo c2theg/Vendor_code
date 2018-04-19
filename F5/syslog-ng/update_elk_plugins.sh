@@ -21,12 +21,12 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.1.6                             \r\n
-Last Updated:  4/14/2018
+Version:  0.1.7                             \r\n
+Last Updated:  4/19/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
 
-
+#-- Update --
 sudo /usr/share/logstash/bin/logstash-plugin update
 #sudo /usr/share/logstash/bin/logstash-plugin update logstash-input-beats
 
@@ -88,7 +88,21 @@ echo "Add to crontab (will update every Wednesday at 4:05am) \r\n \r\n
 \r\n \r\n"
 
 #---------------------------------------------
-echo "Update elasticsearch plugins... \r\n "
+echo "Update elasticsearch plugins (get List. Then Remove and Install plugins)... \r\n "
 sudo /usr/share/elasticsearch/bin/elasticsearch-plugin list
+
+#----- Install / Updates Plugins ----
+#cd /usr/share/elasticsearch/
+
+#sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install analysis-icu
+# sudo bin/elasticsearch-plugin install file:///path/to/plugin.zip
+# sudo bin/elasticsearch-plugin install http://some.domain/path/to/plugin.zip
+
+#-- uninstall if already installed --
+sudo /usr/share/elasticsearch/bin/elasticsearch-plugin remove ingest-user-agent
+sudo /usr/share/elasticsearch/bin/elasticsearch-plugin remove ingest-geoip
+#-- install --
+sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-user-agent
+sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-geoip
 
 echo "Done! \r\n \r\n"
