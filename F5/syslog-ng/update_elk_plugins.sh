@@ -21,7 +21,7 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.1.7                             \r\n
+Version:  0.1.8                             \r\n
 Last Updated:  4/19/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
@@ -30,12 +30,30 @@ This is meant for Ubuntu 16.04+  \r\n \r\n"
 sudo /usr/share/logstash/bin/logstash-plugin update
 #sudo /usr/share/logstash/bin/logstash-plugin update logstash-input-beats
 
+#---------------------------------------------
+echo "Update elasticsearch plugins (get List. Then Remove and Install plugins)... \r\n "
+sudo /usr/share/elasticsearch/bin/elasticsearch-plugin list
+
+#----- Install / Updates Plugins ----
+#cd /usr/share/elasticsearch/
+
+#sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install analysis-icu
+# sudo bin/elasticsearch-plugin install file:///path/to/plugin.zip
+# sudo bin/elasticsearch-plugin install http://some.domain/path/to/plugin.zip
+
+#-- uninstall if already installed --
+sudo /usr/share/elasticsearch/bin/elasticsearch-plugin remove ingest-user-agent
+sudo /usr/share/elasticsearch/bin/elasticsearch-plugin remove ingest-geoip
+#-- install --
+sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-user-agent
+sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-geoip
+
 #--------------------------------------------------------------------------------------
 echo "Removing old GeoIP databases ... "
 rm /etc/elasticsearch/ingest-geoip/GeoLite2-ASN.mmdb.gz
 rm /etc/elasticsearch/ingest-geoip/GeoLite2-Country.mmdb.gz
 rm /etc/elasticsearch/ingest-geoip/GeoLite2-City.mmdb.gz
-echo "DONE! \r\n "
+wait
 
 #--------------------- City ---------------------
 echo "Downloading latest City database file from Maxmind.com....  \r\n \r\n"
@@ -87,22 +105,5 @@ echo "Add to crontab (will update every Wednesday at 4:05am) \r\n \r\n
   5 4 * * 3 /home/ubuntu/update_elk_plugins.sh >> /var/log/update_elk_plugins.log 2>&1
 \r\n \r\n"
 
-#---------------------------------------------
-echo "Update elasticsearch plugins (get List. Then Remove and Install plugins)... \r\n "
-sudo /usr/share/elasticsearch/bin/elasticsearch-plugin list
-
-#----- Install / Updates Plugins ----
-#cd /usr/share/elasticsearch/
-
-#sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install analysis-icu
-# sudo bin/elasticsearch-plugin install file:///path/to/plugin.zip
-# sudo bin/elasticsearch-plugin install http://some.domain/path/to/plugin.zip
-
-#-- uninstall if already installed --
-sudo /usr/share/elasticsearch/bin/elasticsearch-plugin remove ingest-user-agent
-sudo /usr/share/elasticsearch/bin/elasticsearch-plugin remove ingest-geoip
-#-- install --
-sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-user-agent
-sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-geoip
 
 echo "Done! \r\n \r\n"
