@@ -27,15 +27,15 @@ elif len(sys.argv) == 2:
 # 8.8.8.8 is Google's public DNS server
 #my_resolver.nameservers = ['8.8.8.8']
 
-dns.resolver.nameservers = [sys.argv[1]]
+dns.resolver.nameservers = [sys.argv[2]]
 
+print "Domain:", dominio
+print "IP for Domain:", host
+	
 while 1:
 	subdominio = str(random.randrange(10000000))
-	url = subdominio+"."+dominio 
-	print "Domain:", dominio
-	print "IP for Domain:", host
+	url = subdominio+"."+dominio
 	print "SubDomain:", url
-
 	#r = dns.resolver.query('example.org', 'a')
 	answers = dns.resolver.query(url)
 	for rdata in answers: 
