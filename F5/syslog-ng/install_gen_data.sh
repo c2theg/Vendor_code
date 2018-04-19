@@ -35,9 +35,7 @@ wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/ge
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_nxdomain.py
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_watertorture_wget.sh
 
-chmod u+x gen_data.sh
-chmod u+x attack_dns_nxdomain.py
-chmod u+x attack_dns_watertorture_wget.sh
+chmod u+x gen_data.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh
 
 #-- Install DNS-Perf --
 # https://www.nominum.com/measurement-tools/
