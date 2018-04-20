@@ -5,7 +5,7 @@
 #Purpose : Ataque DNS autoritativo con peticion de subdominios aleatorios inexistentes
 #From: https://github.com/hackingyseguridad/watertorture/blob/master/subdominio.py 
 #-- Forked by Christopher Gray
-# Date: 4/20/18 - Version 0.0.5
+# Date: 4/20/18 - Version 0.0.6
 
 import dns.resolver
 import random
@@ -32,7 +32,7 @@ elif len(sys.argv) >= 2:
         dominio = 'google.com'
 
     if len(sys.argv) >= 3:
-        NumTimes = [sys.argv[3]]
+        NumTimes = int(sys.argv[3])
     else:
         NumTimes = 10
 
