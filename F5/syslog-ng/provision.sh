@@ -41,6 +41,7 @@ then
 	rm cleanup_installs.sh
 	rm /etc/logstash/patterns/f5_grok_pattern.yml
 	rm /etc/logstash/dictionaries/f5_syslogpri.yml
+	rm 
 fi
 
 echo "Downloading ES 6 Mappings Config"
@@ -150,6 +151,12 @@ echo "\r\n \r\n Downloading Cleanup script. "
 wget -O "cleanup_installs.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/cleanup_installs.sh"
 sudo chmod u+x cleanup_installs.sh
 wait
+
+echo "\r\n \r\n Downloading Attack Script Updater "
+wget -O "update_attacks.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/update_attacks.sh"
+sudo chmod u+x update_attacks.sh
+wait
+
 
 echo "\r\n \r\n To update your logstash plugins: \r\n \r\n
 	sudo ./update_elk_plugins.sh    \r\n"
