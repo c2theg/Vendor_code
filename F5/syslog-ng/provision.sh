@@ -41,7 +41,7 @@ then
 	rm cleanup_installs.sh
 	rm /etc/logstash/patterns/f5_grok_pattern.yml
 	rm /etc/logstash/dictionaries/f5_syslogpri.yml
-	rm 
+	rm update_attacks.sh
 fi
 
 echo "Downloading ES 6 Mappings Config"
