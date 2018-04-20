@@ -21,15 +21,22 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.0.1                             \r\n
+Version:  0.0.2                             \r\n
 Last Updated:  4/20/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
 #---------------------------------------------------
+rm update_attacks.sh
 rm attack_dns_nxdomain.py
 rm attack_dns_watertorture_wget.sh
 
 #--------
+echo "\r\n \r\n Downloading Attack Script Updater "
+wget -O "update_attacks.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/update_attacks.sh"
+sudo chmod u+x update_attacks.sh
+wait
+
+
 echo "\r\n \r\n Downloading Attacks "
 
 wget -O "attack_dns_nxdomain.py" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_nxdomain.py"
