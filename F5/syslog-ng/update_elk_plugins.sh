@@ -21,10 +21,16 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.1.8                             \r\n
-Last Updated:  4/19/2018
+Version:  0.1.9                             \r\n
+Last Updated:  4/25/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
+
+
+#-- update self
+rm update_elk_plugins.sh
+wget -O "update_elk_plugins.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/update_elk_plugins.sh"
+chmod u+x update_elk_plugins.sh
 
 #-- Update --
 sudo /usr/share/logstash/bin/logstash-plugin update
