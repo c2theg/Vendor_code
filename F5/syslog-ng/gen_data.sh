@@ -1,6 +1,6 @@
 #!/bin/sh
 # Christopher Gray
-# Version 0.1.7
+# Version 0.1.8
 #  4-29-18
 
 #ElasticSearch Mapping for: F5 BigIP
@@ -26,14 +26,14 @@ if [ -z "$2" ]
 fi
 
 
-if [ ! -f "queryfile-example-current"]
+if [ -e "queryfile-example-current"]
    then
+      echo "Loading Nominum sample data file! \r\n \r\n"
+   else
       echo "Missing Nominum sample data... downloading it!  \r\n \r\n "
       wget -O "queryfile-example-current.gz" "ftp://ftp.nominum.com/pub/nominum/dnsperf/data/queryfile-example-current.gz"
       gunzip queryfile-example-current.gz
       wait
-  else
-      echo "Loading Nominum sample data file! \r\n \r\n"
 fi
 
 # https://github.com/cobblau/dnsperf
