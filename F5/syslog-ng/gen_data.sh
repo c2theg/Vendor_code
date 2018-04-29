@@ -52,10 +52,10 @@ fi
 # -h     Print the usage of dnsperf.
 
 #little traffic
-#sudo dnsperf -s $server_ip -d query-file-example-current -c 200 -T 10 -l 300 -q 10000 -Q 25
+#sudo dnsperf -s $server_ip -d queryfile-example-current -c 200 -T 10 -l 300 -q 10000 -Q 25
 
 #Flood: 
-sudo dnsperf -s $server_ip -d query-file-example-current -c 200 -T 10 -l 300 -q 10000 -Q $queries_ps
+sudo dnsperf -s $server_ip -d queryfile-example-current -c 200 -T 10 -l 300 -q 10000 -Q $queries_ps
 wait
 
 
