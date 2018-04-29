@@ -1,7 +1,7 @@
 #!/bin/sh
 # Christopher Gray
-# Version 0.1.5
-#  4-19-18
+# Version 0.1.6
+#  4-29-18
 
 #ElasticSearch Mapping for: F5 BigIP
 #https://support.f5.com/kb/en-us/products/big-ip_ltm/manuals/product/bigip-external-monitoring-implementations-13-0-0/15.html#guid-87e43db0-6700-48d1-8e1b-d52e8bb6c899
@@ -15,6 +15,7 @@ else
       echo "ES Server is set to $server_ip \r\n"
 fi
 
+
 if [ -z "$2" ]
    then
       echo "Defaulting queries to send is set to: 1500 \r\n"
@@ -24,6 +25,13 @@ if [ -z "$2" ]
       #echo "port = $server_port \r\n"
 fi
 
+
+if [ ! -f "query-file-example-current"]; then
+   echo "Missing Nominum sample data... downloading it!  \r\n \r\n "
+   wget -O "queryfile-example-current.gz" "ftp://ftp.nominum.com/pub/nominum/dnsperf/data/queryfile-example-current.gz"
+   gunzip queryfile-example-current.gz
+   wait
+fi
 
 # https://github.com/cobblau/dnsperf
 # Dnsperf supports the following command line options:
@@ -47,7 +55,7 @@ fi
 #sudo dnsperf -s $server_ip -d query-file-example-current -c 200 -T 10 -l 300 -q 10000 -Q 25
 
 #Flood: 
-sudo dnsperf -s $server_ip -d query-file-example-current -c 200 -T 10 -l 300 -q 10000 -Q queries_ps
+sudo dnsperf -s $server_ip -d query-file-example-current -c 200 -T 10 -l 300 -q 10000 -Q $queries_ps
 wait
 
 
