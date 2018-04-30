@@ -132,7 +132,7 @@ wait
 
 
 echo "\r\n \r\n Downloading Update ELK plugins shell script.. "
-wget -O "update_elk_plugins.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/update_elk_plugins.sh"
+wget -O "update_elk_plugins.sh" "https://raw.githubusercontent.com/c2theg/srvBuilds/master/update_elk_plugins.sh"
 sudo chmod u+x update_elk_plugins.sh
 wait
 
