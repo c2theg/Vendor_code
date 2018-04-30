@@ -39,7 +39,7 @@ then
 	rm update_geoipdb.sh
 	rm elasticsearch-f5.yml
 	rm cleanup_installs.sh
-	rm /etc/logstash/patterns/f5_grok_pattern.yml
+	rm /etc/logstash/patterns/custom_grok_patterns.yml
 	rm /etc/logstash/dictionaries/f5_syslogpri.yml
 	rm update_attacks.sh
 fi
@@ -55,7 +55,7 @@ wait
 echo "\r\n \r\n Downloading Logstash Config"
 wget -O "f5_logging.conf" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/logstash2.conf"
 wget -O "f5_syslogpri.yml" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/f5_syslogpri.yml"
-wget -O "f5_grok_pattern.yml" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/f5_grok_pattern.yml"
+wget -O "custom_grok_patterns.yml" "https://raw.githubusercontent.com/c2theg/srvBuilds/master/ES/custom_grok_patterns.yml"
 
 echo "\r\n \r\n"
 echo "moving configs....  "
@@ -65,7 +65,7 @@ then
 	echo "Creating directories... "
 	mkdir "/etc/logstash/patterns/"
 fi
-sudo mv "f5_grok_pattern.yml" "/etc/logstash/patterns/f5_grok_pattern.yml"
+sudo mv "custom_grok_patterns.yml" "/etc/logstash/patterns/custom_grok_patterns.yml"
 
 if [ ! -d "/etc/logstash/dictionaries/" ]
 then
