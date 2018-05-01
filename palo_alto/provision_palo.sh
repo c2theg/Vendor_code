@@ -66,7 +66,9 @@ wget -O "syslog-ng_palo.conf" "https://raw.githubusercontent.com/c2theg/Vendor_c
 sudo cp "syslog-ng_palo.conf" "/etc/syslog-ng/conf.d/syslog-ng_palo.conf"
 #sudo -u /etc/init.d/syslog-ng restart
 sudo service syslog-ng restart
-#wait
+wait
+tail -20 /var/log/network.log
+
 #-------------------------------------------------------
 
 #---- Logrotate ----
