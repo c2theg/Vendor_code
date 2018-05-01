@@ -18,7 +18,7 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.0.3                             \r\n
+Version:  0.0.4                             \r\n
 Last Updated:  5/1/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
@@ -95,7 +95,7 @@ sudo chmod u+x update_elk_plugins.sh
 wait
 #-------------------------------------------------------
 echo "\r\n \r\n Logstash plugins: \r\n \r\n"
-bin/logstash-plugin list --verbose
+/usr/share/logstash/bin/logstash-plugin list --verbose
 
 echo "\r\n \r\n To update your logstash plugins: \r\n \r\n
 	sudo ./update_elk_plugins.sh    \r\n"
