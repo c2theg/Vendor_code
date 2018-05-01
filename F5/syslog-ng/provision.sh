@@ -18,8 +18,8 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.6.10                             \r\n
-Last Updated:  4/19/2018
+Version:  0.6.11                             \r\n
+Last Updated:  5/1/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
 
@@ -85,7 +85,7 @@ sudo chown -R logstash:logstash /var/lib/logstash
 echo "Done! \r\n "
 #---------------------------------------------------------------------
 
-bin/logstash-plugin list --verbose
+/usr/share/logstash/bin/logstash-plugin list --verbose
 
 if [ -s "logstash/f5_logging.conf" ] 
 then
