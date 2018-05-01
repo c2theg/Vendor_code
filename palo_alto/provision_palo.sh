@@ -18,7 +18,7 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.0.4                             \r\n
+Version:  0.0.5                             \r\n
 Last Updated:  5/1/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
@@ -28,6 +28,14 @@ if [ -s "logstash_palo.conf" ]
 then
 	echo "Deleting old configs...  "
 	rm palo_es6-template.json
+	rm logstash/logstash_palo.conf
+	rm custom_grok_patterns.yml
+	rm /etc/syslog-ng/conf.d/syslog-ng_palo.conf
+	rm /etc/logrotate.d/logrotate_syslog_PA_net.conf
+	rm /etc/logrotate.d/logrotate_syslog_PA_url.conf
+	rm elasticsearch-palo.yml
+	rm test_es.sh
+	rm update_elk_plugins.sh
 fi
 
 echo "Downloading ES 6 Mappings Config"
@@ -63,7 +71,7 @@ sudo chown -R logstash:logstash /var/lib/logstash
 #echo "\r\n \r\n Downloading Syslog_ng Config"
 #sudo chown -R syslog:adm /var/log/bigip
 wget -O "syslog-ng_palo.conf" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/palo_alto/syslog-ng_palo.conf"
-sudo cp "syslog-ng_palo.conf" "/etc/syslog-ng/conf.d/syslog-ng_palo.conf"
+sudo mv "syslog-ng_palo.conf" "/etc/syslog-ng/conf.d/syslog-ng_palo.conf"
 #sudo -u /etc/init.d/syslog-ng restart
 sudo service syslog-ng restart
 wait
