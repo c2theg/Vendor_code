@@ -10,7 +10,8 @@ else
       echo "Domain Name is set to $DomainName \r\n"
 fi
 
-while true; do
-        wget -O /dev/null $RANDOM.$DomainName
+for (( c=1; c<=10000; c++ ))
+do
+   wget -O /dev/null $RANDOM.$DomainName
 done
 
