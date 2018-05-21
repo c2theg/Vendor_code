@@ -1,10 +1,7 @@
 #!/bin/sh
 # Christopher Gray
-# Version 0.1.9
-#  4-29-18
-
-#ElasticSearch Mapping for: F5 BigIP
-#https://support.f5.com/kb/en-us/products/big-ip_ltm/manuals/product/bigip-external-monitoring-implementations-13-0-0/15.html#guid-87e43db0-6700-48d1-8e1b-d52e8bb6c899
+# Version 0.1.10
+#  5-21-18
 
 if [ -z "$1" ]
    then
@@ -63,12 +60,12 @@ fi
 sudo dnsperf -s $server_ip -d queryfile-example-current -c 200 -T 10 -l 300 -q 10000 -Q $queries_ps
 wait
 
-
 # Webflow
 #./slowhttptest -c 1000 -B -g -o my_body_stats -i 110 -r 200 -s 8192 -t FAKEVERB -u https://myseceureserver/resources/loginform.html -x 10 -p 3
 
 
 #------ Attack traffic ----------
+python attack_dns_nxdomain.py $server_ip google.com 10000
+./attack_dns_watertorture_wget.sh google.com
 
-
-
+echo "DONE \r\n \r\n"
