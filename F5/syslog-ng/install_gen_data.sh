@@ -59,6 +59,7 @@ make
 sudo make install
 wait
 dnsperf -h
+rm dnsperf-src-2.1.0.0-1.tar.gz
 
 #--- download latest Queryfile from Nominum ---
 if [ -f queryfile-example-current.gz ]; then
