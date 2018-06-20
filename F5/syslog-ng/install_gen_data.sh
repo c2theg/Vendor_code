@@ -29,7 +29,9 @@ sudo -E apt-get upgrade -y
 wait
 echo "Downloading required dependencies...\r\n\r\n"
 #--------------------------------------------------------------------------------------------
-rm update_attacks.sh gen_data.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh attack_phantomdomain.py
+if [ ! -f ca-key.pem ]; then
+    rm update_attacks.sh gen_data.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh attack_phantomdomain.py
+fi
 
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/update_attacks.sh
 #--- attacks ----
@@ -42,8 +44,8 @@ chmod u+x update_attacks.sh gen_data.sh attack_dns_nxdomain.py attack_dns_watert
 
 #----- Install DNSPerf ----------
 # https://www.nominum.com/measurement-tools/
-apt-get install libbind-dev libkrb5-dev libssl-dev libcap-dev libxml2-dev 
-apt-get install bind9utils make
+sudo -E apt-get install -y libbind-dev libkrb5-dev libssl-dev libcap-dev libxml2-dev 
+sudo -E apt-get install -y bind9utils make
 
 wget ftp://ftp.nominum.com/pub/nominum/dnsperf/2.1.0.0/dnsperf-src-2.1.0.0-1.tar.gz
 
@@ -101,7 +103,7 @@ hping3 10.1.1.13 -I eth0 --udp -p 53 --i u1000  \r\n
 #--- MZ tool
 # http://linuxpoison.blogspot.in/2010/01/mz-mausezahn-network-traffic-generation.html
 echo "Installing MZ tool \r\n "
-sudo apt-get -y install mz
+sudo -E apt-get -y install mz
 
 #-- usage
 # Here we showed the source rope as 5.5.5.5 and sent 1000 packets to 1.2.39.40. We are provided with a novelty to generate random DNS queries.
@@ -131,7 +133,7 @@ pip install dnspython
 #--- Slowloris
 echo "\r\n \r\n Downloading Slowloris... \r\n "
 # https://github.com/llaera/slowloris.pl
-sudo apt-get -y install perl libwww-mechanize-shell-perl perl-mechanize
+sudo -E apt-get -y install perl libwww-mechanize-shell-perl perl-mechanize
 wget https://raw.githubusercontent.com/llaera/slowloris.pl/master/slowloris.pl && chmod u+x slowloris.pl
 
 #./slowloris.pl
