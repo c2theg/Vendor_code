@@ -19,8 +19,8 @@ echo "
                             |_|                                             |___|
 
 \r\n \r\n
-Version:  0.0.9                             \r\n
-Last Updated:  4/19/2018
+Version:  0.0.10                             \r\n
+Last Updated:  6/20/2018
 \r\n \r\n
 Updating system first..."
 sudo -E apt-get update
@@ -29,17 +29,19 @@ sudo -E apt-get upgrade -y
 wait
 echo "Downloading required dependencies...\r\n\r\n"
 #--------------------------------------------------------------------------------------------
-rm gen_data.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh
+rm update_attacks.sh gen_data.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh attack_phantomdomain.py
 
+wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/update_attacks.sh
+#--- attacks ----
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/gen_data.sh
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_nxdomain.py
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_watertorture_wget.sh
+wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_phantomdomain.py
+#---- permissions ---
+chmod u+x update_attacks.sh gen_data.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh attack_phantomdomain.py
 
-chmod u+x gen_data.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh
-
-#-- Install DNS-Perf --
+#----- Install DNSPerf ----------
 # https://www.nominum.com/measurement-tools/
-
 apt-get install libbind-dev libkrb5-dev libssl-dev libcap-dev libxml2-dev 
 apt-get install bind9utils make
 
@@ -50,7 +52,7 @@ cd dnsperf-src-2.1.0.0-1
 ./configure
 make
 sudo make install
-
+wait
 dnsperf -h
 
 #--- download latest Queryfile from Nominum ---
@@ -58,8 +60,11 @@ rm queryfile-example-current.gz
 wget -O "queryfile-example-current.gz" "ftp://ftp.nominum.com/pub/nominum/dnsperf/data/queryfile-example-current.gz"
 gunzip queryfile-example-current.gz
 
+#------- Apache Bench ------------
+sudo -E apt-get install -y apache2-utils
+
 #-------------------- HPING ---------------------
-apt-get install -y nload traceroute hping3 tcl8.6
+sudo -E apt-get install -y nload traceroute hping3 tcl8.6
 wait
 
 ### Examples ###
@@ -74,9 +79,6 @@ hping3 10.1.1.13 -I eth0 --udp -p 53 --i u1000  \r\n
 
 \r\n \r\n
 "
-
-
-
 
 #---------- SADDAM
 # https://github.com/OffensivePython/Saddam
@@ -95,7 +97,6 @@ hping3 10.1.1.13 -I eth0 --udp -p 53 --i u1000  \r\n
 #-- usage
 #Usage: ./tsunami [-i <iface>] [-v] [-s <source>] [-n <domain name >]           [-l <amplify level>] [-f <input file>] [-o <output file>]
 #sudo ./tsunami -o recursive_dns.txt -l 4 -e 172.0.0.0/8
-
 
 #--- MZ tool
 # http://linuxpoison.blogspot.in/2010/01/mz-mausezahn-network-traffic-generation.html
@@ -127,8 +128,6 @@ mz eth0 -c 0 -Q 50,100 -A rand -B 10.5.5.0/25 -t tcp \"flags=syn, dp=1-1023\"
 #---- Python ---
 pip install dnspython
 
-
-
 #--- Slowloris
 echo "\r\n \r\n Downloading Slowloris... \r\n "
 # https://github.com/llaera/slowloris.pl
@@ -142,7 +141,6 @@ perl slowloris.pl -dns (Victim URL or IP) -options \r\n
 ./slowloris.pl -dns TARGET_URL -port 443 -timeout 30 -num 200 -https \r\n
 ./slowloris.pl -dns TARGET_URL -port 80 -num 200   \r\n
 "
-
 
 #--- SlowHTTPtest
 #  https://github.com/shekyan/slowhttptest/wiki/InstallationAndUsage
