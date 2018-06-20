@@ -19,7 +19,7 @@ echo "
                             |_|                                             |___|
 
 \r\n \r\n
-Version:  0.0.10                             \r\n
+Version:  0.0.11                             \r\n
 Last Updated:  6/20/2018
 \r\n \r\n
 Updating system first..."
@@ -47,6 +47,9 @@ chmod u+x update_attacks.sh gen_data.sh attack_dns_nxdomain.py attack_dns_watert
 sudo -E apt-get install -y libbind-dev libkrb5-dev libssl-dev libcap-dev libxml2-dev 
 sudo -E apt-get install -y bind9utils make
 
+if [ -f dnsperf-src-2.1.0.0-1.tar.gz ]; then
+    rm dnsperf-src-2.1.0.0-1.tar.gz
+fi
 wget ftp://ftp.nominum.com/pub/nominum/dnsperf/2.1.0.0/dnsperf-src-2.1.0.0-1.tar.gz
 
 tar xfvz dnsperf-src-2.1.0.0-1.tar.gz
@@ -58,7 +61,9 @@ wait
 dnsperf -h
 
 #--- download latest Queryfile from Nominum ---
-rm queryfile-example-current.gz
+if [ -f queryfile-example-current.gz ]; then
+    rm queryfile-example-current.gz
+fi
 wget -O "queryfile-example-current.gz" "ftp://ftp.nominum.com/pub/nominum/dnsperf/data/queryfile-example-current.gz"
 gunzip queryfile-example-current.gz
 
