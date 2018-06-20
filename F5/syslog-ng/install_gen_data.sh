@@ -161,5 +161,5 @@ perl slowloris.pl -dns (Victim URL or IP) -options \r\n
 #make
 #sudo make install
 #--- ubuntu repo ----
-sudo apt-get install slowhttptest
+sudo -E apt-get install -y slowhttptest
 
