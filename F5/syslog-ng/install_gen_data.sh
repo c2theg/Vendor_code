@@ -44,17 +44,18 @@ chmod u+x update_attacks.sh gen_data.sh attack_dns_nxdomain.py attack_dns_watert
 
 #----- Install DNSPerf ----------
 # https://www.nominum.com/measurement-tools/
-sudo -E apt-get install -y libbind-dev libkrb5-dev libssl-dev libcap-dev libxml2-dev 
-sudo -E apt-get install -y bind9utils make
+sudo -E apt-get install -y bind9utils libbind-dev libkrb5-dev libssl-dev libcap-dev libxml2-dev libjson-c-dev libgeoip-dev make
 
 if [ -f dnsperf-src-2.1.0.0-1.tar.gz ]; then
     rm dnsperf-src-2.1.0.0-1.tar.gz
 fi
-wget ftp://ftp.nominum.com/pub/nominum/dnsperf/2.1.0.0/dnsperf-src-2.1.0.0-1.tar.gz
+#wget ftp://ftp.nominum.com/pub/nominum/dnsperf/2.1.0.0/dnsperf-src-2.1.0.0-1.tar.gz
+curl ftp://ftp.nominum.com/pub/nominum/dnsperf/2.1.0.0/dnsperf-src-2.1.0.0-1.tar.gz -O
 
 tar xfvz dnsperf-src-2.1.0.0-1.tar.gz
 cd dnsperf-src-2.1.0.0-1
 ./configure
+make clean
 make
 sudo make install
 wait
