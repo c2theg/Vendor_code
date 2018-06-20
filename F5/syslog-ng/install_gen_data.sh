@@ -19,7 +19,7 @@ echo "
                             |_|                                             |___|
 
 \r\n \r\n
-Version:  0.0.11                             \r\n
+Version:  0.0.12                             \r\n
 Last Updated:  6/20/2018
 \r\n \r\n
 Updating system first..."
@@ -139,8 +139,11 @@ pip install dnspython
 echo "\r\n \r\n Downloading Slowloris... \r\n "
 # https://github.com/llaera/slowloris.pl
 sudo -E apt-get -y install perl libwww-mechanize-shell-perl perl-mechanize
-wget https://raw.githubusercontent.com/llaera/slowloris.pl/master/slowloris.pl && chmod u+x slowloris.pl
 
+if [ -f slowloris.pl ]; then
+    rm slowloris.pl
+fi
+wget https://raw.githubusercontent.com/llaera/slowloris.pl/master/slowloris.pl && chmod u+x slowloris.pl
 #./slowloris.pl
 echo "
 Usage: \r\n
