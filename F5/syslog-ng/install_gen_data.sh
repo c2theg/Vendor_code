@@ -19,7 +19,7 @@ echo "
                             |_|                                             |___|
 
 \r\n \r\n
-Version:  0.0.13                             \r\n
+Version:  0.0.14                             \r\n
 Last Updated:  6/20/2018
 \r\n \r\n
 Updating system first..."
