@@ -29,7 +29,7 @@ sudo -E apt-get upgrade -y
 wait
 echo "Downloading required dependencies...\r\n\r\n"
 #--------------------------------------------------------------------------------------------
-if [ ! -f ca-key.pem ]; then
+if [ ! -f update_attacks.sh ]; then
     rm update_attacks.sh gen_data.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh attack_phantomdomain.py
 fi
 
