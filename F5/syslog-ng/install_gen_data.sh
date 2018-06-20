@@ -19,7 +19,7 @@ echo "
                             |_|                                             |___|
 
 \r\n \r\n
-Version:  0.0.12                             \r\n
+Version:  0.0.13                             \r\n
 Last Updated:  6/20/2018
 \r\n \r\n
 Updating system first..."
@@ -134,6 +134,9 @@ mz eth0 -c 0 -Q 50,100 -A rand -B 10.5.5.0/25 -t tcp \"flags=syn, dp=1-1023\"
 "
 
 #---- Python ---
+sudo -E apt-get install -y python-setuptools python-dev build-essential 
+sudo -E easy_install pip
+sudo -E pip install --upgrade virtualenv
 pip install dnspython
 
 #--- Slowloris
