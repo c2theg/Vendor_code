@@ -19,8 +19,8 @@ echo "
                             |_|                                             |___|
 
 \r\n \r\n
-Version:  0.0.14                             \r\n
-Last Updated:  6/20/2018
+Version:  0.0.15                             \r\n
+Last Updated:  6/21/2018
 \r\n \r\n
 Updating system first..."
 sudo -E apt-get update
@@ -30,17 +30,18 @@ wait
 echo "Downloading required dependencies...\r\n\r\n"
 #--------------------------------------------------------------------------------------------
 if [ -f update_attacks.sh ]; then
-    rm update_attacks.sh gen_data.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh attack_phantomdomain.py
+    rm update_attacks.sh gen_data.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh attack_phantomdomain.py install_nmap-git.sh
 fi
 
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/update_attacks.sh
+wget https://raw.githubusercontent.com/c2theg/srvBuilds/master/install_nmap-git.sh
 #--- attacks ----
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/gen_data.sh
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_nxdomain.py
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_watertorture_wget.sh
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_phantomdomain.py
 #---- permissions ---
-chmod u+x update_attacks.sh gen_data.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh attack_phantomdomain.py
+chmod u+x update_attacks.sh gen_data.sh install_nmap-git.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh attack_phantomdomain.py
 
 #----- Install DNSPerf ----------
 # https://www.nominum.com/measurement-tools/
@@ -48,6 +49,9 @@ sudo -E apt-get install -y bind9utils libbind-dev libkrb5-dev libssl-dev libcap-
 
 if [ -f dnsperf-src-2.1.0.0-1.tar.gz ]; then
     rm dnsperf-src-2.1.0.0-1.tar.gz
+fi
+if [ -d dnsperf-src-2.1.0.0-1 ]; then
+    rm -r dnsperf-src-2.1.0.0-1/
 fi
 #wget ftp://ftp.nominum.com/pub/nominum/dnsperf/2.1.0.0/dnsperf-src-2.1.0.0-1.tar.gz
 curl ftp://ftp.nominum.com/pub/nominum/dnsperf/2.1.0.0/dnsperf-src-2.1.0.0-1.tar.gz -O
@@ -113,11 +117,9 @@ echo "Installing MZ tool \r\n "
 sudo -E apt-get -y install mz
 
 #-- usage
-# Here we showed the source rope as 5.5.5.5 and sent 1000 packets to 1.2.39.40. We are provided with a novelty to generate random DNS queries.
-
-#mz -A 5.5.5.5 -B 1.2.39.40 -t dns “q=google.com” -c 1000
 echo "\r\n \r\n Usage: mz -A rand -B TARGET_DNS_SERVER -t dns "q=pentest.blog" -c 10000000 \r\n
-
+echo " Here we showed the source rope as 5.5.5.5 and sent 1000 packets to 1.2.39.40. We are provided with a novelty to generate random DNS queries. \r\n \r\n 
+mz -A 5.5.5.5 -B 1.2.39.40 -t dns “q=google.com” -c 1000 \r\n
 \r\n
 Using Mausezahn: \r\n
 Send an arbitrary sequence of bytes through your network card 1000 times: \r\n
@@ -134,11 +136,12 @@ mz eth0 -c 0 -Q 50,100 -A rand -B 10.5.5.0/25 -t tcp \"flags=syn, dp=1-1023\"
 \r\n \r\n
 "
 
-#---- Python ---
+#---- Python tools ---
 sudo -E apt-get install -y python-setuptools python-dev build-essential 
 sudo -E easy_install pip
 sudo -E pip install --upgrade virtualenv
 pip install dnspython
+pip install scapy
 
 #--- Slowloris
 echo "\r\n \r\n Downloading Slowloris... \r\n "
@@ -167,4 +170,7 @@ perl slowloris.pl -dns (Victim URL or IP) -options \r\n
 #sudo make install
 #--- ubuntu repo ----
 sudo -E apt-get install -y slowhttptest
+
+#---- NMAP and nload ----
+sh ./install_nmap-git.sh
 
