@@ -39,7 +39,7 @@ wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/at
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_phantomdomain.py
 
 #---- Permissions ---
-chmod u+x update_attacks.sh gen_data.sh install_nmap-git.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh attack_phantomdomain.py
+chmod u+x update_attacks.sh gen_data.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh attack_phantomdomain.py
 
 
 #---- add auto update to crontab ----
