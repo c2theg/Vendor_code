@@ -21,28 +21,39 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.0.2                             \r\n
-Last Updated:  4/20/2018
+Version:  0.0.5                             \r\n
+Last Updated:  6/22/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
 #---------------------------------------------------
-rm update_attacks.sh
-rm attack_dns_nxdomain.py
-rm attack_dns_watertorture_wget.sh
-
-#--------
-echo "\r\n \r\n Downloading Attack Script Updater "
-wget -O "update_attacks.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/update_attacks.sh"
-sudo chmod u+x update_attacks.sh
-wait
-
+if [ -f update_attacks.sh ]; then
+    rm update_attacks.sh gen_data.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh attack_phantomdomain.py install_nmap-git.sh
+fi
 
 echo "\r\n \r\n Downloading Attacks "
+#--- attacks ----
+wget -O "update_attacks.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/update_attacks.sh"
+wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/gen_data.sh
+wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_nxdomain.py
+wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_watertorture_wget.sh
+wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_phantomdomain.py
 
-wget -O "attack_dns_nxdomain.py" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_nxdomain.py"
-sudo chmod u+x attack_dns_nxdomain.py
+#---- Permissions ---
+chmod u+x update_attacks.sh gen_data.sh install_nmap-git.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh attack_phantomdomain.py
 
-wget -O "attack_dns_watertorture_wget.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_watertorture_wget.sh"
-sudo chmod u+x attack_dns_watertorture_wget.sh
+
+#---- add auto update to crontab ----
+Cron_output=$(crontab -l | grep "update_attacks.sh")
+if [ -z "$Cron_output" ]
+then
+    echo "Script not in crontab. Adding."
+    line="10 3 * * * /home/ubuntu/update_attacks.sh >> /var/log/update_attacks.log 2>&1"
+    (crontab -u root -l; echo "$line" ) | crontab -u root -
+
+    line="1@reboot /root/update_attacks.sh >> /var/log/update_attacks.log 2>&1"
+    (crontab -u root -l; echo "$line" ) | crontab -u root -
+else
+      echo "Script was found in crontab. skipping addition"
+fi
 
 echo "\r\n \r\n DONE! \r\n \r\n "
