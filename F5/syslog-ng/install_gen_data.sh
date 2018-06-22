@@ -19,8 +19,8 @@ echo "
                             |_|                                             |___|
 
 \r\n \r\n
-Version:  0.0.15                             \r\n
-Last Updated:  6/21/2018
+Version:  0.0.16                             \r\n
+Last Updated:  6/22/2018
 \r\n \r\n
 Updating system first..."
 sudo -E apt-get update
@@ -30,18 +30,15 @@ wait
 echo "Downloading required dependencies...\r\n\r\n"
 #--------------------------------------------------------------------------------------------
 if [ -f update_attacks.sh ]; then
-    rm update_attacks.sh gen_data.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh attack_phantomdomain.py install_nmap-git.sh
+    rm update_attacks.sh gen_data.sh install_nmap-git.sh
 fi
 
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/update_attacks.sh
 wget https://raw.githubusercontent.com/c2theg/srvBuilds/master/install_nmap-git.sh
-#--- attacks ----
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/gen_data.sh
-wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_nxdomain.py
-wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_watertorture_wget.sh
-wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_phantomdomain.py
-#---- permissions ---
-chmod u+x update_attacks.sh gen_data.sh install_nmap-git.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh attack_phantomdomain.py
+
+#---- Permissions ---
+chmod u+x update_attacks.sh install_nmap-git.sh gen_data.sh
 
 #----- Install DNSPerf ----------
 # https://www.nominum.com/measurement-tools/
@@ -53,9 +50,8 @@ fi
 if [ -d dnsperf-src-2.1.0.0-1 ]; then
     rm -r dnsperf-src-2.1.0.0-1/
 fi
-#wget ftp://ftp.nominum.com/pub/nominum/dnsperf/2.1.0.0/dnsperf-src-2.1.0.0-1.tar.gz
-curl ftp://ftp.nominum.com/pub/nominum/dnsperf/2.1.0.0/dnsperf-src-2.1.0.0-1.tar.gz -O
 
+curl ftp://ftp.nominum.com/pub/nominum/dnsperf/2.1.0.0/dnsperf-src-2.1.0.0-1.tar.gz -O
 tar xfvz dnsperf-src-2.1.0.0-1.tar.gz
 cd dnsperf-src-2.1.0.0-1
 ./configure
@@ -174,3 +170,11 @@ sudo -E apt-get install -y slowhttptest
 #---- NMAP and nload ----
 sh ./install_nmap-git.sh
 
+sh ./update_attacks.sh
+
+
+echo "All items done installing!!! \r\n \r\n "
+
+echo "To generate VALID DNS traffic run the following script:  ./gen_data.sh "
+
+echo "\r\n \r\n"
