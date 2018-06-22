@@ -21,7 +21,7 @@ echo "
 |_____|_|_|_| |_|___|_| |___|  _|_|_|___|_|    |_|_|_|_____|  |_____|_| |__,|_  |
                             |_|                                             |___|
 \r\n \r\n
-Version:  0.0.5                             \r\n
+Version:  0.0.6                             \r\n
 Last Updated:  6/22/2018
 \r\n \r\n
 This is meant for Ubuntu 16.04+  \r\n \r\n"
@@ -31,8 +31,9 @@ if [ -f update_attacks.sh ]; then
 fi
 
 echo "\r\n \r\n Downloading Attacks "
-#--- attacks ----
+#--- files ----
 wget -O "update_attacks.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/update_attacks.sh"
+wget -O - -q -t 1 --timeout=3 https://magnetoai.com/api/updater/check.php?f=update_attacks_sh > /dev/null
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/gen_data.sh
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_nxdomain.py
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_watertorture_wget.sh
