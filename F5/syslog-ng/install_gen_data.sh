@@ -19,7 +19,7 @@ echo "
                             |_|                                             |___|
 
 \r\n \r\n
-Version:  0.0.16                             \r\n
+Version:  0.0.17                             \r\n
 Last Updated:  6/22/2018
 \r\n \r\n
 Updating system first..."
@@ -113,9 +113,9 @@ echo "Installing MZ tool \r\n "
 sudo -E apt-get -y install mz
 
 #-- usage
-echo "\r\n \r\n Usage: mz -A rand -B TARGET_DNS_SERVER -t dns "q=pentest.blog" -c 10000000 \r\n
+echo "\r\n \r\n Usage: mz -A rand -B TARGET_DNS_SERVER -t dns \"q=pentest.blog\" -c 10000000 \r\n "
 echo " Here we showed the source rope as 5.5.5.5 and sent 1000 packets to 1.2.39.40. We are provided with a novelty to generate random DNS queries. \r\n \r\n 
-mz -A 5.5.5.5 -B 1.2.39.40 -t dns “q=google.com” -c 1000 \r\n
+mz -A 5.5.5.5 -B 1.2.39.40 -t dns \“q=google.com\” -c 1000 \r\n
 \r\n
 Using Mausezahn: \r\n
 Send an arbitrary sequence of bytes through your network card 1000 times: \r\n
