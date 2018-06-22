@@ -50,7 +50,7 @@ then
     line="10 3 * * * /home/ubuntu/update_attacks.sh >> /var/log/update_attacks.log 2>&1"
     (crontab -u root -l; echo "$line" ) | crontab -u root -
 
-    line="1@reboot /root/update_attacks.sh >> /var/log/update_attacks.log 2>&1"
+    line="@reboot /root/update_attacks.sh >> /var/log/update_attacks.log 2>&1"
     (crontab -u root -l; echo "$line" ) | crontab -u root -
 else
       echo "Script was found in crontab. skipping addition"
