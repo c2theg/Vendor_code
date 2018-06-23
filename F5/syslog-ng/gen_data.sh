@@ -1,6 +1,6 @@
 #!/bin/sh
 # Christopher Gray
-# Version 0.1.11
+# Version 0.1.12
 #  6-22-18
 
 if [ -z "$1" ]
@@ -56,15 +56,15 @@ fi
 #sudo dnsperf -s $server_ip -d queryfile-example-current -c 200 -T 10 -l 300 -q 10000 -Q 25
 
 #Flood: 
-sudo dnsperf -s $server_ip -d queryfile-example-current -c 200 -T 10 -l 300 -q 10000 -Q $queries_ps
+sudo dnsperf -s $server_ip -d queryfile-example-current -c 200 -T 10 -l 300 -q 10000 -Q $queries_ps &
 wait
 
 # Webflow
-./slowhttptest -c 1000 -B -g -o my_body_stats -i 110 -r 200 -s 8192 -t FAKEVERB -u https://myseceureserver/resources/loginform.html -x 10 -p 3
+./slowhttptest -c 1000 -B -g -o my_body_stats -i 110 -r 200 -s 8192 -t FAKEVERB -u https://myseceureserver/resources/loginform.html -x 10 -p 3 &
 
 #------ Attack traffic ----------
-python attack_dns_nxdomain.py $server_ip google.com 10000
-./attack_dns_watertorture_wget.sh google.com
+python attack_dns_nxdomain.py $server_ip google.com 10000 &
+./attack_dns_watertorture_wget.sh google.com &
 
 #---- apache bench attack ----
 while true
