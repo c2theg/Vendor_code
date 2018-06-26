@@ -1,6 +1,20 @@
 The following scripts will download, setup, and configure the software. <br /><br />
 
 Getting Started: <br />
+
+Install Attack Generator: <br /> 
+<b>
+  wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/install_gen_data.sh && chmod u+x install_gen_data.sh && ./install_gen_data.sh 
+</b>
+<br /><br />
+Update Attacks: <br />
+
+<b> wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/update_attacks.sh && chmod u+x update_attacks.sh && ./update_attacks.sh </b> 
+<br /><br /><br /><br />
+
+
+
+
 <ul>
   <li><b>Install Elastic Stack (v6): </b><br />
     wget https://raw.githubusercontent.com/c2theg/srvBuilds/master/install_elk6.sh && chmod u+x install_elk6.sh && ./install_elk6.sh
