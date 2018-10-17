@@ -33,7 +33,6 @@ fi
 echo "\r\n \r\n Downloading Attacks "
 #--- files ----
 wget -O "update_attacks.sh" "https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/update_attacks.sh"
-wget -O - -q -t 1 --timeout=3 https://magnetoai.com/api/updater/check.php?f=update_attacks_sh > /dev/null
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/gen_data.sh
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_nxdomain.py
 wget https://raw.githubusercontent.com/c2theg/Vendor_code/master/F5/syslog-ng/attack_dns_watertorture_wget.sh
