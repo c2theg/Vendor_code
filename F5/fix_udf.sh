@@ -4,7 +4,7 @@ export EDITOR=nano
 
 # By: Christopher Gray
 # 10/23/18
-# version: 0.0.1
+# version: 0.0.2
 #------ Auto add to startup ------------------------------------
 Cron_output=$(crontab -l | grep "fix_udf.sh")
 #echo "The output is: [ $Cron_output ]"
