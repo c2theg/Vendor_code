@@ -1,3 +1,4 @@
+#!/bin/sh
 export TERM=xterm
 export EDITOR=nano
 
