@@ -1,0 +1,4 @@
+http://www.example.com/
+http://www.example.com/foo.html
+http://www.example.com/foo/bar/
+http://www.example.com/foo/bar/?v=1
