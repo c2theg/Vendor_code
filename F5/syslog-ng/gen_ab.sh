@@ -17,7 +17,7 @@ fi
 #---- apache bench attack ----
 echo "Starting a Apache bench strest test... \r\n"
 
-cat myurls.txt | parallel "ab -n 10000 -c 10 {}"
+cat load_urls.txt | parallel "ab -n 10000 -c 10 {}"
 
 #while true
 #do
