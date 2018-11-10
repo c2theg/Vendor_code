@@ -17,6 +17,7 @@ fi
 #---- apache bench attack ----
 echo "Starting a Apache bench strest test... \r\n"
 
+ab -t 60 -n 10000000 http://$server_ip
 cat load_urls.txt | parallel "ab -n 10000 -c 10 {}"
 
 #while true
