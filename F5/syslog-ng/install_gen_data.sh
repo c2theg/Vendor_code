@@ -42,7 +42,7 @@ chmod u+x update_attacks.sh install_nmap-git.sh gen_data.sh
 
 #----- Install DNSPerf ----------
 # https://www.nominum.com/measurement-tools/
-sudo -E apt-get install -y bind9utils libbind-dev libkrb5-dev libssl-dev libcap-dev libxml2-dev libjson-c-dev libgeoip-dev make
+sudo -E apt-get install -y bind9utils libbind-dev libkrb5-dev libssl-dev libcap-dev libxml2-dev libjson-c-dev libgeoip-dev make parallel
 
 if [ -f dnsperf-src-2.1.0.0-1.tar.gz ]; then
     rm dnsperf-src-2.1.0.0-1.tar.gz
