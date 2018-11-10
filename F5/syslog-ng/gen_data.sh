@@ -66,9 +66,7 @@ sudo nping $server_ip $NPING_SILENT -c $SAMPLES --rate $RATE --tcp --flags RST -
 #-----------------------------------------------------------------------------------------------------------------
 
 #--- Webflow -----
-echo "Performing a Slow HTTP Test script against webserver \r\n "
-sudo ./slowhttptest -c 1000 -B -g -o my_body_stats -i 110 -r 200 -s 8192 -t FAKEVERB -u https://$server_ip/resources/loginform.html -x 10 -p 3 2> /dev/null &
-
-sudo ./gen_ab.sh $server_ip &>/dev/null &
-
+#echo "Performing a Slow HTTP Test script against webserver \r\n "
+#sudo ./slowhttptest -c 1000 -B -g -o my_body_stats -i 110 -r 200 -s 8192 -t FAKEVERB -u https://$server_ip/resources/loginform.html -x 10 -p 3 2> /dev/null &
+#sudo ./gen_ab.sh $server_ip &>/dev/null &
 echo "DONE \r\n \r\n"
