@@ -27,7 +27,7 @@ Last Updated:  11/9/2018
 This is meant for Ubuntu 16.04+  \r\n \r\n"
 #---------------------------------------------------
 if [ -f update_attacks.sh ]; then
-    rm update_attacks.sh gen_data.sh gen_udp_floods.sh gen_legit_dns_traffic.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh attack_phantomdomain.py install_nmap-git.sh kill_all_attacks.sh
+    rm update_attacks.sh gen_data.sh gen_udp_floods.sh gen_legit_dns_traffic.sh attack_dns_nxdomain.py attack_dns_watertorture_wget.sh attack_phantomdomain.py kill_all_attacks.sh
 fi
 
 echo "\r\n \r\n Downloading scripts... \r\n"
