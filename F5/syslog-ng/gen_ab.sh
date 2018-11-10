@@ -16,8 +16,11 @@ fi
 
 #---- apache bench attack ----
 echo "Starting a Apache bench strest test... \r\n"
-while true
-do
+
+cat myurls.txt | parallel "ab -n 10000 -c 10 {}"
+
+#while true
+#do
     #ab -r -c 1000 -n 1000000 $server_ip  &>/dev/null &
-    ab -n 1000 -c 10 -k -H "Accept-Encoding: gzip, deflate" $server_ip
-done
+#    ab -n 1000 -c 10 -k -H "Accept-Encoding: gzip, deflate" $server_ip
+#done
