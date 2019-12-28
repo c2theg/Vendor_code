@@ -1,4 +1,4 @@
-security protocol-inspection profile protocol_inspection_ddos {
+security protocol-inspection profile protocol_inspection_app_ddos_ips {
     app-service none
     auto-add-new-inspections on
     auto-publish-suggestion off
