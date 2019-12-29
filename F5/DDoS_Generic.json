@@ -1,8 +1,8 @@
 security dos profile DDoS_Generic {
     app-service none
-    creation-time 2019-09-16:13:37:00
-    creation-user admin
-    description "Generic DDoS profile for all Virtual Servers. *** THIS SHOULD BE MODIFIED FOR YOUR USE CASE *** [Updated: 12/28/19 - Version 0.0.8]"
+    creation-time 2019-12-28:23:44:30
+    creation-user root
+    description "Generic DDoS profile for all Virtual Servers. *** THIS SHOULD BE MODIFIED FOR YOUR USE CASE *** [Updated: 12/28/19 - Version 0.0.9]"
     dos-network {
         DDoS_Generic {
             network-attack-vector {
@@ -383,6 +383,8 @@ security dos profile DDoS_Generic {
             }
         }
     }
+    http-whitelist DDoS_Whitelist
+    last-modified-time 2019-12-29:00:10:04
     modify-user admin
     protocol-dns {
         DDoS_Generic {
@@ -527,4 +529,5 @@ security dos profile DDoS_Generic {
         }
     }
     threshold-sensitivity medium
+    whitelist DDoS_Whitelist
 }
