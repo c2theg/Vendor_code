@@ -5,7 +5,7 @@ security protocol-inspection profile protocol_inspection_app_ddos_ips {
     avr-stat-collect on
     compliance-enable on
     defaults-from protocol_inspection
-    description "General IPS rules specific to DDoS"
+    description "General IPS rules specific to DDoS  *** THIS SHOULD BE MODIFIED FOR YOUR USE CASE *** [Updated: 12/28/19 - Version 0.0.9]"
     services {
         dns {
             compliance {
