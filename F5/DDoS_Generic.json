@@ -1,8 +1,8 @@
 security dos profile DDoS_Generic {
     app-service none
-    creation-time 2019-09-03:14:21:21
+    creation-time 2019-09-16:13:37:00
     creation-user admin
-    description "generic profile for all vs"
+    description "Generic DDoS profile for all Virtual Servers. *** THIS SHOULD BE MODIFIED FOR YOUR USE CASE ***"
     dos-network {
         DDoS_Generic {
             network-attack-vector {
@@ -13,7 +13,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -35,7 +35,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -57,7 +57,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -79,7 +79,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -101,7 +101,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -123,7 +123,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -145,7 +145,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -167,7 +167,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -189,7 +189,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -211,7 +211,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -233,7 +233,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -255,7 +255,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -277,7 +277,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -299,7 +299,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -321,7 +321,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -343,7 +343,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting enabled
                     auto-scrubbing enabled
                     bad-actor enabled
-                    blacklist-category attacker_ips
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -365,7 +365,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -383,7 +383,6 @@ security dos profile DDoS_Generic {
             }
         }
     }
-    last-modified-time 2019-09-16:12:59:17
     modify-user admin
     protocol-dns {
         DDoS_Generic {
@@ -395,7 +394,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing enabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -418,7 +417,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -440,7 +439,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -462,7 +461,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing enabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -485,7 +484,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
@@ -509,7 +508,7 @@ security dos profile DDoS_Generic {
                     auto-blacklisting disabled
                     auto-scrubbing disabled
                     bad-actor disabled
-                    blacklist-category denial_of_service
+                    blacklist-category DDoS_Blacklisted
                     blacklist-detection-seconds 60
                     blacklist-duration 14400
                     ceiling infinite
