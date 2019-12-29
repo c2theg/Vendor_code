@@ -2,7 +2,7 @@ security dos profile DDoS_Generic {
     app-service none
     creation-time 2019-09-16:13:37:00
     creation-user admin
-    description "Generic DDoS profile for all Virtual Servers. *** THIS SHOULD BE MODIFIED FOR YOUR USE CASE ***"
+    description "Generic DDoS profile for all Virtual Servers. *** THIS SHOULD BE MODIFIED FOR YOUR USE CASE *** [Updated: 12/28/19 - Version 0.0.8]"
     dos-network {
         DDoS_Generic {
             network-attack-vector {
