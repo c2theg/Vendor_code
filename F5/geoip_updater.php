@@ -1,7 +1,7 @@
 <?php
 /*
  ------ STEPS -----
- By: Christopher Gray - christophermjgray@gmail.com - 9/16/17 - Version 0.0.8
+ By: Christopher Gray - christophermjgray@gmail.com - 9/16/17 - Version 0.0.9
 	https://devcentral.f5.com/codeshare/auto-updates-geoip-database-on-big-ip-1061
 	https://github.com/c2theg/Vendor_code/edit/master/F5/geoip_updater.php
 
