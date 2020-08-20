@@ -5,13 +5,17 @@
 	https://devcentral.f5.com/codeshare/auto-updates-geoip-database-on-big-ip-1061
 	https://github.com/c2theg/Vendor_code/edit/master/F5/geoip_updater.php
 
-  you need PHP to get this to work.
+ you need PHP to get this to work.
+ Setup your ssh-agent so you can connect as root with no password.
+ Grab the download urls from downloads.f5.com with the HTTPS option on the final location download page.
+
  - For Ubuntu:
 
  sudo apt-get -y install php-cli php-curl php-mcrypt php-ssh2 php-zip
 
  then on the CLI:
- F5S=f5-a.example.com,f5-b.example.com php geoip_updater.php <downloads.f5.com https geoip file url - on location page> <optional, md5 file url>
+
+ F5S=f5-a.example.com,f5-b.example.com php geoip_updater.php <https geoip file url> [<https md5 file url>]
 
  */
 
@@ -38,7 +42,7 @@
 		if (filter_var($argv[2], FILTER_VALIDATE_URL)) {
 			$F5_DownloadURL_MD5 = $argv[2];
 		} else {
-			echo("Not a valid MD5 URL");
+			echo("Not a valid MD5 URL" . PHP_EOL);
 			exit;
 		}
 	}
@@ -51,7 +55,7 @@
 	if (filter_var($F5_DownloadURL, FILTER_VALIDATE_URL)) {
 		echo("URL looks good" . PHP_EOL);
 	} else {
-		echo("Not a valid URL");
+		echo("Not a valid URL" . PHP_EOL);
 		exit;
 	}
 
@@ -59,7 +63,7 @@
 
 	$DownloadResults = DownloadFile($F5_DownloadURL, $FileName_Zip);
 	if ($DownloadResults != true) {
-		echo "Download Error! ";
+		echo "Download Error! " . PHP_EOL;
 	}
 
 	if (isset($F5_DownloadURL_MD5) && ($F5_DownloadURL_MD5 != '')) {
@@ -67,7 +71,7 @@
 
 		$DownloadResults = DownloadFile($F5_DownloadURL_MD5, $FileNameMD5_Zip);
 		if ($DownloadResults != true) {
-			echo "Download Error! ";
+			echo "Download Error! " . PHP_EOL;
 		}
 
 		$MD5_fileCheck =  md5_file($FileName_Zip);
@@ -82,24 +86,17 @@
 
 	//---
 	if (!file_exists($FileName_Zip)) {
-		echo "File does not exist. Please fix the path or manually put the file in this directory, and try again ";
+		echo "File does not exist. Please fix the path or manually put the file in this directory, and try again " . PHP_EOL;
 		exit;
 	}
-	//---
-	$methods = array(
-		'kex' => 'diffie-hellman-group1-sha1',
-		'client_to_server' => array(
-		'crypt' => '3des-cbc',
-		'comp' => 'none'),
-		'server_to_client' => array(
-		'crypt' => 'aes256-cbc,aes192-cbc,aes128-cbc',
-		'comp' => 'none'));
+	//--- Use any available key exchange, host key, client_to_server and server_to_client
+	$methods = array();
 	$callbacks = array('disconnect' => 'my_ssh_disconnect');
 	if (!function_exists("ssh2_connect")) die("function ssh2_connect doesn't exist");
 
 	$Updated_Server = 0;
 	$Uploaded_File = 0;
-	$TodaysDate = date("Y-m-d");
+	$TodaysDate = date('Y-m-d');
 	$TmpDir = 'geoip-'.$TodaysDate;
 	$RemoteDir = '/shared/tmp/';
 	recursiveRemoveDirectory($TmpDir);
@@ -117,7 +114,7 @@
 		echo "Listing file names" . PHP_EOL;
 		var_dump($Files_arr);
 	} else {
-		echo 'Failed';
+		echo 'Failed' . PHP_EOL;
 		exit;
 	}
 	//---
@@ -129,13 +126,13 @@
 		try {
 			echo "Connecting to server $F5_Srv - (Server ".($Updated_Server + 1)." of ".($Num_BIGIPs).")... ";
 			$connection = ssh2_connect($F5_Srv, $F5_Port, $methods, $callbacks);
-			if (!$connection) die('Connection failed');
+			if (!$connection) die('Connection failed' . PHP_EOL);
 			echo "Connected." . PHP_EOL;
 
 			if (ssh2_auth_agent($connection, $BigIPs_username)) {
 				echo "Authentication Successful." . PHP_EOL;
 			} else {
-				die('Authentication Failed...');
+				die('Authentication Failed...' . PHP_EOL);
 			}
 
 			//--- Upload files to F5 ---
@@ -174,13 +171,13 @@
 			fclose($shell);
 			unset($shell);
 
-			echo "Disconnecting from server $F5_Srv ... ";
+			echo "Disconnecting from server $F5_Srv ... " . PHP_EOL;
 			ssh2_exec($connection, 'exit');
 			unset($connection); // disconnect from server
 			sleep(2);
 		} catch (Exception $e) {
 			$ErrorMsg = 'There was an error. Caught exception: '.$e->getMessage().', Line: '. __LINE__ .', File: '. __FILE__ .', Function: '. __FUNCTION__ .')';
-			echo $ErrorMsg;
+			echo $ErrorMsgi . PHP_EOL;
 		}
 		echo "Done." . PHP_EOL;
 
@@ -191,14 +188,18 @@
 	//--- general ---
 	function CLI_Help() {
 		echo "ERROR: Arguments required:" . PHP_EOL;
-		echo "Usage: F5S=a.example.com,b.example.com php geoip_updater.php <HTTPS Download Path> <MD5 Download path - optional>" . PHP_EOL;
-		echo "go to Downloads.f5.com and browse to the file until you get the to 'DOWNLOAD LOCATIONS' page (with the different countries)." . PHP_EOL;
+		echo "Usage: F5S=a.example.com,b.example.com php geoip_updater.php <HTTPS Download Path> [<MD5 Download path>]" . PHP_EOL;
+		echo "go to Downloads.f5.com and browse the file until you get to 'DOWNLOAD LOCATIONS' page (with the different countries)." . PHP_EOL;
 		echo "Scroll down and right click on the button 'https' file download, and select 'Copy link address'. NOT ON A COUNTRY" . PHP_EOL;
-		echo "eg: php geoip_updater.php https://downloads.f5.com/geoipfile_path.zip" . PHP_EOL;
+		echo "eg: F5S=a.example.com php geoip_updater.php https://downloads.f5.com/geoipfile_path.zip" . PHP_EOL;
 		exit;
 	}
 
 	function DownloadFile($URL, $FileName) {
+		if (file_exists($FileName)) {
+			echo "$FileName already downloaded. Erase file to re-download." . PHP_EOL;
+			return true;
+		}
 		try {
 			echo "download file....(this may take some time)" . PHP_EOL;
 			echo "$URL -> $FileName" . PHP_EOL;
@@ -218,7 +219,7 @@
 			return true;
 		} catch (Exception $e) {
 			$ErrorMsg = 'There was an error. Caught exception: '.$e->getMessage().', Line: '. __LINE__ .', File: '. __FILE__ .', Function: '. __FUNCTION__ .')';
-			echo $ErrorMsg;
+			echo $ErrorMsg . PHP_EOL;
 			return false;
 		}
 	}
