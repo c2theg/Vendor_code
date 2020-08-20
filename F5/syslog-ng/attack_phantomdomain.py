@@ -45,8 +45,8 @@ elif len(sys.argv) >= 2:
         print "We're on time %d \r\n \r\n" % (x)
         try:
             subdominio = str(random.randrange(10000000))
-            url = subdominio+".ww".subdominio+"."+dominio
-            print "SubDomain: ", url, " \r\n "
+            url = subdominio + "." + dominio
+            print "URL: ", url, " \r\n "
             #r = dns.resolver.query('example.org', 'a')
             answers = dns.resolver.query(url)
             for rdata in answers: 
