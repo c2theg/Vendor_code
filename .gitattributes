@@ -1,0 +1,11 @@
+*.conf text
+*.css text
+*.js text
+*.json text
+*.md text
+*.php text
+*.ps1 text
+*.sh text
+*.tcl text
+*.txt text
+*.yml text
