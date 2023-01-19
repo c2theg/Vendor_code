@@ -76,7 +76,7 @@
 		}
 
 		$MD5_fileCheck =  md5_file($FileName_Zip);
-		$MD5_manifest  = trim(file_get_contents($FileNameMD5_Zip, NULL, NULL, 0, 33));
+		$MD5_manifest  = trim(file_get_contents($FileNameMD5_Zip, false, NULL, 0, 33));
 		echo "MD5 from file: [$MD5_fileCheck], against checksum [$MD5_manifest] ...  ";
 		if ($MD5_fileCheck === $MD5_manifest) {
 			echo "MD5 compare is correct." . PHP_EOL;
