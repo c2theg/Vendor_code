@@ -60,7 +60,7 @@
 		exit;
 	}
 
-	$FileName_Zip = substr($F5_DownloadURL, (strrpos($F5_DownloadURL, '/') + 1));
+	$FileName_Zip = preg_replace('/.*\/(.*)\?.*/','$1',$F5_DownloadURL);
 
 	$DownloadResults = DownloadFile($F5_DownloadURL, $FileName_Zip);
 	if ($DownloadResults != true) {
@@ -68,7 +68,7 @@
 	}
 
 	if (isset($F5_DownloadURL_MD5) && ($F5_DownloadURL_MD5 != '')) {
-		$FileNameMD5_Zip = substr($F5_DownloadURL_MD5, (strrpos($F5_DownloadURL_MD5, '/') + 1));
+		$FileNameMD5_Zip = preg_replace('/.*\/(.*)\?.*/','$1',$F5_DownloadURL_MD5);
 
 		$DownloadResults = DownloadFile($F5_DownloadURL_MD5, $FileNameMD5_Zip);
 		if ($DownloadResults != true) {
