@@ -166,6 +166,12 @@
 					fwrite($shell, "$Command\n"); // send a command
 					sleep(10);
 					echo "Done." . PHP_EOL;
+					// delete the files after install
+					$Command = "rm ".$RemoteDir.$Files_arr[$g];
+					if ($Debug == 1) { echo "Sending command: $Command ... "; }
+					fwrite($shell, "$Command\n"); // send a command
+					sleep(10);
+					echo "Done." . PHP_EOL;
 				}
 				unset($g);
 			}
